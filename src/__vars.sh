@@ -29,7 +29,6 @@ _C_HEADING='\e[1;37m'
 # Argument defaults
 filters=()
 exclude=false
-debug=false
 command=""
 verbose=false
 branch=false

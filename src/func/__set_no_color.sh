@@ -10,11 +10,6 @@
 # License, or (at your option) any later version.
 
 __set_no_color() {
-  [[ $debug == true ]] && {
-    echo
-    echo -e "Colors disabled via '--no-color' option"
-    echo
-  }
   _C___RESET=''
   _C____PATH=''
   _C_PATH_DM=''

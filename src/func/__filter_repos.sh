@@ -16,26 +16,13 @@ __filter_repos() {
 
   for repo_git_dir in "${repo_list[@]}"; do
 
-    [[ "$debug" == true ]] && {
-      echo -e "${_C_____DIM}Debug:${_C___RESET} Processing repository: ${_C____PATH}$(dirname "$repo_git_dir")${_C___RESET}"
-    }
-
     if [[ ${#filters[@]} -eq 0 ]]; then
-      [[ "$debug" == true ]] && {
-        echo -e "${_C_____DIM}Debug:${_C___RESET} No filters specified, including repository: ${_C____PATH}$(dirname "$repo_git_dir")${_C___RESET} by default"
-        echo
-        echo
-      }
       filtered_repo_git_dirs+=("$repo_git_dir")
       continue
     fi
 
     match=false
     for filter in "${filters[@]}"; do
-      [[ "$debug" == true ]] && {
-        echo -e "${_C_____DIM}Debug:${_C___RESET} Applying filter: ${_C__OPTION}${filter}${_C___RESET}"
-      }
-
       filter_key="${filter%%:*}"
       filter_value="${filter#*:}"
 
@@ -52,31 +39,17 @@ __filter_repos() {
       esac
 
       if __match_filter "$value" "$filter_value"; then
-        [[ "$debug" == true ]] && {
-          echo -e "${_C_____DIM}Debug:${_C___RESET} Filter matched: ${_C__OPTION}${filter}${_C___RESET} for value: ${_C____PATH}${value}${_C___RESET}"
-        }
         match=true && break
       fi
     done
 
     if [[ "$exclude" == false && "$match" == true ]]; then
-      [[ "$debug" == true ]] && {
-        echo -e "${_C_____DIM}Debug:${_C___RESET} Including repository: ${_C____PATH}$(dirname "$repo_git_dir")${_C___RESET}"
-      }
       filtered_repo_git_dirs+=("$repo_git_dir")
     fi
 
     if [[ "$exclude" == true && "$match" == false ]]; then
-      [[ "$debug" == true ]] && {
-        echo -e "${_C_____DIM}Debug:${_C___RESET} Including repository: ${_C____PATH}$(dirname "$repo_git_dir")${_C___RESET}"
-      }
       filtered_repo_git_dirs+=("$repo_git_dir")
     fi
-
-    [[ "$debug" == true ]] && {
-      echo
-      echo
-    }
   done
 
   repo_list=("${filtered_repo_git_dirs[@]}")

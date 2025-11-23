@@ -31,7 +31,6 @@ while [[ $# -gt 0 ]]; do
     --filter  |-f ) shift; __read_filter "$1"; shift ;;
     --no-color    ) __set_no_color;            shift ;;
     --verbose |-v ) verbose=true;              shift ;;
-    --debug       ) debug=true;                shift ;;
 
     # Parse Commands
     git       |g  ) ___git;  shift ;;
@@ -117,12 +116,6 @@ for repository in "${repositories[@]}"; do
 
     parsed_args=()
     __expand_args args parsed_args
-
-    [[ "$debug" == true ]] && {
-      echo -e "${_C_____DIM}Debug:${_C___RESET} in:                ${_C____PATH}$(pwd)${_C___RESET}"
-      echo -e "${_C_____DIM}Debug:${_C___RESET} Received command:  ${_C_COMMAND}${command} ${args[*]}${_C___RESET}"
-      echo -e "${_C_____DIM}Debug:${_C___RESET} Executing command: ${_C_COMMAND}${command} ${parsed_args[*]}${_C___RESET}"
-    }
 
     echo -e "${_C_SUCCESS}${_PRIMARY_SYMBOL} \$(${command} ${parsed_args[*]})${_C___RESET} ${_C_____DIM}in${_C___RESET} $(__repo_status ".")"
     command -- "$command" "${parsed_args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)

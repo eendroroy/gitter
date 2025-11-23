@@ -11,11 +11,6 @@
 
 __parse_command() {
   if [[ -n "$command" ]]; then
-    [[ "$debug" == true ]] && {
-      echo
-      echo -e "${_C_____DIM}Debug:${_C___RESET} Existing command type: ${_C__OPTION}${command}${_C___RESET}"
-      echo -e "${_C_____DIM}Debug:${_C___RESET} New command type:      ${_C__OPTION}${1}${_C___RESET}"
-    }
     echo
     echo -e "\n${_C___ERROR}Multiple command types specified${_C___RESET}" 1>&2
     echo
