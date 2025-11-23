@@ -9,7 +9,9 @@
   License, or (at your option) any later version.
 -->
 
-# dotfiles
+# gitter
+
+Run git or arbitrary command in multiple git repositories with filters in current directory
  
 ## Installation
 
