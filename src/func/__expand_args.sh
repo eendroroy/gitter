@@ -10,9 +10,9 @@
 # License, or (at your option) any later version.
 
 __expand_args() {
-  local -n args=$1
-  local -n parsed_args=$2
-  for arg in "${args[@]}"; do
+  local -n args_ref=$1
+  local -n parsed_args_ref=$2
+  for arg in "${args_ref[@]}"; do
     # {_repo_} -> name of the current git repository
     [[ $arg == *"{_repo_}"* ]] && arg="${arg//\{_repo_\}/$(basename "$(pwd)")}"
 
@@ -42,6 +42,6 @@ __expand_args() {
       echo -e "${_C_____DIM}Debug:${_C___RESET} Parsed argument: ${_C____ARGS}${arg}${_C___RESET}"
     }
 
-    parsed_args+=("$arg")
+    parsed_args_ref+=("$arg")
   done
 }
