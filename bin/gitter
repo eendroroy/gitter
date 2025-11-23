@@ -10,46 +10,14 @@
 # License, or (at your option) any later version.
 
 _____SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-____CURRENT_DIR=$(pwd)
-_SUCCESS_SYMBOL=" ░"
-___ERROR_SYMBOL=" ░"
-_PRIMARY_SYMBOL=" ━"
 
-_C___RESET='\e[0m'
-_C____PATH='\e[35m'
-_C_PATH_DM='\e[2;35m'
-_C_COMMAND='\e[32m'
-_C____ARGS='\e[33m'
-_C__OPTION='\e[36m'
-_C_____DIM='\e[2;38;5;3m'
-_C___VALUE='\e[2;35;1;3m'
-_C_SUCCESS='\e[38;5;2m'
-_C___ERROR='\e[38;5;9m'
-_C_HEADING='\e[1;37m'
-
-for script in "$_____SCRIPT_DIR"/../src/*.sh; do
+for script in "$_____SCRIPT_DIR"/../src/func/*.sh; do
   # shellcheck source=/dev/null
   source "$script"
 done
 
-# Argument defaults
-filters=()
-exclude=false
-debug=false
-command=""
-verbose=false
-branch=false
-args=()
-
-# Commands
-___git()  { __parse_command "git" ; }
-___exec() { __parse_command "exec"; }
-___list() { __parse_command "list"; }
-___help() { __parse_command "help"; }
-
-# Command aliases
-___lb()   { __parse_command "list"; branch=true; }
-___ll()   { __parse_command "list"; verbose=true; }
+source "$_____SCRIPT_DIR"/../src/__vars.sh
+source "$_____SCRIPT_DIR"/../src/__command_fn.sh
 
 if [[ $# -eq 0 ]]; then
   __help
@@ -66,27 +34,20 @@ while [[ $# -gt 0 ]]; do
     --debug       ) debug=true;                shift ;;
 
     # Parse Commands
-    git  |g  ) ___git;  shift ;;
-    exec |x  ) ___exec; shift ;;
-    list |ls ) ___list; shift ;;
-          lb ) ___lb;   shift ;;
-          ll ) ___ll;   shift ;;
-    help     ) ___help; shift ;;
-    --)
-      shift
-      while [[ $# -gt 0 ]]; do
-        args+=("$1")
-        shift
-      done
-      ;;
-    *)
-      echo
-      echo -e "${_C___ERROR}Unknown argument:${_C___RESET} $1" 1>&2
-      echo
-      echo -e "Run ${_C_COMMAND}gitter --help${_C___RESET} for usage information." 1>&2
-      echo
-      exit 1
-      ;;
+    git       |g  ) ___git;  shift ;;
+    exec      |x  ) ___exec; shift ;;
+    list      |ls ) ___list; shift ;;
+               lb ) ___lb;   shift ;;
+               ll ) ___ll;   shift ;;
+    help          ) ___help; shift ;;
+
+    # Parse Command Arguments
+    --            ) __read_command_args "$@"; break ;;
+
+    # Handle Unknown Options/Arguments
+    --*           ) __handle_unknown_option "$1" ;;
+    -*            ) __handle_unknown_option "$1" ;;
+    *             ) __handle_unknown_arg    "$1" ;;
   esac
 done
 
@@ -107,139 +68,36 @@ fi
   exit 1
 }
 
-readarray -d '' -t repo_git_dirs < <(find . -name ".git" -type d -print0)
+# -- find all git repositories in the current directory
+readarray -d '' -t repositories < <(find . -name ".git" -type d -print0)
 
-# If .gitterignore exists, load patterns and remove matching repos from the list.
-if [[ -f .gitterignore ]]; then
-  # Load non-empty, non-comment lines from .gitterignore
-  mapfile -t ignore_patterns < <(sed -e 's/#.*//' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' -e '/^$/d' .gitterignore)
-
-  # If there are patterns, filter repo_git_dirs accordingly.
-  if [[ ${#ignore_patterns[@]} -gt 0 ]]; then
-    kept_repo_git_dirs=()
-    for repo_git_dir in "${repo_git_dirs[@]}"; do
-      git_repo_dir_name="$(dirname "${repo_git_dir#./}")"
-      for pattern in "${ignore_patterns[@]}"; do
-        if [[ "$pattern" == '*/'* ]]; then
-          # find all folder tree and match each folder in the path
-          IFS='/' read -r -a path_parts <<< "$git_repo_dir_name"
-          ignore=false
-          for part in "${path_parts[@]}"; do
-            if [[ "$part" == "${pattern#*/}" ]]; then
-              ignore=true
-              break
-            fi
-          done
-          [[ "$ignore" == true ]] && break
-        elif [[ "$pattern" == *'/*' ]]; then
-          # find only the parent folder
-          parent_dir="${git_repo_dir_name%%/*}"
-          if [[ "$parent_dir" == "${pattern%/*}" ]]; then
-            ignore=true
-            break
-          fi
-        else
-          # direct match with repo name
-          repo_name="$(basename "$(dirname "$repo_git_dir")")"
-          if [[ "$repo_name" == "$pattern" ]]; then
-            ignore=true
-            break
-          fi
-          # direct match with relative path
-          if [[ "$git_repo_dir_name" == "$pattern" ]]; then
-            ignore=true
-            break
-          fi
-        fi
-      done
-
-      [[ "$ignore" == false ]] && kept_repo_git_dirs+=("$repo_git_dir")
-    done
-
-    repo_git_dirs=("${kept_repo_git_dirs[@]}")
-  fi
-fi
-
-if [[ ${#repo_git_dirs[@]} -eq 0 ]]; then
+if [[ ${#repositories[@]} -eq 0 ]]; then
   echo -e "${_C___ERROR}${___ERROR_SYMBOL}  No git repositories found in the current directory${_C___RESET}" 1>&2
   exit 1
 fi
 
-filtered_repo_git_dirs=()
+# -- process .gitterignore if exists
+if [[ -f .gitterignore ]]; then
+  __process_gitterignore repositories
+fi
 
-for repo_git_dir in "${repo_git_dirs[@]}"; do
+if [[ ${#repositories[@]} -eq 0 ]]; then
+  echo -e "${_C___ERROR}${___ERROR_SYMBOL}  All git repositories are ignored by .gitterignore${_C___RESET}" 1>&2
+  exit 1
+fi
 
-  [[ "$debug" == true ]] && {
-    echo -e "${_C_____DIM}Debug:${_C___RESET} Processing repository: ${_C____PATH}$(dirname "$repo_git_dir")${_C___RESET}"
-  }
+# -- apply user specified filters
+__filter_repos repositories
 
-  if [[ ${#filters[@]} -eq 0 ]]; then
-    [[ "$debug" == true ]] && {
-      echo -e "${_C_____DIM}Debug:${_C___RESET} No filters specified, including repository: ${_C____PATH}$(dirname "$repo_git_dir")${_C___RESET} by default"
-      echo
-      echo
-    }
-    filtered_repo_git_dirs+=("$repo_git_dir")
-    continue
-  fi
-
-  match=false
-  for filter in "${filters[@]}"; do
-    [[ "$debug" == true ]] && {
-      echo -e "${_C_____DIM}Debug:${_C___RESET} Applying filter: ${_C__OPTION}${filter}${_C___RESET}"
-    }
-
-    filter_key="${filter%%:*}"
-    filter_value="${filter#*:}"
-
-    repo_dir="$(dirname "$repo_git_dir")"
-
-    case "$filter_key" in
-      P|path  ) value="$repo_dir" ;;
-      R|repo  ) value="$(basename "$repo_dir")" ;;
-      B|branch) value="$(git -C "$repo_dir" branch --show-current 2>/dev/null)" ;;
-      *)
-        echo -e "${_C___ERROR}${___ERROR_SYMBOL}  Unknown filter key: ${filter_key}${_C___RESET}" 1>&2
-        exit 1
-        ;;
-    esac
-
-    if __match_filter "$value" "$filter_value"; then
-      [[ "$debug" == true ]] && {
-        echo -e "${_C_____DIM}Debug:${_C___RESET} Filter matched: ${_C__OPTION}${filter}${_C___RESET} for value: ${_C____PATH}${value}${_C___RESET}"
-      }
-      match=true && break
-    fi
-  done
-
-  if [[ "$exclude" == false && "$match" == true ]]; then
-    [[ "$debug" == true ]] && {
-      echo -e "${_C_____DIM}Debug:${_C___RESET} Including repository: ${_C____PATH}$(dirname "$repo_git_dir")${_C___RESET}"
-    }
-    filtered_repo_git_dirs+=("$repo_git_dir")
-  fi
-
-  if [[ "$exclude" == true && "$match" == false ]]; then
-    [[ "$debug" == true ]] && {
-      echo -e "${_C_____DIM}Debug:${_C___RESET} Including repository: ${_C____PATH}$(dirname "$repo_git_dir")${_C___RESET}"
-    }
-    filtered_repo_git_dirs+=("$repo_git_dir")
-  fi
-
-  [[ "$debug" == true ]] && {
-    echo
-    echo
-  }
-done
-
-if [[ ${#filtered_repo_git_dirs[@]} -eq 0 ]]; then
+if [[ ${#repositories[@]} -eq 0 ]]; then
   echo -e "${_C___ERROR}${___ERROR_SYMBOL}${_C___RESET}  No git repositories found in the current directory with applied filters" 1>&2
   exit 1
 fi
 
+# -- execute 'list' command
 if [[ "$command" == "list" ]]; then
-  for repo_git_dir in "${filtered_repo_git_dirs[@]}"; do
-    repo_dir=$(dirname "$repo_git_dir")
+  for repository in "${repositories[@]}"; do
+    repo_dir=$(dirname "$repository")
     echo -ne "${_C_SUCCESS}${_PRIMARY_SYMBOL}${_C___RESET} "
     __repo_status "$repo_dir" "$branch"
     echo
@@ -248,50 +106,17 @@ if [[ "$command" == "list" ]]; then
   exit 0
 fi
 
-# Remaining commands: git, exec
+# -- set command and args for 'exec' command
 [[ "$command" == "exec" ]] && command="${args[0]}" && args=("${args[@]:1}")
 
-for repo_git_dir in "${filtered_repo_git_dirs[@]}"; do
-  repo_dir=$(dirname "$repo_git_dir")
+# -- execute git/exec commands in each repository
+for repository in "${repositories[@]}"; do
+  repo_dir=$(dirname "$repository")
   (
-    cd "$repo_dir" 2>/dev/null || {
-      echo -e "${_C___ERROR}${_PRIMARY_SYMBOL}  Failed to enter: ${_C___RESET} $(__print_path "$repo_dir")" 1>&2
-      exit 1
-    }
+    __enter_repo_dir "$repo_dir"
 
     parsed_args=()
-    for arg in "${args[@]}"; do
-      # {_repo_} -> name of the current git repository
-      [[ $arg == *"{_repo_}"* ]] && arg="${arg//\{_repo_\}/$(basename "$(pwd)")}"
-
-      # {_path_} -> relative path of the current working directory from where gitter was invoked
-      [[ $arg == *"{_path_}"* ]] && arg="${arg//\{_path_\}/${PWD/"${____CURRENT_DIR}"/.}}"
-
-      # {_path:abs_} -> absolute path of the current working directory}
-      [[ $arg == *"{_path:abs_}"* ]] && arg="${arg//\{_path:abs_\}/$(pwd)}"
-
-      # {_branch_} -> current git branch name
-      [[ $arg == *"{_branch_}"* ]] && arg="${arg//\{_branch_\}/$(git branch --show-current 2>/dev/null)}"
-
-      # {_commit_} -> current git commit hash
-      [[ $arg == *"{_commit_}"* ]] && arg="${arg//\{_commit_\}/$(git log -1 --format="%H" 2>/dev/null)}"
-
-      # {_commit:[int]_} -> current git commit hash abbreviated to [int] characters
-      if [[ $arg =~ \{_commit:([0-9]+)_\} ]]; then
-        abbrev_length="${BASH_REMATCH[1]}"
-        abbrev_commit="$(git log -1 --format="%h" --abbrev="$abbrev_length" 2>/dev/null)"
-        arg="${arg//\{_commit:${abbrev_length}_\}/$abbrev_commit}"
-      fi
-
-      # {_author_} -> current git commit author email
-      [[ $arg == *"{_author_}"* ]] && arg="${arg//\{_author_\}/$(git log -1 --format="%ae" 2>/dev/null)}"
-
-      [[ "$debug" == true ]] && {
-        echo -e "${_C_____DIM}Debug:${_C___RESET} Parsed argument: ${_C____ARGS}${arg}${_C___RESET}"
-      }
-
-      parsed_args+=("$arg")
-    done
+    __expand_args args parsed_args
 
     [[ "$debug" == true ]] && {
       echo -e "${_C_____DIM}Debug:${_C___RESET} in:                ${_C____PATH}$(pwd)${_C___RESET}"
