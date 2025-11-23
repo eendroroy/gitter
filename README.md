@@ -15,14 +15,6 @@ Run git or arbitrary command in multiple git repositories with filters in curren
  
 ## Installation
 
-### Using the installer
-
-```shell
-curl -s 'https://raw.githubusercontent.com/eendroroy/gitter/refs/heads/master/installer.sh' | bash
-```
-
-### Manually
-
 Clone the repo:
 
 ```bash
