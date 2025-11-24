@@ -34,9 +34,3 @@ ____CURRENT_DIR=$(pwd)
 [[ -z "${GITTER_C___ERROR+x}" ]] && GITTER_C___ERROR='\e[38;5;9m'
 [[ -z "${GITTER_C_HEADING+x}" ]] && GITTER_C_HEADING='\e[1;37m'
 GITTER_C___RESET='\e[0m'
-
-# Argument defaults
-GITTER_FILTERS=()
-command=""
-branch=false
-args=()

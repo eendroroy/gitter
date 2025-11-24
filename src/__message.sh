@@ -27,3 +27,8 @@ __all_repositories_ignored() {
   echo -e "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}  All git repositories are ignored by .gitterignore${GITTER_C___RESET}" 1>&2
   exit 1
 }
+
+__all_repositories_filtered_out() {
+  echo -e "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}${GITTER_C___RESET}  No git repositories found in the current directory with applied filters" 1>&2
+  exit 1
+}

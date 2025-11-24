@@ -15,72 +15,56 @@ _____SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 source "$_____SCRIPT_DIR"/../src/__variables.sh
 source "$_____SCRIPT_DIR"/../src/__message.sh
+# shellcheck source=/dev/null
+for script in "$_____SCRIPT_DIR"/../src/func/*.sh; do source "$script"; done
 
-for script in "$_____SCRIPT_DIR"/../src/func/*.sh; do
-  # shellcheck source=/dev/null
-  source "$script"
-done
+[[ $# -eq 0 ]] && { __help; exit 1; }
 
-if [[ $# -eq 0 ]]; then
-  __help
-  exit 1
-fi
+# Argument defaults
+command=""
+branch=false
+args=()
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     # Parse Options
-    --exclude |-e ) GITTER_FILTER_EXCLUDE=true; shift ;;
-    --filter  |-f ) shift; __read_filter "$1";  shift ;;
-    --no-color    ) __set_no_color;             shift ;;
-    --verbose |-v ) GITTER_VERBOSE=true;        shift ;;
+    --exclude |-e) GITTER_FILTER_EXCLUDE=true; shift ;;
+    --filter  |-f) shift; __read_filter "$1";  shift ;;
+    --no-color   ) __set_no_color;             shift ;;
+    --verbose |-v) GITTER_VERBOSE=true;        shift ;;
 
     # Parse Commands
-    git       |g  ) ___git;  shift ;;
-    exec      |x  ) ___exec; shift ;;
-    list      |ls ) ___list; shift ;;
-               lb ) ___lb;   shift ;;
-               ll ) ___ll;   shift ;;
-    help          ) ___help; shift ;;
+    git       |g ) ___git;  shift ;;
+    exec      |x ) ___exec; shift ;;
+    list      |ls) ___list; shift ;;
+               lb) ___lb;   shift ;;
+               ll) ___ll;   shift ;;
+    help         ) ___help; shift ;;
 
     # Parse Command Arguments
-    --            ) __read_command_args "$@"; break ;;
+    --) __read_command_args "$@"; break ;;
 
     # Handle Unknown Options/Arguments
-    --*           ) __handle_unknown_option "$1" ;;
-    -*            ) __handle_unknown_option "$1" ;;
-    *             ) __handle_unknown_arg    "$1" ;;
+    --*|-*) __handle_unknown_option "$1" ;;
+    *     ) __handle_unknown_arg    "$1" ;;
   esac
 done
 
-if [[ "$command" == "help" ]]; then
-  __help
-  exit 0
-fi
-
-# Set default command type if none specified
+[[ "$command" == "help" ]] && { __help; exit 0; }
 [[ -z "$command" ]] && command="git"
-
 [[ "$command" != "list" && ${#args[@]} -eq 0 ]] && __invalid_args_for_command_list
 
 # -- find all git repositories in the current directory
 readarray -d '' -t repositories < <(find . -name ".git" -maxdepth "$((GITTER_MAX_DEPTH+1))" -type d -print0)
-
 [[ ${#repositories[@]} -eq 0 ]] && __no_repository_found
 
 # -- process .gitterignore if exists
-if [[ -f .gitterignore ]]; then
-  __process_gitterignore repositories
-fi
-
+[[ -f .gitterignore ]] && __process_gitterignore repositories
 [[ ${#repositories[@]} -eq 0 ]] && __all_repositories_ignored
 
 # -- apply user specified filters
 __filter_repos repositories
-
-if [[ ${#repositories[@]} -eq 0 ]]; then
-  echo -e "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}${GITTER_C___RESET}  No git repositories found in the current directory with applied filters" 1>&2
-  exit 1
-fi
+[[ ${#repositories[@]} -eq 0 ]] && __all_repositories_filtered_out
 
 # -- execute 'list' command
 if [[ "$command" == "list" ]]; then
@@ -102,12 +86,10 @@ for repository in "${repositories[@]}"; do
   repo_dir=$(dirname "$repository")
   (
     __enter_repo_dir "$repo_dir"
+    __expand_args args
 
-    parsed_args=()
-    __expand_args args parsed_args
-
-    echo -e "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL} \$(${command} ${parsed_args[*]})${GITTER_C___RESET} ${GITTER_C_____DIM}in${GITTER_C___RESET} $(__repo_status ".")"
-    command -- "$command" "${parsed_args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
+    echo -e "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL} \$(${command} ${args[*]})${GITTER_C___RESET} ${GITTER_C_____DIM}in${GITTER_C___RESET} $(__repo_status ".")"
+    command -- "$command" "${args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
   )
 done
 exit 0
