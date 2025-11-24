@@ -9,6 +9,7 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+# shellcheck disable=SC2034
 # Commands
 ___git()  { __parse_command "git" ; }
 ___exec() { __parse_command "exec"; }

@@ -9,6 +9,8 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+# shellcheck disable=SC2034
+
 ____CURRENT_DIR=$(pwd)
 
 # Default variables

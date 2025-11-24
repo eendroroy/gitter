@@ -9,6 +9,7 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+# shellcheck disable=SC2034
 __set_no_color() {
   GITTER_C___RESET=''
   GITTER_C____PATH=''
