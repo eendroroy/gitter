@@ -144,6 +144,28 @@ Filters allow you to include or exclude repositories based on specific criteria 
 - `-e -f repo:+test+`: Excludes repositories with "test" anywhere in the repository name.
 - `-f path:+utils+ -f branch:dev`: Includes repositories with "utils" in the path or currently on the "dev" branch.
 
+## .gitterignore
+
+You can create a `.gitterignore` file in the current directory to specify repositories that should be ignored by `gitter`. Each line in the file should contain a pattern to match repository names or paths. Lines starting with `#` are treated as comments and ignored.
+
+### Patterns
+
+- `relative/path/to/directory`: Ignore directory at exact relative path `relative/path/to/directory`
+- `*/directory_name`: Ignore directories under any parent directory named `directory_name`
+- `directory_name/*`: Ignore directories directly under the top-level directory named `directory_name`
+
+## Placeholders
+
+Within `exec` and `git` commands, you can use the following placeholders in arguments:
+
+- `{_repo_}`: Name of the current git repository
+- `{_path_}`: Relative path of the current working directory from where gitter was invoked
+- `{_path:abs_}`: Absolute path of the current working directory
+- `{_branch_}`: Current git branch name
+- `{_commit_}`: Current git commit hash
+- `{_commit:[int]_}`: Current git commit hash abbreviated to `[int]` characters. i.e. `{_commit:8_}`
+- `{_author_}`: Current git commit author email
+
 ## License
 
 The project is available as open source under the terms of the [AGPL3 License](https://www.fsf.org/licensing/licenses/agpl.html).
