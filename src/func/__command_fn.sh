@@ -17,4 +17,4 @@ ___help() { __parse_command "help"; }
 
 # Command aliases
 ___lb()   { __parse_command "list"; branch=true; }
-___ll()   { __parse_command "list"; verbose=true; }
+___ll()   { __parse_command "list"; GITTER_VERBOSE=true; }

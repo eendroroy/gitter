@@ -12,9 +12,9 @@
 __parse_command() {
   if [[ -n "$command" ]]; then
     echo
-    echo -e "\n${_C___ERROR}Multiple command types specified${_C___RESET}" 1>&2
+    echo -e "\n${GITTER_C___ERROR}Multiple command types specified${GITTER_C___RESET}" 1>&2
     echo
-    echo -e "Run ${_C_COMMAND}gitter --help${_C___RESET} for usage information." 1>&2
+    echo -e "Run ${GITTER_C_COMMAND}gitter --help${GITTER_C___RESET} for usage information." 1>&2
     echo
     exit 1
   fi

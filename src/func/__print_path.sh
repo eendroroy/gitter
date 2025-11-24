@@ -20,7 +20,7 @@ __print_path() {
   if [[ "$path" == "." ]]; then
     path="$(basename "${____CURRENT_DIR}")"
   else
-    echo -ne "${_C_PATH_DM}${path%/*}/${_C___RESET}"
+    echo -ne "${GITTER_C_PATH_DM}${path%/*}/${GITTER_C___RESET}"
   fi
-  echo -ne "${_C____PATH}${path##*/}${_C___RESET}"
+  echo -ne "${GITTER_C____PATH}${path##*/}${GITTER_C___RESET}"
 }

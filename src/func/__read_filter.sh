@@ -12,11 +12,11 @@
 __read_filter() {
   if [[ -z "$1" || "$1" == -* ]]; then
     echo
-    echo -e "${_C___ERROR}Missing or invalid argument for:${_C___RESET} ${_C__OPTION}--filter${_C___RESET}" 1>&2
+    echo -e "${GITTER_C___ERROR}Missing or invalid argument for:${GITTER_C___RESET} ${GITTER_C__OPTION}--filter${GITTER_C___RESET}" 1>&2
     echo
-    echo -e "Run ${_C_COMMAND}gitter --help${_C___RESET} for usage information." 1>&2
+    echo -e "Run ${GITTER_C_COMMAND}gitter --help${GITTER_C___RESET} for usage information." 1>&2
     echo
     exit 1
   fi
-  filters+=("$1")
+  GITTER_FILTERS+=("$1")
 }

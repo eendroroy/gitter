@@ -10,15 +10,15 @@
 # License, or (at your option) any later version.
 
 __set_no_color() {
-  _C___RESET=''
-  _C____PATH=''
-  _C_PATH_DM=''
-  _C_COMMAND=''
-  _C____ARGS=''
-  _C__OPTION=''
-  _C_____DIM=''
-  _C___VALUE=''
-  _C_SUCCESS=''
-  _C___ERROR=''
-  _C_HEADING=''
+  GITTER_C___RESET=''
+  GITTER_C____PATH=''
+  GITTER_C_PATH_DM=''
+  GITTER_C_COMMAND=''
+  GITTER_C____ARGS=''
+  GITTER_C__OPTION=''
+  GITTER_C_____DIM=''
+  GITTER_C___VALUE=''
+  GITTER_C_SUCCESS=''
+  GITTER_C___ERROR=''
+  GITTER_C_HEADING=''
 }

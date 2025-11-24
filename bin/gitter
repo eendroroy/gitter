@@ -9,15 +9,17 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+# shellcheck disable=SC2034
+
 _____SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+source "$_____SCRIPT_DIR"/../src/__variables.sh
+source "$_____SCRIPT_DIR"/../src/__message.sh
 
 for script in "$_____SCRIPT_DIR"/../src/func/*.sh; do
   # shellcheck source=/dev/null
   source "$script"
 done
-
-source "$_____SCRIPT_DIR"/../src/__vars.sh
-source "$_____SCRIPT_DIR"/../src/__command_fn.sh
 
 if [[ $# -eq 0 ]]; then
   __help
@@ -27,10 +29,10 @@ fi
 while [[ $# -gt 0 ]]; do
   case "$1" in
     # Parse Options
-    --exclude |-e ) exclude=true;              shift ;;
-    --filter  |-f ) shift; __read_filter "$1"; shift ;;
-    --no-color    ) __set_no_color;            shift ;;
-    --verbose |-v ) verbose=true;              shift ;;
+    --exclude |-e ) GITTER_FILTER_EXCLUDE=true; shift ;;
+    --filter  |-f ) shift; __read_filter "$1";  shift ;;
+    --no-color    ) __set_no_color;             shift ;;
+    --verbose |-v ) GITTER_VERBOSE=true;        shift ;;
 
     # Parse Commands
     git       |g  ) ___git;  shift ;;
@@ -58,38 +60,25 @@ fi
 # Set default command type if none specified
 [[ -z "$command" ]] && command="git"
 
-[[ "$command" != "list" && ${#args[@]} -eq 0 ]] && {
-  echo
-  echo -e "${_C___ERROR}No arguments provided for command:${_C___RESET} $command" 1>&2
-  echo
-  echo -e "Run ${_C_COMMAND}gitter --help${_C___RESET} for usage information." 1>&2
-  echo
-  exit 1
-}
+[[ "$command" != "list" && ${#args[@]} -eq 0 ]] && __invalid_args_for_command_list
 
 # -- find all git repositories in the current directory
-readarray -d '' -t repositories < <(find . -name ".git" -type d -print0)
+readarray -d '' -t repositories < <(find . -name ".git" -maxdepth "$((GITTER_MAX_DEPTH+1))" -type d -print0)
 
-if [[ ${#repositories[@]} -eq 0 ]]; then
-  echo -e "${_C___ERROR}${___ERROR_SYMBOL}  No git repositories found in the current directory${_C___RESET}" 1>&2
-  exit 1
-fi
+[[ ${#repositories[@]} -eq 0 ]] && __no_repository_found
 
 # -- process .gitterignore if exists
 if [[ -f .gitterignore ]]; then
   __process_gitterignore repositories
 fi
 
-if [[ ${#repositories[@]} -eq 0 ]]; then
-  echo -e "${_C___ERROR}${___ERROR_SYMBOL}  All git repositories are ignored by .gitterignore${_C___RESET}" 1>&2
-  exit 1
-fi
+[[ ${#repositories[@]} -eq 0 ]] && __all_repositories_ignored
 
 # -- apply user specified filters
 __filter_repos repositories
 
 if [[ ${#repositories[@]} -eq 0 ]]; then
-  echo -e "${_C___ERROR}${___ERROR_SYMBOL}${_C___RESET}  No git repositories found in the current directory with applied filters" 1>&2
+  echo -e "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}${GITTER_C___RESET}  No git repositories found in the current directory with applied filters" 1>&2
   exit 1
 fi
 
@@ -97,7 +86,7 @@ fi
 if [[ "$command" == "list" ]]; then
   for repository in "${repositories[@]}"; do
     repo_dir=$(dirname "$repository")
-    echo -ne "${_C_SUCCESS}${_PRIMARY_SYMBOL}${_C___RESET} "
+    echo -ne "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C___RESET} "
     __repo_status "$repo_dir" "$branch"
     echo
     continue
@@ -117,7 +106,7 @@ for repository in "${repositories[@]}"; do
     parsed_args=()
     __expand_args args parsed_args
 
-    echo -e "${_C_SUCCESS}${_PRIMARY_SYMBOL} \$(${command} ${parsed_args[*]})${_C___RESET} ${_C_____DIM}in${_C___RESET} $(__repo_status ".")"
+    echo -e "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL} \$(${command} ${parsed_args[*]})${GITTER_C___RESET} ${GITTER_C_____DIM}in${GITTER_C___RESET} $(__repo_status ".")"
     command -- "$command" "${parsed_args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
   )
 done

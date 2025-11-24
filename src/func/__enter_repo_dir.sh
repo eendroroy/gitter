@@ -12,7 +12,7 @@
 __enter_repo_dir() {
   local dir="$1"
   cd "$dir" 2>/dev/null || {
-    echo -e "${_C___ERROR}${_PRIMARY_SYMBOL}  Failed to enter: ${_C___RESET} $(__print_path "$dir")" 1>&2
+    echo -e "${GITTER_C___ERROR}${GITTER_PRIMARY_SYMBOL}  Failed to enter: ${GITTER_C___RESET} $(__print_path "$dir")" 1>&2
     exit 1
   }
 }

@@ -16,13 +16,13 @@ __filter_repos() {
 
   for repo_git_dir in "${repo_list[@]}"; do
 
-    if [[ ${#filters[@]} -eq 0 ]]; then
+    if [[ ${#GITTER_FILTERS[@]} -eq 0 ]]; then
       filtered_repo_git_dirs+=("$repo_git_dir")
       continue
     fi
 
     match=false
-    for filter in "${filters[@]}"; do
+    for filter in "${GITTER_FILTERS[@]}"; do
       filter_key="${filter%%:*}"
       filter_value="${filter#*:}"
 
@@ -33,7 +33,7 @@ __filter_repos() {
         R|repo  ) value="$(basename "$repo_dir")" ;;
         B|branch) value="$(git -C "$repo_dir" branch --show-current 2>/dev/null)" ;;
         *)
-          echo -e "${_C___ERROR}${___ERROR_SYMBOL}  Unknown filter key: ${filter_key}${_C___RESET}" 1>&2
+          echo -e "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}  Unknown filter key: ${filter_key}${GITTER_C___RESET}" 1>&2
           exit 1
           ;;
       esac
@@ -43,11 +43,11 @@ __filter_repos() {
       fi
     done
 
-    if [[ "$exclude" == false && "$match" == true ]]; then
+    if [[ "$GITTER_FILTER_EXCLUDE" == false && "$match" == true ]]; then
       filtered_repo_git_dirs+=("$repo_git_dir")
     fi
 
-    if [[ "$exclude" == true && "$match" == false ]]; then
+    if [[ "$GITTER_FILTER_EXCLUDE" == true && "$match" == false ]]; then
       filtered_repo_git_dirs+=("$repo_git_dir")
     fi
   done

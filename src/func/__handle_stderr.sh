@@ -11,6 +11,6 @@
 
 __handle_stderr() {
   while IFS= read -r line; do
-    printf "${_C___ERROR}%s${_C___RESET}  %s\n" "${___ERROR_SYMBOL}" "${line}" 1>&2
+    printf "${GITTER_C___ERROR}%s${GITTER_C___RESET}  %s\n" "${GITTER___ERROR_SYMBOL}" "${line}" 1>&2
   done
 }

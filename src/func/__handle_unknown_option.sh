@@ -11,9 +11,9 @@
 
 __handle_unknown_option() {
   echo
-  echo -e "${_C___ERROR}Unknown option:${_C___RESET} $1" 1>&2
+  echo -e "${GITTER_C___ERROR}Unknown option:${GITTER_C___RESET} $1" 1>&2
   echo
-  echo -e "Run ${_C_COMMAND}gitter --help${_C___RESET} for usage information." 1>&2
+  echo -e "Run ${GITTER_C_COMMAND}gitter --help${GITTER_C___RESET} for usage information." 1>&2
   echo
   exit 1
 }

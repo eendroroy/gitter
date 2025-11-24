@@ -12,14 +12,14 @@
 __repo_status() {
   (
     cd "$1" 2>/dev/null || {
-      echo -e "${_C___ERROR}${_PRIMARY_SYMBOL}  Failed to enter: ${1}${_C___RESET}" 1>&2
+      echo -e "${GITTER_C___ERROR}${GITTER_PRIMARY_SYMBOL}  Failed to enter: ${1}${GITTER_C___RESET}" 1>&2
       exit 1
     }
 
     echo -ne "$(__print_path)"
-    [[ $verbose == true || $2 = true ]] && echo -ne " ${_C_____DIM}on${_C___RESET} ${_C_COMMAND}$(git branch --show-current)${_C___RESET}"
-    [[ $verbose == true ]] && echo -ne " ${_C___VALUE}$(git log -1 --format="%h" --abbrev=8)${_C___RESET}"
-    [[ $verbose == true ]] && echo -ne " ${_C____ARGS}$(git log -1 --format="%cr")${_C___RESET}"
-    [[ $verbose == true ]] && echo -ne " ${_C_____DIM}by${_C___RESET} ${_C__OPTION}$(git log -1 --format="%ae")${_C___RESET}"
+    [[ $GITTER_VERBOSE == true || $2 = true ]] && echo -ne " ${GITTER_C_____DIM}on${GITTER_C___RESET} ${GITTER_C_COMMAND}$(git branch --show-current)${GITTER_C___RESET}"
+    [[ $GITTER_VERBOSE == true ]] && echo -ne " ${GITTER_C___VALUE}$(git log -1 --format="%h" --abbrev=8)${GITTER_C___RESET}"
+    [[ $GITTER_VERBOSE == true ]] && echo -ne " ${GITTER_C____ARGS}$(git log -1 --format="%cr")${GITTER_C___RESET}"
+    [[ $GITTER_VERBOSE == true ]] && echo -ne " ${GITTER_C_____DIM}by${GITTER_C___RESET} ${GITTER_C__OPTION}$(git log -1 --format="%ae")${GITTER_C___RESET}"
   )
 }
