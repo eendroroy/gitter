@@ -23,7 +23,6 @@ __help() {
   echo -e "  ${GITTER_C__OPTION}git   g      ${GITTER_C___RESET} Run a git command (${GITTER_C____ARGS}default${GITTER_C___RESET})"
   echo -e "  ${GITTER_C__OPTION}exec  x      ${GITTER_C___RESET} Run an arbitrary command"
   echo -e "  ${GITTER_C__OPTION}list  ls     ${GITTER_C___RESET} List repositories only"
-  echo -e "  ${GITTER_C__OPTION}      lb     ${GITTER_C___RESET} List repositories with branch name"
   echo -e "  ${GITTER_C__OPTION}      ll     ${GITTER_C___RESET} Equivalent to ${GITTER_C__OPTION}list --verbose${GITTER_C___RESET} command"
   echo -e "  ${GITTER_C__OPTION}help         ${GITTER_C___RESET} Show this help menu"
   echo

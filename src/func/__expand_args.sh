@@ -27,5 +27,5 @@ __expand_args() {
 
     parsed_args+=("$arg")
   done
-  args_ref=("${parsed_args_ref[@]}")
+  args_ref=("${parsed_args[@]}")
 }

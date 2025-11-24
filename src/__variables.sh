@@ -24,6 +24,14 @@ ____CURRENT_DIR=$(pwd)
 [[ -z "${GITTER_VERBOSE+x}"        ]] && GITTER_VERBOSE=false        || return 0
 [[ -z "${GITTER_FILTER_EXCLUDE+x}" ]] && GITTER_FILTER_EXCLUDE=false || return 0
 
+if [[ -z "${GITTER_REPO_PATTERNS+x}" ]]; then
+  GITTER_REPO_PATTERNS=(" on " "{_branch_}")
+fi
+
+if [[ -z "${GITTER_REPO_PATTERNS_VERBOSE+x}" ]]; then
+  GITTER_REPO_PATTERNS_VERBOSE=(" on " "{_branch_}" " " "{_commit:a_}" " updated " "{_time:r_}" " by " "{_author_}")
+fi
+
 # Color defaults
 [[ -z "${GITTER_C____PATH+x}" ]] && GITTER_C____PATH='\e[35m'
 [[ -z "${GITTER_C_PATH_DM+x}" ]] && GITTER_C_PATH_DM='\e[2;35m'

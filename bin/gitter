@@ -22,7 +22,6 @@ for script in "$_____SCRIPT_DIR"/../src/func/*.sh; do source "$script"; done
 
 # Argument defaults
 command=""
-branch=false
 args=()
 
 while [[ $# -gt 0 ]]; do
@@ -71,7 +70,7 @@ if [[ "$command" == "list" ]]; then
   for repository in "${repositories[@]}"; do
     repo_dir=$(dirname "$repository")
     echo -ne "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C___RESET} "
-    __repo_status "$repo_dir" "$branch"
+    __repo_status "$repo_dir"
     echo
     continue
   done
