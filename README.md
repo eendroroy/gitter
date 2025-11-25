@@ -40,12 +40,12 @@ Run `gitter help` for details.
 
 ```shell
 # Configuration variables for gitter
-export GITTER_MAX_DEPTH=2              # Maximum directory depth to search for git repositories (default: 2)
 export GITTER_SUCCESS_SYMBOL=" ░"      # Symbol to indicate success status
 export GITTER___ERROR_SYMBOL=" ░"      # Symbol to indicate error status
 export GITTER_PRIMARY_SYMBOL=" ━"      # Symbol to indicate primary information
 
 # Arg defaults
+export GITTER_MAX_DEPTH=2              # Maximum directory depth to search for git repositories (default: 2)
 export GITTER_FILTERS=()               # Default empty filters
 export GITTER_VERBOSE=false            # Disable verbose mode by default
 export GITTER_FILTER_EXCLUDE=false     # Do not exclude matched repositories by default
@@ -66,8 +66,8 @@ export GITTER_C___VALUE='\e[2;35;1;3m' # Value color
 
 ## Repository status patterns
 
-When running git commands, gitter will display the repository status based on the configured patterns. The default
-patterns are as follows:
+When running git commands, gitter will display the repository status based on the configured patterns.
+The default patterns are as follows:
 
 ```shell
 # gitter list | gitter ls
@@ -121,8 +121,8 @@ or branch name. You can use multiple filters to narrow down the selection of rep
 ## .gitterignore
 
 You can create a `.gitterignore` file in the current directory to specify repositories that should be ignored by
-`gitter`. Each line in the file should contain a pattern to match repository names or paths. Lines starting with `#` are
-treated as comments and ignored.
+`gitter`. Each line in the file should contain a pattern to match repository names or paths. 
+Lines starting with `#` are treated as comments and ignored.
 
 #### Patterns
 
