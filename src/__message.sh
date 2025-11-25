@@ -32,3 +32,21 @@ __all_repositories_filtered_out() {
   echo -e "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}${GITTER_C___RESET}  No git repositories found in the current directory with applied filters" 1>&2
   exit 1
 }
+
+__unknown_arg() {
+  echo
+  echo -e "${GITTER_C___ERROR}Unknown argument:${GITTER_C___RESET} $1" 1>&2
+  echo
+  echo -e "Run ${GITTER_C_COMMAND}gitter --help${GITTER_C___RESET} for usage information." 1>&2
+  echo
+  exit 1
+}
+
+__unknown_option() {
+  echo
+  echo -e "${GITTER_C___ERROR}Unknown option:${GITTER_C___RESET} $1" 1>&2
+  echo
+  echo -e "Run ${GITTER_C_COMMAND}gitter --help${GITTER_C___RESET} for usage information." 1>&2
+  echo
+  exit 1
+}

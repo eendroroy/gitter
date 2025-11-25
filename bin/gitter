@@ -44,8 +44,8 @@ while [[ $# -gt 0 ]]; do
     --) __read_command_args "$@"; break ;;
 
     # Handle Unknown Options/Arguments
-    --*|-*) __handle_unknown_option "$1" ;;
-    *     ) __handle_unknown_arg    "$1" ;;
+    --*|-*) __unknown_option "$1" ;;
+    *     ) __unknown_arg    "$1" ;;
   esac
 done
 
