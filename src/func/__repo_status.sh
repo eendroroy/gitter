@@ -29,7 +29,8 @@ __repo_status() {
         "{_commit:f_}" ) echo -ne "${GITTER_C___VALUE}$(git log -1 --format="%H")${GITTER_C___RESET}";;
         "{_time:r_}"   ) echo -ne "${GITTER_C____ARGS}$(git log -1 --format="%cr")${GITTER_C___RESET}";;
         "{_time:d_}"   ) echo -ne "${GITTER_C____ARGS}$(git log -1 --format="%cd")${GITTER_C___RESET}";;
-        "{_author_}"   ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%ae")${GITTER_C___RESET}";;
+        "{_author:e_}" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%ae")${GITTER_C___RESET}";;
+        "{_author:n_}" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%an")${GITTER_C___RESET}";;
         *              ) echo -ne "${GITTER_C_____DIM}${pattern}${GITTER_C___RESET}" ;;
       esac
     done

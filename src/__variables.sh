@@ -30,7 +30,7 @@ if [[ -z "${GITTER_REPO_PATTERNS+x}" ]]; then
 fi
 
 if [[ -z "${GITTER_REPO_PATTERNS_VERBOSE+x}" ]]; then
-  GITTER_REPO_PATTERNS_VERBOSE=(" on " "{_branch_}" " " "{_commit:a_}" " updated " "{_time:r_}" " by " "{_author_}")
+  GITTER_REPO_PATTERNS_VERBOSE=(" on " "{_branch_}" " " "{_commit:a_}" " by " "{_author:e_}" " " "{_time:r_}")
 fi
 
 # Color defaults

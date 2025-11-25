@@ -85,23 +85,24 @@ Placeholders:
     {_branch_}       Current git branch name
     {_commit_}       Current git commit hash
     {_commit:[int]_} Current git commit hash abbreviated to [int] characters. i.e. {_commit:8_}
-    {_author_}       Current git commit author email
+    {_author:e_}     Current git commit author email
+    {_author:n_}     Current git commit author name
 ```
 
 ## Configuration
 
 ```shell
 # Configuration variables for gitter
-export GITTER_MAX_DEPTH=2         # Maximum directory depth to search for git repositories (default: 2)
-export GITTER_SUCCESS_SYMBOL=" ░" # Symbol to indicate success status
-export GITTER___ERROR_SYMBOL=" ░" # Symbol to indicate error status
-export GITTER_PRIMARY_SYMBOL=" ━" # Symbol to indicate primary information
+export GITTER_MAX_DEPTH=2              # Maximum directory depth to search for git repositories (default: 2)
+export GITTER_SUCCESS_SYMBOL=" ░"      # Symbol to indicate success status
+export GITTER___ERROR_SYMBOL=" ░"      # Symbol to indicate error status
+export GITTER_PRIMARY_SYMBOL=" ━"      # Symbol to indicate primary information
 
 # Arg defaults
-export GITTER_FILTERS=()           # Default empty filters
-export GITTER_VERBOSE=false        # Disable verbose mode by default
-export GITTER_FILTER_EXCLUDE=false # Do not exclude matched repositories by default
-export GITTER_NO_COLOR=false       # Enable colored output by default
+export GITTER_FILTERS=()               # Default empty filters
+export GITTER_VERBOSE=false            # Disable verbose mode by default
+export GITTER_FILTER_EXCLUDE=false     # Do not exclude matched repositories by default
+export GITTER_NO_COLOR=false           # Enable colored output by default
 
 # Color configuration
 export GITTER_C____PATH='\e[35m'       # Path color
@@ -122,10 +123,10 @@ When running git commands, gitter will display the repository status based on th
 
 ```shell
 # gitter list | gitter ll
-export GITTER_REPO_PATTERNS=(" on " "{_branch_}")
+export GITTER_REPO_PATTERNS=(" on " "{_branch_}") # default pattern
 
 # gitter list --verbose | gitter ll
-export GITTER_REPO_PATTERNS_VERBOSE=(" on " "{_branch_}" " " "{_commit:a_}" " updated at " "{_time:r_}" " by " "{_author_}")
+export GITTER_REPO_PATTERNS_VERBOSE=(" on " "{_branch_}" " " "{_commit:a_}" " by " "{_author:e_}" " " "{_time:r_}")  # default pattern
 ```
 
 #### Available placeholders for patterns

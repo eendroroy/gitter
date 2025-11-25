@@ -73,6 +73,7 @@ __help() {
   echo -e "    ${GITTER_C____ARGS}{_branch_}${GITTER_C___RESET}       Current git branch name"
   echo -e "    ${GITTER_C____ARGS}{_commit_}${GITTER_C___RESET}       Current git commit hash"
   echo -e "    ${GITTER_C____ARGS}{_commit:[int]_}${GITTER_C___RESET} Current git commit hash abbreviated to [int] characters. i.e. ${GITTER_C____ARGS}{_commit:8_}${GITTER_C___RESET}"
-  echo -e "    ${GITTER_C____ARGS}{_author_}${GITTER_C___RESET}       Current git commit author email"
+  echo -e "    ${GITTER_C____ARGS}{_author:e_}${GITTER_C___RESET}     Current git commit author email"
+  echo -e "    ${GITTER_C____ARGS}{_author:n_}${GITTER_C___RESET}     Current git commit author name"
   echo
 }

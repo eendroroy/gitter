@@ -23,7 +23,8 @@ __expand_args() {
       abbrev_commit="$(git log -1 --format="%h" --abbrev="$abbrev_length" 2>/dev/null)"
       arg="${arg//\{_commit:${abbrev_length}_\}/$abbrev_commit}"
     }
-    [[ $arg == *"{_author_}"* ]] && arg="${arg//\{_author_\}/$(git log -1 --format="%ae" 2>/dev/null)}"
+    [[ $arg == *"{_author:e_}"* ]] && arg="${arg//\{_author_\}/$(git log -1 --format="%ae" 2>/dev/null)}"
+    [[ $arg == *"{_author:n_}"* ]] && arg="${arg//\{_author_\}/$(git log -1 --format="%an" 2>/dev/null)}"
 
     parsed_args+=("$arg")
   done
