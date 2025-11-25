@@ -27,12 +27,13 @@ args=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
     # Parse Commands
-    git  |g ) ___git;  shift ;;
-    exec |x ) ___exec; shift ;;
-    list |ls) ___list; shift ;;
-          lb) ___lb;   shift ;;
-          ll) ___ll;   shift ;;
-    help    ) ___help; shift ;;
+    git   |g ) ___git;    shift ;;
+    exec  |x ) ___exec;   shift ;;
+    list  |ls) ___list;   shift ;;
+           lb) ___lb;     shift ;;
+           ll) ___ll;     shift ;;
+    config|c ) ___config; shift ;;
+    help     ) ___help;   shift ;;
 
     # Parse Options
     --max-depth|-d) shift; __read_max_depth "$1"; shift ;;
@@ -53,7 +54,8 @@ done
 [[ "$GITTER_NO_COLOR" == true ]] && __disable_color_output
 
 [[ -z "$command" ]] && command="git"
-[[ "$command" == "help" ]] && { __help; exit 0; }
+[[ "$command" == "help"   ]] && { __help;         exit 0; }
+[[ "$command" == "config" ]] && { __print_config; exit 0; }
 [[ "$command" != "list" && ${#args[@]} -eq 0 ]] && __invalid_args_for_command "$command"
 
 # -- find all git repositories in the current directory

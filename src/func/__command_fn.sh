@@ -11,10 +11,11 @@
 
 # shellcheck disable=SC2034
 # Commands
-___git()  { __parse_command "git" ; }
-___exec() { __parse_command "exec"; }
-___list() { __parse_command "list"; }
-___help() { __parse_command "help"; }
+___git()    { __parse_command "git" ; }
+___exec()   { __parse_command "exec"; }
+___list()   { __parse_command "list"; }
+___help()   { __parse_command "help"; }
+___config() { __parse_command "config"; }
 
 # Command aliases
 ___ll()   { __parse_command "list"; GITTER_VERBOSE=true; }

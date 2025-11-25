@@ -52,16 +52,16 @@ export GITTER_FILTER_EXCLUDE=false     # Do not exclude matched repositories by 
 export GITTER_NO_COLOR=false           # Enable colored output by default
 
 # Color configuration
+export GITTER_C___ERROR='\e[38;5;9m'   # Error color
+export GITTER_C_SUCCESS='\e[38;5;2m'   # Success color
 export GITTER_C____PATH='\e[35m'       # Path color
 export GITTER_C_PATH_DM='\e[2;35m'     # Dimmed path color
+export GITTER_C_____DIM='\e[2;38;5;3m' # Dim color
+export GITTER_C_HEADING='\e[1;37m'     # Heading color
 export GITTER_C_COMMAND='\e[32m'       # Command color
 export GITTER_C____ARGS='\e[33m'       # Arguments color
 export GITTER_C__OPTION='\e[36m'       # Option color
 export GITTER_C___VALUE='\e[2;35;1;3m' # Value color
-export GITTER_C_____DIM='\e[2;38;5;3m' # Dim color
-export GITTER_C_SUCCESS='\e[38;5;2m'   # Success color
-export GITTER_C___ERROR='\e[38;5;9m'   # Error color
-export GITTER_C_HEADING='\e[1;37m'     # Heading color
 ```
 
 ## Repository status patterns

@@ -22,11 +22,12 @@ __help() {
   echo -e "|${GITTER_C__OPTION}help${GITTER_C___RESET}]"
   echo
   echo -e "${GITTER_C_HEADING}Commands:${GITTER_C___RESET}"
-  echo -e "  ${GITTER_C__OPTION}git   g  ${GITTER_C___RESET} Run a git command (${GITTER_C____ARGS}default${GITTER_C___RESET})"
-  echo -e "  ${GITTER_C__OPTION}exec  x  ${GITTER_C___RESET} Run an arbitrary command"
-  echo -e "  ${GITTER_C__OPTION}list  ls ${GITTER_C___RESET} List repositories only"
-  echo -e "  ${GITTER_C__OPTION}      ll ${GITTER_C___RESET} Equivalent to ${GITTER_C__OPTION}list --verbose${GITTER_C___RESET} command"
-  echo -e "  ${GITTER_C__OPTION}help     ${GITTER_C___RESET} Show this help menu"
+  echo -e "  ${GITTER_C__OPTION}git    g  ${GITTER_C___RESET} Run a git command (${GITTER_C____ARGS}default${GITTER_C___RESET})"
+  echo -e "  ${GITTER_C__OPTION}exec   x  ${GITTER_C___RESET} Run an arbitrary command"
+  echo -e "  ${GITTER_C__OPTION}list   ls ${GITTER_C___RESET} List repositories only"
+  echo -e "  ${GITTER_C__OPTION}       ll ${GITTER_C___RESET} Equivalent to ${GITTER_C__OPTION}list --verbose${GITTER_C___RESET} command"
+  echo -e "  ${GITTER_C__OPTION}config c  ${GITTER_C___RESET} Print current (effective) configuration"
+  echo -e "  ${GITTER_C__OPTION}help      ${GITTER_C___RESET} Show this help menu"
   echo
   echo -e "${GITTER_C_HEADING}Options:${GITTER_C___RESET}"
   echo -e "  ${GITTER_C__OPTION}--max-depth -d <${GITTER_C___VALUE}depth${GITTER_C___RESET}>${GITTER_C___RESET}   Look for git repositories up to specified depth (default: ${GITTER_C____ARGS}2${GITTER_C___RESET})"
