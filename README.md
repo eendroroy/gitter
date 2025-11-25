@@ -99,6 +99,7 @@ export GITTER_PRIMARY_SYMBOL=" ━" # Symbol to indicate primary information
 export GITTER_FILTERS=()           # Default empty filters
 export GITTER_VERBOSE=false        # Disable verbose mode by default
 export GITTER_FILTER_EXCLUDE=false # Do not exclude matched repositories by default
+export GITTER_NO_COLOR=false       # Enable colored output by default
 
 # Color configuration
 export GITTER_C____PATH='\e[35m'       # Path color

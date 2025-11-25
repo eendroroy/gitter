@@ -10,7 +10,7 @@
 # License, or (at your option) any later version.
 
 # shellcheck disable=SC2034
-__set_no_color() {
+__disable_color_output() {
   GITTER_C___RESET=''
   GITTER_C____PATH=''
   GITTER_C_PATH_DM=''

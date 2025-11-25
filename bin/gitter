@@ -29,7 +29,7 @@ while [[ $# -gt 0 ]]; do
     # Parse Options
     --exclude |-e) GITTER_FILTER_EXCLUDE=true; shift ;;
     --filter  |-f) shift; __read_filter "$1";  shift ;;
-    --no-color   ) __set_no_color;             shift ;;
+    --no-color   ) GITTER_NO_COLOR=true;      shift ;;
     --verbose |-v) GITTER_VERBOSE=true;        shift ;;
 
     # Parse Commands
@@ -48,6 +48,8 @@ while [[ $# -gt 0 ]]; do
     *     ) __handle_unknown_arg    "$1" ;;
   esac
 done
+
+[[ "$GITTER_NO_COLOR" == true ]] && __disable_color_output
 
 [[ "$command" == "help" ]] && { __help; exit 0; }
 [[ -z "$command" ]] && command="git"
