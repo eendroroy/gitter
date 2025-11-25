@@ -19,7 +19,7 @@ __help() {
   echo -ne " [${GITTER_C__OPTION}git${GITTER_C___RESET} ${GITTER_C__OPTION}--${GITTER_C___RESET} <${GITTER_C____ARGS}args ...${GITTER_C___RESET}>${GITTER_C___RESET}"
   echo -ne "|${GITTER_C__OPTION}exec${GITTER_C___RESET} ${GITTER_C__OPTION}--${GITTER_C___RESET} <${GITTER_C____ARGS}args ...${GITTER_C___RESET}>${GITTER_C___RESET}"
   echo -ne "|${GITTER_C__OPTION}list${GITTER_C___RESET}"
-  echo -ne "|${GITTER_C__OPTION}help${GITTER_C___RESET}]"
+  echo -e "|${GITTER_C__OPTION}help${GITTER_C___RESET}]"
   echo
   echo -e "${GITTER_C_HEADING}Commands:${GITTER_C___RESET}"
   echo -e "  ${GITTER_C__OPTION}git   g  ${GITTER_C___RESET} Run a git command (${GITTER_C____ARGS}default${GITTER_C___RESET})"
@@ -35,7 +35,8 @@ __help() {
   echo -e "  ${GITTER_C__OPTION}--no-color              ${GITTER_C___RESET} Disable colored output"
   echo
   echo -e "${GITTER_C_HEADING}Filers:${GITTER_C___RESET}"
-  echo -ne "  ${GITTER_C_____DIM}<${GITTER_C___RESET}${GITTER_C___ERROR}prefix${GITTER_C___RESET}${GITTER_C_____DIM}>${GITTER_C___RESET}"
+  echo -e "  Syntax:"
+  echo -ne "    ${GITTER_C_____DIM}<${GITTER_C___RESET}${GITTER_C___ERROR}prefix${GITTER_C___RESET}${GITTER_C_____DIM}>${GITTER_C___RESET}"
   echo -ne   "${GITTER_C_____DIM}<${GITTER_C___RESET}${GITTER_C_HEADING}:${GITTER_C___RESET}${GITTER_C_____DIM}>${GITTER_C___RESET}"
   echo -ne   "${GITTER_C_____DIM}[${GITTER_C___RESET}${GITTER_C___ERROR}+${GITTER_C___RESET}${GITTER_C_____DIM}]${GITTER_C___RESET}"
   echo -ne   "${GITTER_C_____DIM}<${GITTER_C___RESET}${GITTER_C___VALUE}pattern${GITTER_C___RESET}${GITTER_C_____DIM}>${GITTER_C___RESET}"

@@ -35,14 +35,14 @@ Gitter
   Run git or arbitrary command in multiple git repositories with filters in current directory
 
 Usage:
-  gitter [--exclude] [--filter <pattern> ...] [--<option> ...] [git|exec|list|help] [-- <args ...>]
+  gitter [[--exclude] --filter <pattern> ...] [--<option> ...] [git -- <args ...>|exec -- <args ...>|list|help]
 
 Commands:
-  git   g       Run a git command (default)
-  exec  x       Run an arbitrary command
-  list  ls      List repositories only
-        ll      Equivalent to list --verbose command
-  help          Show this help menu
+  git   g   Run a git command (default)
+  exec  x   Run an arbitrary command
+  list  ls  List repositories only
+        ll  Equivalent to list --verbose command
+  help      Show this help menu
 
 Options:
   --filter   -f <pattern>  Match repo directory name exactly
@@ -51,12 +51,13 @@ Options:
   --no-color               Disable colored output
 
 Filers:
-  <prefix><:>[+]<pattern>[+]
+  Syntax:
+    <prefix><:>[+]<pattern>[+]
 
   Prefixes:
-    path   P   Match for path name
-    repo   R   Match for repo name
-    branch B   Match for current git branch
+    path    Match for path name
+    repo    Match for repo name
+    branch  Match for current git branch
 
   Patterns:
     +          Matches anywhere in the value (default if no anchors specified)
@@ -71,19 +72,19 @@ Ignore-file:
   Each line in the file should contain a pattern to match repository names or paths.
   Lines starting with # are treated as comments and ignored.
   Patterns:
-    relative/path/to/directory - Ignore directory at exact relative path relative/path/to/directory
-    */directory_name           - Ignore directories under any parent directory named directory_name
-    directory_name/*           - Ignore directories directly under the top-level directory named directory_name
+    relative/path/to/directory Ignore directory at exact relative path relative/path/to/directory
+    */directory_name           Ignore directories under any parent directory named directory_name
+    directory_name/*           Ignore directories directly under the top-level directory named directory_name
 
 Placeholders:
   Within exec and git commands, the following placeholders can be used in arguments:
-    {_repo_}         - Name of the current git repository
-    {_path_}         - Relative path of the current working directory from where gitter was invoked
-    {_path:abs_}     - Absolute path of the current working directory
-    {_branch_}       - Current git branch name
-    {_commit_}       - Current git commit hash
-    {_commit:[int]_} - Current git commit hash abbreviated to [int] characters. i.e. {_commit:8_}
-    {_author_}       - Current git commit author email
+    {_repo_}         Name of the current git repository
+    {_path_}         Relative path of the current working directory from where gitter was invoked
+    {_path:abs_}     Absolute path of the current working directory
+    {_branch_}       Current git branch name
+    {_commit_}       Current git commit hash
+    {_commit:[int]_} Current git commit hash abbreviated to [int] characters. i.e. {_commit:8_}
+    {_author_}       Current git commit author email
 ```
 
 ## Configuration
