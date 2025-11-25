@@ -29,9 +29,9 @@ __filter_repos() {
       repo_dir="$(dirname "$repo_git_dir")"
 
       case "$filter_key" in
-        P|path  ) value="$repo_dir" ;;
-        R|repo  ) value="$(basename "$repo_dir")" ;;
-        B|branch) value="$(git -C "$repo_dir" branch --show-current 2>/dev/null)" ;;
+        path  ) value="$repo_dir" ;;
+        repo  ) value="$(basename "$repo_dir")" ;;
+        branch) value="$(git -C "$repo_dir" branch --show-current 2>/dev/null)" ;;
         *)
           echo -e "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}  Unknown filter key: ${filter_key}${GITTER_C___RESET}" 1>&2
           exit 1
