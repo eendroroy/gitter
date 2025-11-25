@@ -45,9 +45,10 @@ Commands:
   help      Show this help menu
 
 Options:
-  --filter   -f <pattern>  Match repo directory name exactly
-  --exclude  -e            Exclude matched repositories instead of including
-  --verbose  -v            Enable verbose mode
+  --max-depth -d <depth>   Look for git repositories up to specified depth (default: 2)
+  --filter    -f <pattern> Filter repositories matching the given pattern (can be specified multiple times)
+  --exclude   -e           Exclude matched repositories instead of including
+  --verbose   -v           Enable verbose mode
   --no-color               Disable colored output
 
 Filers:
@@ -146,24 +147,24 @@ Filters allow you to include or exclude repositories based on specific criteria 
 
 #### Prefixes
 
-- `path` or `P`: Match for path name
-- `repo` or `R`: Match for repository name
-- `branch` or `B`: Match for current git branch
+- `path`  : Match for path name
+- `repo`  : Match for repository name
+- `branch`: Match for current git branch
 
 #### Patterns
 
 - `+pattern+`: Matches substring anywhere in the value
-- `pattern+`: Matches the beginning of the value
-- `+pattern`: Matches the end of the value
-- `pattern`: Matches exactly the value
+- `pattern+` : Matches the beginning of the value
+- `+pattern` : Matches the end of the value
+- `pattern`  : Matches exactly the value
 
 #### Examples
 
-- `-f repo:+lib+`: Includes repositories with "lib" anywhere in the repository name.
-- `-f path:src+`: Includes repositories with paths starting with "src".
-- `-f branch:feature/+`: Includes repositories currently on branches starting with "feature/".
-- `-f branch:main`: Includes repositories currently on the "main" branch.
-- `-e -f repo:+test+`: Excludes repositories with "test" anywhere in the repository name.
+- `-f repo:+lib+`                : Includes repositories with "lib" anywhere in the repository name.
+- `-f path:src+`                 : Includes repositories with paths starting with "src".
+- `-f branch:feature/+`          : Includes repositories currently on branches starting with "feature/".
+- `-f branch:main`               : Includes repositories currently on the "main" branch.
+- `-e -f repo:+test+`            : Excludes repositories with "test" anywhere in the repository name.
 - `-f path:+utils+ -f branch:dev`: Includes repositories with "utils" in the path or currently on the "dev" branch.
 
 ## .gitterignore
@@ -173,20 +174,20 @@ You can create a `.gitterignore` file in the current directory to specify reposi
 #### Patterns
 
 - `relative/path/to/directory`: Ignore directory at exact relative path `relative/path/to/directory`
-- `*/directory_name`: Ignore directories under any parent directory named `directory_name`
-- `directory_name/*`: Ignore directories directly under the top-level directory named `directory_name`
+- `*/directory_name`          : Ignore directories under any parent directory named `directory_name`
+- `directory_name/*`          : Ignore directories directly under the top-level directory named `directory_name`
 
 ## Placeholders
 
 Within `exec` and `git` commands, you can use the following placeholders in arguments:
 
-- `{_repo_}`: Name of the current git repository
-- `{_path_}`: Relative path of the current working directory from where gitter was invoked
-- `{_path:abs_}`: Absolute path of the current working directory
-- `{_branch_}`: Current git branch name
-- `{_commit_}`: Current git commit hash
+- `{_repo_}`        : Name of the current git repository
+- `{_path_}`        : Relative path of the current working directory from where gitter was invoked
+- `{_path:abs_}`    : Absolute path of the current working directory
+- `{_branch_}`      : Current git branch name
+- `{_commit_}`      : Current git commit hash
 - `{_commit:[int]_}`: Current git commit hash abbreviated to `[int]` characters. i.e. `{_commit:8_}`
-- `{_author_}`: Current git commit author email
+- `{_author_}`      : Current git commit author email
 
 ## License
 

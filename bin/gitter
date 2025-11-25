@@ -26,19 +26,20 @@ args=()
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    # Parse Options
-    --exclude |-e) GITTER_FILTER_EXCLUDE=true; shift ;;
-    --filter  |-f) shift; __read_filter "$1";  shift ;;
-    --no-color   ) GITTER_NO_COLOR=true;      shift ;;
-    --verbose |-v) GITTER_VERBOSE=true;        shift ;;
-
     # Parse Commands
-    git       |g ) ___git;  shift ;;
-    exec      |x ) ___exec; shift ;;
-    list      |ls) ___list; shift ;;
-               lb) ___lb;   shift ;;
-               ll) ___ll;   shift ;;
-    help         ) ___help; shift ;;
+    git  |g ) ___git;  shift ;;
+    exec |x ) ___exec; shift ;;
+    list |ls) ___list; shift ;;
+          lb) ___lb;   shift ;;
+          ll) ___ll;   shift ;;
+    help    ) ___help; shift ;;
+
+    # Parse Options
+    --max-depth|-d) shift; __read_max_depth "$1"; shift ;;
+    --exclude  |-e) GITTER_FILTER_EXCLUDE=true;   shift ;;
+    --filter   |-f) shift; __read_filter "$1";    shift ;;
+    --no-color    ) GITTER_NO_COLOR=true;         shift ;;
+    --verbose  |-v) GITTER_VERBOSE=true;          shift ;;
 
     # Parse Command Arguments
     --) __read_command_args "$@"; break ;;
@@ -51,9 +52,9 @@ done
 
 [[ "$GITTER_NO_COLOR" == true ]] && __disable_color_output
 
-[[ "$command" == "help" ]] && { __help; exit 0; }
 [[ -z "$command" ]] && command="git"
-[[ "$command" != "list" && ${#args[@]} -eq 0 ]] && __invalid_args_for_command_list
+[[ "$command" == "help" ]] && { __help; exit 0; }
+[[ "$command" != "list" && ${#args[@]} -eq 0 ]] && __invalid_args_for_command "$command"
 
 # -- find all git repositories in the current directory
 readarray -d '' -t repositories < <(find . -name ".git" -maxdepth "$((GITTER_MAX_DEPTH+1))" -type d -print0)

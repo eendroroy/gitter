@@ -9,9 +9,9 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-__invalid_args_for_command_list() {
+__invalid_args_for_command() {
   echo
-  echo -e "${GITTER_C___ERROR}No arguments provided for command:${GITTER_C___RESET} list" 1>&2
+  echo -e "${GITTER_C___ERROR}No arguments provided for command:${GITTER_C___RESET} ${GITTER_C_COMMAND}${1}${GITTER_C___RESET}" 1>&2
   echo
   echo -e "Run ${GITTER_C_COMMAND}gitter --help${GITTER_C___RESET} for usage information." 1>&2
   echo
