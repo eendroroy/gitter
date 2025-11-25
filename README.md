@@ -70,7 +70,7 @@ When running git commands, gitter will display the repository status based on th
 patterns are as follows:
 
 ```shell
-# gitter list | gitter ll
+# gitter list | gitter ls
 export GITTER_REPO_STATUS=(" on " "[branch]") # default pattern
 
 # gitter list --verbose | gitter ll
