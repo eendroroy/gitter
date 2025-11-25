@@ -10,7 +10,6 @@
 # License, or (at your option) any later version.
 
 __filter_repos() {
-  # $1: name of array variable with repo git dirs
   local -n repo_list="$1"
   local filtered_repo_git_dirs=()
 

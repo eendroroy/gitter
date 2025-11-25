@@ -14,17 +14,19 @@ __expand_args() {
   local parsed_args=()
   for arg in "${args_ref[@]}"; do
     [[ $arg == *"{_repo_}"* ]] && arg="${arg//\{_repo_\}/$(basename "$(pwd)")}"
-    [[ $arg == *"{_path_}"* ]] && arg="${arg//\{_path_\}/${PWD/"${____CURRENT_DIR}"/.}}"
-    [[ $arg == *"{_path:abs_}"* ]] && arg="${arg//\{_path:abs_\}/$(pwd)}"
+    [[ $arg == *"{_path:r_}"* ]] && arg="${arg//\{_path:r_\}/${PWD/"${____CURRENT_DIR}"/.}}"
+    [[ $arg == *"{_path:a_}"* ]] && arg="${arg//\{_path:a_\}/$(pwd)}"
     [[ $arg == *"{_branch_}"* ]] && arg="${arg//\{_branch_\}/$(git branch --show-current 2>/dev/null)}"
-    [[ $arg == *"{_commit_}"* ]] && arg="${arg//\{_commit_\}/$(git log -1 --format="%H" 2>/dev/null)}"
+    [[ $arg == *"{_commit:f_}"* ]] && arg="${arg//\{_commit:f_\}/$(git log -1 --format="%H" 2>/dev/null)}"
     [[ $arg =~ \{_commit:([0-9]+)_\} ]] && {
       abbrev_length="${BASH_REMATCH[1]}"
       abbrev_commit="$(git log -1 --format="%h" --abbrev="$abbrev_length" 2>/dev/null)"
       arg="${arg//\{_commit:${abbrev_length}_\}/$abbrev_commit}"
     }
-    [[ $arg == *"{_author:e_}"* ]] && arg="${arg//\{_author_\}/$(git log -1 --format="%ae" 2>/dev/null)}"
-    [[ $arg == *"{_author:n_}"* ]] && arg="${arg//\{_author_\}/$(git log -1 --format="%an" 2>/dev/null)}"
+    [[ $arg == *"{_time:r_}"* ]] && arg="${arg//\{_time:r_\}/$(git log -1 --format="%cr" 2>/dev/null)}"
+    [[ $arg == *"{_time:d_}"* ]] && arg="${arg//\{_time:d_\}/$(git log -1 --format="%cd" 2>/dev/null)}"
+    [[ $arg == *"{_author:e_}"* ]] && arg="${arg//\{_author:e_\}/$(git log -1 --format="%ae" 2>/dev/null)}"
+    [[ $arg == *"{_author:n_}"* ]] && arg="${arg//\{_author:n_\}/$(git log -1 --format="%an" 2>/dev/null)}"
 
     parsed_args+=("$arg")
   done

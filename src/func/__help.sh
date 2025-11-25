@@ -45,7 +45,7 @@ __help() {
   echo
   echo -e "  Prefixes:"
   echo -e "    ${GITTER_C___ERROR}path  ${GITTER_C___RESET}  Match for path name"
-  echo -e "    ${GITTER_C___ERROR}repo  ${GITTER_C___RESET}  Match for repo name"
+  echo -e "    ${GITTER_C___ERROR}repo  ${GITTER_C___RESET}  Match for repository name"
   echo -e "    ${GITTER_C___ERROR}branch${GITTER_C___RESET}  Match for current git branch"
   echo
   echo -e "  Patterns:"
@@ -68,12 +68,14 @@ __help() {
   echo -e "${GITTER_C_HEADING}Placeholders:${GITTER_C___RESET}"
   echo -e "  Within ${GITTER_C__OPTION}exec${GITTER_C___RESET} and ${GITTER_C__OPTION}git${GITTER_C___RESET} commands, the following placeholders can be used in arguments:"
   echo -e "    ${GITTER_C____ARGS}{_repo_}${GITTER_C___RESET}         Name of the current git repository"
-  echo -e "    ${GITTER_C____ARGS}{_path_}${GITTER_C___RESET}         Relative path of the current working directory from where gitter was invoked"
-  echo -e "    ${GITTER_C____ARGS}{_path:abs_}${GITTER_C___RESET}     Absolute path of the current working directory"
+  echo -e "    ${GITTER_C____ARGS}{_path:r_}${GITTER_C___RESET}       Relative path of the current working directory from where gitter was invoked"
+  echo -e "    ${GITTER_C____ARGS}{_path:a_}${GITTER_C___RESET}       Absolute path of the current working directory"
   echo -e "    ${GITTER_C____ARGS}{_branch_}${GITTER_C___RESET}       Current git branch name"
-  echo -e "    ${GITTER_C____ARGS}{_commit_}${GITTER_C___RESET}       Current git commit hash"
+  echo -e "    ${GITTER_C____ARGS}{_commit:f_}${GITTER_C___RESET}     Current git commit hash"
   echo -e "    ${GITTER_C____ARGS}{_commit:[int]_}${GITTER_C___RESET} Current git commit hash abbreviated to [int] characters. i.e. ${GITTER_C____ARGS}{_commit:8_}${GITTER_C___RESET}"
   echo -e "    ${GITTER_C____ARGS}{_author:e_}${GITTER_C___RESET}     Current git commit author email"
   echo -e "    ${GITTER_C____ARGS}{_author:n_}${GITTER_C___RESET}     Current git commit author name"
+  echo -e "    ${GITTER_C____ARGS}{_time:r_}${GITTER_C___RESET}       Relative time of the current git commit (e.g., \"2 days ago\")"
+  echo -e "    ${GITTER_C____ARGS}{_time:d_}${GITTER_C___RESET}       Date and time of the current git commit (e.g., \"2024-01-01 12:00:00\")"
   echo
 }

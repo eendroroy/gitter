@@ -12,10 +12,10 @@
 # gitter
 
 Run git or arbitrary command in multiple git repositories with filters in current directory
- 
+
 ## Installation
 
-Clone the repo:
+Clone the repository:
 
 ```bash
 git clone https://github.com/eendroroy/gitter.git ~/.gitter
@@ -57,7 +57,7 @@ Filers:
 
   Prefixes:
     path    Match for path name
-    repo    Match for repo name
+    repo    Match for repository name
     branch  Match for current git branch
 
   Patterns:
@@ -119,28 +119,31 @@ export GITTER_C_HEADING='\e[1;37m'     # Heading color
 
 ## Repository status patterns
 
-When running git commands, gitter will display the repository status based on the configured patterns. The default patterns are as follows:
+When running git commands, gitter will display the repository status based on the configured patterns. The default
+patterns are as follows:
 
 ```shell
 # gitter list | gitter ll
-export GITTER_REPO_PATTERNS=(" on " "{_branch_}") # default pattern
+export GITTER_REPO_STATUS=(" on " "[branch]") # default pattern
 
 # gitter list --verbose | gitter ll
-export GITTER_REPO_PATTERNS_VERBOSE=(" on " "{_branch_}" " " "{_commit:a_}" " by " "{_author:e_}" " " "{_time:r_}")  # default pattern
+export GITTER_REPO_STATUS_VERBOSE=(" on " "[branch]" " " "[commit:a]" " by " "[author:e]" " " "[time:r]")  # default pattern
 ```
 
 #### Available placeholders for patterns
 
-- `{_branch_}` : Current git branch name
-- `{_commit:a_}` : Abbreviated (8) current git commit hash
-- `{_commit:f_}` : Full current git commit hash
-- `{_time:r_}` : Relative time of the current git commit (e.g., "2 days ago")
-- `{_time:d_}` : Date and time of the current git commit (e.g., "2024-01-01 12:00:00")
-- `{_author_}` : Current git commit author email
+- `[branch]`   : Current git branch name
+- `[commit:a]` : Abbreviated (8) current git commit hash
+- `[commit:f]` : Full current git commit hash
+- `[time:r]`   : Relative time of the current git commit (e.g., "2 days ago")
+- `[time:d]`   : Date and time of the current git commit (e.g., "2024-01-01 12:00:00")
+- `[author:e]` : Current git commit author email
+- `[author:n]` : Current git commit author name
 
 ## Filters
 
-Filters allow you to include or exclude repositories based on specific criteria such as path, repository name, or branch name. You can use multiple filters to narrow down the selection of repositories.
+Filters allow you to include or exclude repositories based on specific criteria such as path, repository name, 
+or branch name. You can use multiple filters to narrow down the selection of repositories.
 
 #### Filter Format
 
@@ -170,7 +173,9 @@ Filters allow you to include or exclude repositories based on specific criteria 
 
 ## .gitterignore
 
-You can create a `.gitterignore` file in the current directory to specify repositories that should be ignored by `gitter`. Each line in the file should contain a pattern to match repository names or paths. Lines starting with `#` are treated as comments and ignored.
+You can create a `.gitterignore` file in the current directory to specify repositories that should be ignored by
+`gitter`. Each line in the file should contain a pattern to match repository names or paths. Lines starting with `#` are
+treated as comments and ignored.
 
 #### Patterns
 
@@ -178,18 +183,22 @@ You can create a `.gitterignore` file in the current directory to specify reposi
 - `*/directory_name`          : Ignore directories under any parent directory named `directory_name`
 - `directory_name/*`          : Ignore directories directly under the top-level directory named `directory_name`
 
-## Placeholders
+## Argument expansion
 
 Within `exec` and `git` commands, you can use the following placeholders in arguments:
 
 - `{_repo_}`        : Name of the current git repository
-- `{_path_}`        : Relative path of the current working directory from where gitter was invoked
-- `{_path:abs_}`    : Absolute path of the current working directory
+- `{_path:r_}`      : Relative path of the current working directory from where gitter was invoked
+- `{_path:a_}`      : Absolute path of the current working directory
 - `{_branch_}`      : Current git branch name
-- `{_commit_}`      : Current git commit hash
+- `{_commit:f_}`    : Current git commit hash
 - `{_commit:[int]_}`: Current git commit hash abbreviated to `[int]` characters. i.e. `{_commit:8_}`
-- `{_author_}`      : Current git commit author email
+- `{_time:r_}`      : Relative time of the current git commit (e.g., "2 days ago")
+- `{_time:d_}`      : Date and time of the current git commit (e.g., "2024-01-01 12:00:00")
+- `{_author:e_}`    : Current git commit author email
+- `{_author:n_}`    : Current git commit author name
 
 ## License
 
-The project is available as open source under the terms of the [AGPL3 License](https://www.fsf.org/licensing/licenses/agpl.html).
+The project is available as open source under the terms of
+the [AGPL3 License](https://www.fsf.org/licensing/licenses/agpl.html).

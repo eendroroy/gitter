@@ -25,12 +25,12 @@ ____CURRENT_DIR=$(pwd)
 [[ -z "${GITTER_FILTER_EXCLUDE+x}" ]] && GITTER_FILTER_EXCLUDE=false
 [[ -z "${GITTER_NO_COLOR+x}"       ]] && GITTER_NO_COLOR=false
 
-if [[ -z "${GITTER_REPO_PATTERNS+x}" ]]; then
-  GITTER_REPO_PATTERNS=(" on " "{_branch_}")
+if [[ -z "${GITTER_REPO_STATUS+x}" ]]; then
+  GITTER_REPO_STATUS=(" on " "[branch]")
 fi
 
-if [[ -z "${GITTER_REPO_PATTERNS_VERBOSE+x}" ]]; then
-  GITTER_REPO_PATTERNS_VERBOSE=(" on " "{_branch_}" " " "{_commit:a_}" " by " "{_author:e_}" " " "{_time:r_}")
+if [[ -z "${GITTER_REPO_STATUS_VERBOSE+x}" ]]; then
+  GITTER_REPO_STATUS_VERBOSE=(" on " "[branch]" " " "[commit:a]" " by " "[author:e]" " " "[time:r]")
 fi
 
 # Color defaults

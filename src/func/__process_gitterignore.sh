@@ -10,19 +10,15 @@
 # License, or (at your option) any later version.
 
 __process_gitterignore() {
-  # $1: name of array variable with repo git dirs
   local -n repo_git_dirs="$1"
-  # Load non-empty, non-comment lines from .gitterignore
   mapfile -t ignore_patterns < <(sed -e 's/#.*//' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' -e '/^$/d' .gitterignore)
 
-  # If there are patterns, filter repo_git_dirs accordingly.
   if [[ ${#ignore_patterns[@]} -gt 0 ]]; then
     kept_repo_git_dirs=()
     for repo_git_dir in "${repo_git_dirs[@]}"; do
       git_repo_dir_name="$(dirname "${repo_git_dir#./}")"
       for pattern in "${ignore_patterns[@]}"; do
         if [[ "$pattern" == '*/'* ]]; then
-          # find all folder tree and match each folder in the path
           IFS='/' read -r -a path_parts <<< "$git_repo_dir_name"
           ignore=false
           for part in "${path_parts[@]}"; do
@@ -33,20 +29,17 @@ __process_gitterignore() {
           done
           [[ "$ignore" == true ]] && break
         elif [[ "$pattern" == *'/*' ]]; then
-          # find only the parent folder
           parent_dir="${git_repo_dir_name%%/*}"
           if [[ "$parent_dir" == "${pattern%/*}" ]]; then
             ignore=true
             break
           fi
         else
-          # direct match with repo name
           repo_name="$(basename "$(dirname "$repo_git_dir")")"
           if [[ "$repo_name" == "$pattern" ]]; then
             ignore=true
             break
           fi
-          # direct match with relative path
           if [[ "$git_repo_dir_name" == "$pattern" ]]; then
             ignore=true
             break

@@ -11,9 +11,9 @@
 
 __repo_status() {
   if [[ "$GITTER_VERBOSE" == true ]]; then
-    local -a PATTERNS=("${GITTER_REPO_PATTERNS_VERBOSE[@]}")
+    local -a PATTERNS=("${GITTER_REPO_STATUS_VERBOSE[@]}")
   else
-    local -a PATTERNS=("${GITTER_REPO_PATTERNS[@]}")
+    local -a PATTERNS=("${GITTER_REPO_STATUS[@]}")
   fi
   (
     cd "$1" 2>/dev/null || {
@@ -24,13 +24,13 @@ __repo_status() {
     echo -ne "$(__print_path)"
     for pattern in "${PATTERNS[@]}"; do
       case "$pattern" in
-        "{_branch_}"   ) echo -ne "${GITTER_C_COMMAND}$(git branch --show-current)${GITTER_C___RESET}";;
-        "{_commit:a_}" ) echo -ne "${GITTER_C___VALUE}$(git log -1 --format="%h" --abbrev=8)${GITTER_C___RESET}";;
-        "{_commit:f_}" ) echo -ne "${GITTER_C___VALUE}$(git log -1 --format="%H")${GITTER_C___RESET}";;
-        "{_time:r_}"   ) echo -ne "${GITTER_C____ARGS}$(git log -1 --format="%cr")${GITTER_C___RESET}";;
-        "{_time:d_}"   ) echo -ne "${GITTER_C____ARGS}$(git log -1 --format="%cd")${GITTER_C___RESET}";;
-        "{_author:e_}" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%ae")${GITTER_C___RESET}";;
-        "{_author:n_}" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%an")${GITTER_C___RESET}";;
+        "[branch]"   ) echo -ne "${GITTER_C_COMMAND}$(git branch --show-current)${GITTER_C___RESET}";;
+        "[commit:a]" ) echo -ne "${GITTER_C___VALUE}$(git log -1 --format="%h" --abbrev=8)${GITTER_C___RESET}";;
+        "[commit:f]" ) echo -ne "${GITTER_C___VALUE}$(git log -1 --format="%H")${GITTER_C___RESET}";;
+        "[time:r]"   ) echo -ne "${GITTER_C____ARGS}$(git log -1 --format="%cr")${GITTER_C___RESET}";;
+        "[time:d]"   ) echo -ne "${GITTER_C____ARGS}$(git log -1 --format="%cd")${GITTER_C___RESET}";;
+        "[author:e]" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%ae")${GITTER_C___RESET}";;
+        "[author:n]" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%an")${GITTER_C___RESET}";;
         *              ) echo -ne "${GITTER_C_____DIM}${pattern}${GITTER_C___RESET}" ;;
       esac
     done
