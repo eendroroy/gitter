@@ -27,7 +27,7 @@ __print_config() {
   ___print_config_value "" "               GITTER_FILTER_EXCLUDE" "'${GITTER_FILTER_EXCLUDE}'"
   ___print_config_value "" "                     GITTER_NO_COLOR" "'${GITTER_NO_COLOR}'"
   ___print_config_value "" "                  GITTER_REPO_STATUS" "(${GITTER_REPO_STATUS[*]})"
-  ___print_config_value "" "          GITTER_REPO_STATUS_VERBOSE" "(${GITTER_REPO_STATUS_VERBOSE[*]}})"
+  ___print_config_value "" "          GITTER_REPO_STATUS_VERBOSE" "(${GITTER_REPO_STATUS_VERBOSE[*]})"
   echo
   echo -e "${GITTER_C_HEADING}Colors:${GITTER_C___RESET}"
   ___print_config_value "(${GITTER_C_SUCCESS}Success color ${GITTER_C___RESET})  " "GITTER_C_SUCCESS" "'\\${GITTER_C_SUCCESS}'"
