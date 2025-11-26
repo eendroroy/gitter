@@ -10,7 +10,8 @@
 # License, or (at your option) any later version.
 
 # shellcheck disable=SC2034
-
+____GITTER____LINK="https://github.com/eendroroy/gitter"
+____GITTER_VERSION="0.0.1"
 _____SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 source "$_____SCRIPT_DIR"/../src/__variables.sh
@@ -27,20 +28,20 @@ args=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
     # Parse Commands
-    git   |g ) ___git;    shift ;;
-    exec  |x ) ___exec;   shift ;;
-    list  |ls) ___list;   shift ;;
-           lb) ___lb;     shift ;;
-           ll) ___ll;     shift ;;
-    config|c ) ___config; shift ;;
-    help     ) ___help;   shift ;;
+    git   |g ) ___git;             ;;
+    exec  |x ) ___exec;            ;;
+    list  |ls) ___list;            ;;
+           lb) ___lb;              ;;
+           ll) ___ll;              ;;
+    config|c ) ___config;          ;;
+    help     ) ___help "$@"; break ;;
 
     # Parse Options
-    --max-depth|-d) shift; __read_max_depth "$1"; shift ;;
-    --exclude  |-e) GITTER_FILTER_EXCLUDE=true;   shift ;;
-    --filter   |-f) shift; __read_filter "$1";    shift ;;
-    --no-color    ) GITTER_NO_COLOR=true;         shift ;;
-    --verbose  |-v) GITTER_VERBOSE=true;          shift ;;
+    --max-depth|-d) shift; __read_max_depth "$1"      ;;
+    --exclude  |-e)        GITTER_FILTER_EXCLUDE=true ;;
+    --filter   |-f) shift; __read_filter "$1"         ;;
+    --no-color    )        GITTER_NO_COLOR=true       ;;
+    --verbose  |-v)        GITTER_VERBOSE=true        ;;
 
     # Parse Command Arguments
     --) __read_command_args "$@"; break ;;
@@ -49,13 +50,20 @@ while [[ $# -gt 0 ]]; do
     --*|-*) __unknown_option "$1" ;;
     *     ) __unknown_arg    "$1" ;;
   esac
+  shift
 done
 
 [[ "$GITTER_NO_COLOR" == true ]] && __disable_color_output
 
 [[ -z "$command" ]] && command="git"
-[[ "$command" == "help"   ]] && { __help;         exit 0; }
-[[ "$command" == "config" ]] && { __print_config; exit 0; }
+
+[[ "$command" == "help"              ]] && { __help;              exit 0; }
+[[ "$command" == "help-filter"       ]] && { __help_filter;       exit 0; }
+[[ "$command" == "help-gitterignore" ]] && { __help_gitterignore; exit 0; }
+[[ "$command" == "help-placeholder"  ]] && { __help_placeholder;  exit 0; }
+[[ "$command" == "help-status"       ]] && { __help_status;       exit 0; }
+[[ "$command" == "config"            ]] && { __print_config; exit 0; }\
+
 [[ "$command" != "list" && ${#args[@]} -eq 0 ]] && __invalid_args_for_command "$command"
 
 # -- find all git repositories in the current directory

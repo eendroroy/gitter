@@ -10,7 +10,7 @@
 # License, or (at your option) any later version.
 
 ___print_config_value() {
-  echo -e "  ${GITTER_C__OPTION}${1}${GITTER_C___RESET}${GITTER_C_COMMAND}${2}${GITTER_C___RESET}=${GITTER_C____ARGS}${3}${GITTER_C___RESET}"
+  echo -e "  ${GITTER_C__OPTION}${1}${GITTER_C___RESET}${GITTER_C_COMMAND}${2}${GITTER_C___RESET}=${GITTER_C_____ARG}${3}${GITTER_C___RESET}"
 }
 
 __print_config() {
@@ -37,7 +37,7 @@ __print_config() {
   ___print_config_value "(${GITTER_C_____DIM}Dim color     ${GITTER_C___RESET})  " "GITTER_C_____DIM" "'\\${GITTER_C_____DIM}'"
   ___print_config_value "(${GITTER_C_HEADING}Heading color ${GITTER_C___RESET})  " "GITTER_C_HEADING" "'\\${GITTER_C_HEADING}'"
   ___print_config_value "(${GITTER_C_COMMAND}Command color ${GITTER_C___RESET})  " "GITTER_C_COMMAND" "'\\${GITTER_C_COMMAND}'"
-  ___print_config_value "(${GITTER_C____ARGS}Argument color${GITTER_C___RESET})  " "GITTER_C____ARGS" "'\\${GITTER_C____ARGS}'"
+  ___print_config_value "(${GITTER_C_____ARG}Argument color${GITTER_C___RESET})  " "GITTER_C_____ARG" "'\\${GITTER_C_____ARG}'"
   ___print_config_value "(${GITTER_C__OPTION}Option color  ${GITTER_C___RESET})  " "GITTER_C__OPTION" "'\\${GITTER_C__OPTION}'"
   ___print_config_value "(${GITTER_C___VALUE}Value color   ${GITTER_C___RESET})  " "GITTER_C___VALUE" "'\\${GITTER_C___VALUE}'"
   echo

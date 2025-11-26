@@ -15,7 +15,7 @@ __disable_color_output() {
   GITTER_C____PATH=''
   GITTER_C_PATH_DM=''
   GITTER_C_COMMAND=''
-  GITTER_C____ARGS=''
+  GITTER_C_____ARG=''
   GITTER_C__OPTION=''
   GITTER_C_____DIM=''
   GITTER_C___VALUE=''

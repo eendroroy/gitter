@@ -59,7 +59,7 @@ export GITTER_C_PATH_DM='\e[2;35m'     # Dimmed path color
 export GITTER_C_____DIM='\e[2;38;5;3m' # Dim color
 export GITTER_C_HEADING='\e[1;37m'     # Heading color
 export GITTER_C_COMMAND='\e[32m'       # Command color
-export GITTER_C____ARGS='\e[33m'       # Arguments color
+export GITTER_C_____ARG='\e[33m'       # Arguments color
 export GITTER_C__OPTION='\e[36m'       # Option color
 export GITTER_C___VALUE='\e[2;35;1;3m' # Value color
 ```
@@ -77,7 +77,7 @@ export GITTER_REPO_STATUS=(" on " "[branch]") # default pattern
 export GITTER_REPO_STATUS_VERBOSE=(" on " "[branch]" " " "[commit:a]" " by " "[author:e]" " " "[time:r]")  # default pattern
 ```
 
-#### Available placeholders for patterns
+#### Available placeholders for repository status patterns
 
 - `[branch]`   : Current git branch name
 - `[commit:a]` : Abbreviated (8) current git commit hash

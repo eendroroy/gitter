@@ -14,8 +14,25 @@
 ___git()    { __parse_command "git" ; }
 ___exec()   { __parse_command "exec"; }
 ___list()   { __parse_command "list"; }
-___help()   { __parse_command "help"; }
 ___config() { __parse_command "config"; }
+___help()   {
+  shift
+  if [[ $# -eq 0 ]]; then
+    __parse_command "help"
+    return
+  else
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        filter      ) __parse_command "help-filter" ;;
+        status      ) __parse_command "help-status" ;;
+        gitterignore) __parse_command "help-gitterignore" ;;
+        placeholder ) __parse_command "help-placeholder" ;;
+        *           ) __unknown_arg "$1" ;;
+      esac
+      shift
+    done
+  fi
+}
 
 # Command aliases
 ___ll()   { __parse_command "list"; GITTER_VERBOSE=true; }

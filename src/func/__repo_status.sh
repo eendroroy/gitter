@@ -27,8 +27,8 @@ __repo_status() {
         "[branch]"   ) echo -ne "${GITTER_C_COMMAND}$(git branch --show-current)${GITTER_C___RESET}";;
         "[commit:a]" ) echo -ne "${GITTER_C___VALUE}$(git log -1 --format="%h" --abbrev=8)${GITTER_C___RESET}";;
         "[commit:f]" ) echo -ne "${GITTER_C___VALUE}$(git log -1 --format="%H")${GITTER_C___RESET}";;
-        "[time:r]"   ) echo -ne "${GITTER_C____ARGS}$(git log -1 --format="%cr")${GITTER_C___RESET}";;
-        "[time:d]"   ) echo -ne "${GITTER_C____ARGS}$(git log -1 --format="%cd")${GITTER_C___RESET}";;
+        "[time:r]"   ) echo -ne "${GITTER_C_____ARG}$(git log -1 --format="%cr")${GITTER_C___RESET}";;
+        "[time:d]"   ) echo -ne "${GITTER_C_____ARG}$(git log -1 --format="%cd")${GITTER_C___RESET}";;
         "[author:e]" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%ae")${GITTER_C___RESET}";;
         "[author:n]" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%an")${GITTER_C___RESET}";;
         *              ) echo -ne "${GITTER_C_____DIM}${pattern}${GITTER_C___RESET}" ;;

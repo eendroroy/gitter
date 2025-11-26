@@ -41,7 +41,7 @@ fi
 [[ -z "${GITTER_C_____DIM+x}" ]] && GITTER_C_____DIM='\e[2;38;5;3m'
 [[ -z "${GITTER_C_HEADING+x}" ]] && GITTER_C_HEADING='\e[1;37m'
 [[ -z "${GITTER_C_COMMAND+x}" ]] && GITTER_C_COMMAND='\e[32m'
-[[ -z "${GITTER_C____ARGS+x}" ]] && GITTER_C____ARGS='\e[33m'
+[[ -z "${GITTER_C_____ARG+x}" ]] && GITTER_C_____ARG='\e[33m'
 [[ -z "${GITTER_C__OPTION+x}" ]] && GITTER_C__OPTION='\e[36m'
 [[ -z "${GITTER_C___VALUE+x}" ]] && GITTER_C___VALUE='\e[2;35;1;3m'
 GITTER_C___RESET='\e[0m'
