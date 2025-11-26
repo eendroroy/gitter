@@ -27,4 +27,12 @@ __help_placeholder() {
   echo -e "    ${GITTER_C_____ARG}{_time:r_}${GITTER_C___RESET}       Relative time of the current git commit (e.g., \"2 days ago\")"
   echo -e "    ${GITTER_C_____ARG}{_time:d_}${GITTER_C___RESET}       Date and time of the current git commit (e.g., \"2024-01-01 12:00:00\")"
   echo
+  echo -e "${GITTER_C_HEADING}Example Usage:${GITTER_C___RESET}"
+  echo -e "  ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C__OPTION}exec${GITTER_C___RESET} -- echo \
+\"Repository: ${GITTER_C_____ARG}{_repo_}${GITTER_C___RESET}, \
+Branch: ${GITTER_C_____ARG}{_branch_}${GITTER_C___RESET}, \
+Commit: ${GITTER_C_____ARG}{_commit:8_}${GITTER_C___RESET}\
+Author: ${GITTER_C_____ARG}{_author:e_}${GITTER_C___RESET}, \
+Date: ${GITTER_C_____ARG}{_time:d_}${GITTER_C___RESET}\""
+  echo
 }

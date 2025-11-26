@@ -33,4 +33,10 @@ __help_filter() {
   echo -e "  ${GITTER_C___ERROR}+${GITTER_C___RESET}${GITTER_C___VALUE}pattern${GITTER_C___RESET}${GITTER_C___ERROR}+${GITTER_C___RESET}  Matches substring anywhere in the value"
   echo -e "   ${GITTER_C___VALUE}pattern${GITTER_C___RESET}   Matches exactly the value"
   echo
+  echo -e "${GITTER_C_HEADING}Examples:${GITTER_C___RESET}"
+  echo -e "  ${GITTER_C_COMMAND}gitter ${GITTER_C__OPTION}--filter${GITTER_C___RESET} ${GITTER_C___VALUE}path:src/+${GITTER_C___RESET}                     Filter repositories with path starting with 'src/'"
+  echo -e "  ${GITTER_C_COMMAND}gitter ${GITTER_C__OPTION}--exclude --filter${GITTER_C___RESET} ${GITTER_C___VALUE}repo:+-test${GITTER_C___RESET}          Filter repositories with name NOT ending with '-test'"
+  echo -e "  ${GITTER_C_COMMAND}gitter ${GITTER_C__OPTION}--filter${GITTER_C___RESET} ${GITTER_C___VALUE}branch:master${GITTER_C___RESET}                  Filter repositories on branch 'master'"
+  echo -e "  ${GITTER_C_COMMAND}gitter ${GITTER_C__OPTION}--filter${GITTER_C___RESET} ${GITTER_C___VALUE}path:+src/${GITTER_C___RESET} ${GITTER_C__OPTION}--filter${GITTER_C___RESET} ${GITTER_C___VALUE}path:+test${GITTER_C___RESET} Filter repositories with path containing 'src/' or 'test'"
+  echo
 }

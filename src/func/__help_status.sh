@@ -23,4 +23,11 @@ __help_status() {
   echo -e "    ${GITTER_C_____ARG}[author:e]${GITTER_C___RESET}Current git commit author email"
   echo -e "    ${GITTER_C_____ARG}[author:n]${GITTER_C___RESET} Current git commit author name"
   echo
+  echo -e "${GITTER_C_HEADING}Example Configuration for status:${GITTER_C___RESET}"
+  echo -e " Set ${GITTER_C_COMMAND}GITTER_REPO_STATUS${GITTER_C___RESET}=${GITTER_C_____ARG}(\"on\" \"[branch]\")${GITTER_C___RESET}"
+  echo
+  echo -e  "${GITTER_C_HEADING}Example Configuration for verbose status:${GITTER_C___RESET}"
+  echo -ne " Set ${GITTER_C_COMMAND}GITTER_REPO_STATUS_VERBOSE${GITTER_C___RESET}="
+  echo -e  "${GITTER_C_____ARG}(\" on \" \"[branch]\" \" \" \"[commit:a]\" \" by \" \"[author:e]\" \" \" \"[time:r]\")${GITTER_C___RESET}"
+  echo
 }
