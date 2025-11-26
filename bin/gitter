@@ -62,7 +62,7 @@ done
 [[ "$command" == "help-gitterignore" ]] && { __help_gitterignore; exit 0; }
 [[ "$command" == "help-placeholder"  ]] && { __help_placeholder;  exit 0; }
 [[ "$command" == "help-status"       ]] && { __help_status;       exit 0; }
-[[ "$command" == "config"            ]] && { __print_config; exit 0; }\
+[[ "$command" == "config"            ]] && { __print_config;      exit 0; }
 
 [[ "$command" != "list" && ${#args[@]} -eq 0 ]] && __invalid_args_for_command "$command"
 
@@ -100,8 +100,15 @@ for repository in "${repositories[@]}"; do
     __enter_repo_dir "$repo_dir"
     __expand_args args
 
-    echo -e "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL} \$(${command} ${args[*]})${GITTER_C___RESET} ${GITTER_C_____DIM}in${GITTER_C___RESET} $(__repo_status ".")"
+    args_string="${args[*]}"
+    [[ ${#args_string} -gt 80 ]] && args_string="${args_string:0:77}..."
+
+    echo
+    echo -e "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C___RESET} $(__repo_status ".")"
+    echo -e "   ${GITTER_C_____DIM}\$(${GITTER_C___RESET}${GITTER_C_COMMAND}${command} ${GITTER_C_____ARG}${args_string}${GITTER_C___RESET}${GITTER_C_____DIM})${GITTER_C___RESET}"
+    echo
     command -- "$command" "${args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
+    echo
   )
 done
 exit 0

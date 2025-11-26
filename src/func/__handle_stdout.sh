@@ -10,7 +10,7 @@
 # License, or (at your option) any later version.
 
 __handle_stdout() {
-  while IFS= read -r line; do
-    printf "${GITTER_C_SUCCESS}%s${GITTER_C___RESET}  %s\n" "${GITTER_SUCCESS_SYMBOL}" "${line}"
+  while IFS= read -r line || [ -n "$line" ]; do
+    printf '%b\n' "${GITTER_C_SUCCESS}${GITTER_SUCCESS_SYMBOL}${GITTER_C___RESET}  ${line}"
   done
 }

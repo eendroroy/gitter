@@ -10,7 +10,7 @@
 # License, or (at your option) any later version.
 
 __handle_stderr() {
-  while IFS= read -r line; do
-    printf "${GITTER_C___ERROR}%s${GITTER_C___RESET}  %s\n" "${GITTER___ERROR_SYMBOL}" "${line}" 1>&2
+  while IFS= read -r line || [ -n "$line" ]; do
+    printf '%b\n' "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}${GITTER_C___RESET}  ${line}" 1>&2
   done
 }

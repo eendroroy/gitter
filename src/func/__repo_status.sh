@@ -31,7 +31,7 @@ __repo_status() {
         "[time:d]"   ) echo -ne "${GITTER_C_____ARG}$(git log -1 --format="%cd")${GITTER_C___RESET}";;
         "[author:e]" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%ae")${GITTER_C___RESET}";;
         "[author:n]" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%an")${GITTER_C___RESET}";;
-        *              ) echo -ne "${GITTER_C_____DIM}${pattern}${GITTER_C___RESET}" ;;
+        *            ) echo -ne "${GITTER_C_____DIM}${pattern}${GITTER_C___RESET}" ;;
       esac
     done
   )
