@@ -94,11 +94,11 @@ fi
 [[ "$command" == "exec" ]] && command="${args[0]}" && args=("${args[@]:1}")
 
 # -- execute git/exec commands in each repository
-repo_index=1
+repo_index=0
 total_repos=${#repositories[@]}
 for repository in "${repositories[@]}"; do
-  [[ "$GITTER_ASK_CONFIRMATION" == true && "$exit_code" -eq 0 ]] && __ask_to_proceed "$repo_index" "$total_repos"
   repo_index=$((repo_index+1))
+  [[ "$GITTER_CONTINUE_ON_ERROR" == false && "$exit_code" -ne 0 ]] && __ask_on_error "$exit_code" "$repo_index" "$total_repos"
   repo_dir=$(dirname "$repository")
   (
     __enter_repo_dir "$repo_dir"
@@ -111,10 +111,12 @@ for repository in "${repositories[@]}"; do
     echo -ne "   ${GITTER_C_____DIM}\$(${GITTER_C___RESET}${GITTER_C_COMMAND}${command}"
     echo -e  " ${GITTER_C_____ARG}${args_string}${GITTER_C___RESET}${GITTER_C_____DIM})${GITTER_C___RESET}"
     [[ "$command" == "git" ]] && args=("-c" "color.ui=always" "${args[@]}")
+
+    [[ "$GITTER_ASK_CONFIRMATION" == true && "$exit_code" -eq 0 ]] && __ask_to_proceed "$repo_index" "$total_repos"
+
     command -- "$command" "${args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
   )
   exit_code=$?
-  [[ "$GITTER_CONTINUE_ON_ERROR" == false && "$exit_code" -ne 0 ]] && __ask_on_error "$exit_code" "$repo_index" "$total_repos"
 done
 
 exit 0
