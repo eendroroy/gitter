@@ -31,7 +31,7 @@ export fpath=("${fpath[@]}" "${HOME}/.gitter/completions")
 ## Usage
 
 ```shell
-gitter [--<option> ...] [git -- <args ...>|exec -- <args ...>|list|help]
+gitter [[--exclude] --filter <pattern> ...] [--<option> ...] [git -- <args ...>|exec -- <args ...>|list|help [item]]
 ```
 
 Run `gitter help` for details.
