@@ -24,13 +24,14 @@ _gitter() {
     "list:List repositories only"
     "ls:List repositories only"
     "ll:Equivalent to list --verbose command"
-    "help:Show this help menu"
-    "--filter:Match repository directory name exactly"
-    "-f:Match repository directory name exactly"
+    "help:Show help, takes optional topic argument"
+    "config:Print current (effective) configuration"
+    "--filter:Filter repositories matching the given pattern (can be specified multiple times)"
+    "-f:Filter repositories matching the given pattern (can be specified multiple times)"
     "--exclude:Exclude matched repositories instead of including"
     "-e:Exclude matched repositories instead of including"
-    "--verbose:Enable verbose mode (only for list command)"
-    "-v:Enable verbose mode (only for list command)"
+    "--verbose:Enable verbose mode"
+    "-v:Enable verbose mode"
     "--no-color:Disable colored output"
     "--:End of command options, all following arguments are treated as positional arguments"
   )
@@ -50,10 +51,18 @@ _gitter() {
     "branch\:+_branch_+:Match by current branch name substring - replace '_branch_' with desired value"
   )
 
+  helps=(
+    "filter:Show help about filter patterns"
+    "gitterignore:Show help about .gitterignore file"
+    "placeholder:Show help about available placeholders"
+    "status:Show help about status placeholders"
+  )
+
   _arguments -C \
-    '1:command:->command' \
     '--filter:pattern:->pattern' \
     '-f:pattern:->pattern' \
+    '1:command:->command' \
+    '2:help:->help' \
     '*::args:->args'
 
   case $state in
@@ -65,6 +74,9 @@ _gitter() {
       _describe 'pattern prefix' pattern_prefixes
       return
       ;;
+    help)
+      _describe 'help topics' helps
+      return
   esac
 }
 
