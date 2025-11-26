@@ -27,13 +27,14 @@ args=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
     # Parse Commands
-    git   |g ) ___git;             ;;
-    exec  |x ) ___exec;            ;;
-    list  |ls) ___list;            ;;
-           lb) ___lb;              ;;
-           ll) ___ll;              ;;
-    config|c ) ___config;          ;;
-    help     ) ___help "$@"; break ;;
+    git     |g ) ___git              ;;
+    exec    |x ) ___exec             ;;
+    list    |ls) ___list             ;;
+             lb) ___lb               ;;
+             ll) ___ll               ;;
+    config  |c ) ___config           ;;
+    help       ) ___help "$@"; break ;;
+    version |v ) ___version          ;;
 
     # Parse Options
     --max-depth    |-d) shift; __read_max_depth "$1"          ;;
@@ -63,6 +64,7 @@ done
 [[ "$command" == "help-placeholder"  ]] && { __help_placeholder;  exit 0; }
 [[ "$command" == "help-status"       ]] && { __help_status;       exit 0; }
 [[ "$command" == "config"            ]] && { __print_config;      exit 0; }
+[[ "$command" == "version"           ]] && { __version;      exit 0; }
 
 [[ "$command" != "list" && ${#args[@]} -eq 0 ]] && __invalid_args_for_command "$command"
 

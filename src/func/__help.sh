@@ -17,19 +17,9 @@ __help() {
   echo -e "${GITTER_C_HEADING}Version:${GITTER_C___RESET} ${GITTER_C__OPTION}${____GITTER_VERSION}${GITTER_C___RESET}"
   echo
   echo -e "${GITTER_C_HEADING}Usage:${GITTER_C___RESET}"
-  echo -ne "  ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} [[${GITTER_C__OPTION}--exclude${GITTER_C___RESET}] ${GITTER_C__OPTION}--filter <${GITTER_C___VALUE}pattern${GITTER_C___RESET}${GITTER_C__OPTION}>${GITTER_C___RESET} ...] [${GITTER_C__OPTION}--<option>${GITTER_C___RESET} ...]"
-  echo -ne " [${GITTER_C__OPTION}git${GITTER_C___RESET} ${GITTER_C__OPTION}--${GITTER_C___RESET} <${GITTER_C_____ARG}args ...${GITTER_C___RESET}>${GITTER_C___RESET}"
-  echo -ne "|${GITTER_C__OPTION}exec${GITTER_C___RESET} ${GITTER_C__OPTION}--${GITTER_C___RESET} <${GITTER_C_____ARG}args ...${GITTER_C___RESET}>${GITTER_C___RESET}"
-  echo -ne "|${GITTER_C__OPTION}list${GITTER_C___RESET}"
-  echo -e "|${GITTER_C__OPTION}help${GITTER_C___RESET} [${GITTER_C___VALUE}item${GITTER_C___RESET}]]"
-  echo
-  echo -e "${GITTER_C_HEADING}Commands:${GITTER_C___RESET}"
-  echo -e "  ${GITTER_C__OPTION}git    g ${GITTER_C___RESET}        Run a git command (${GITTER_C_____ARG}default${GITTER_C___RESET})"
-  echo -e "  ${GITTER_C__OPTION}exec   x ${GITTER_C___RESET}        Run an arbitrary command"
-  echo -e "  ${GITTER_C__OPTION}list   ls${GITTER_C___RESET}        List repositories only"
-  echo -e "  ${GITTER_C__OPTION}       ll${GITTER_C___RESET}        Equivalent to ${GITTER_C__OPTION}list --verbose${GITTER_C___RESET} command"
-  echo -e "  ${GITTER_C__OPTION}config c ${GITTER_C___RESET}        Print current (effective) configuration"
-  echo -e "  ${GITTER_C__OPTION}help     ${GITTER_C___RESET} [${GITTER_C___VALUE}item${GITTER_C___RESET}] Show help"
+  echo -ne "  ${GITTER_C_COMMAND}gitter${GITTER_C___RESET}"
+  echo -ne "  [${GITTER_C__OPTION}--<option>${GITTER_C___RESET} ...]"
+  echo -e  " [${GITTER_C__OPTION}command${GITTER_C___RESET} [${GITTER_C__OPTION}--${GITTER_C___RESET} <${GITTER_C_____ARG}args ...${GITTER_C___RESET}>${GITTER_C___RESET}]]"
   echo
   echo -e "${GITTER_C_HEADING}Options:${GITTER_C___RESET}"
   echo -e "  ${GITTER_C__OPTION}--max-depth        -d <${GITTER_C___VALUE}depth${GITTER_C___RESET}>${GITTER_C___RESET}   Look for git repositories up to specified depth (default: ${GITTER_C_____ARG}2${GITTER_C___RESET})"
@@ -39,6 +29,16 @@ __help() {
   echo -e "  ${GITTER_C__OPTION}--verbose          -v          ${GITTER_C___RESET} Enable verbose mode"
   echo -e "  ${GITTER_C__OPTION}--no-color                     ${GITTER_C___RESET} Disable colored output"
   echo
+  echo -e "${GITTER_C_HEADING}Commands:${GITTER_C___RESET}"
+  echo -e "  ${GITTER_C__OPTION}git     g ${GITTER_C___RESET}        Run a git command (${GITTER_C_____ARG}default${GITTER_C___RESET})"
+  echo -e "  ${GITTER_C__OPTION}exec    x ${GITTER_C___RESET}        Run an arbitrary command"
+  echo -e "  ${GITTER_C__OPTION}list    ls${GITTER_C___RESET}        List repositories only"
+  echo -e "  ${GITTER_C__OPTION}        ll${GITTER_C___RESET}        Equivalent to ${GITTER_C__OPTION}list --verbose${GITTER_C___RESET} command"
+  echo -e "  ${GITTER_C__OPTION}config  c ${GITTER_C___RESET}        Print current (effective) configuration"
+  echo -e "  ${GITTER_C__OPTION}version v ${GITTER_C___RESET}        Show version"
+  echo -e "  ${GITTER_C__OPTION}help      ${GITTER_C___RESET} [${GITTER_C___VALUE}item${GITTER_C___RESET}] Show help"
+  echo
+
   echo -e "${GITTER_C_HEADING}Help items:${GITTER_C___RESET}"
   echo -ne "  ${GITTER_C_COMMAND}gitter${GITTER_C___RESET}"
   echo -ne " ${GITTER_C__OPTION}help${GITTER_C___RESET}"
