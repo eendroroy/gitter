@@ -15,7 +15,6 @@ ____GITTER_VERSION="0.0.1"
 _____SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 source "$_____SCRIPT_DIR"/../src/__variables.sh
-source "$_____SCRIPT_DIR"/../src/__message.sh
 # shellcheck source=/dev/null
 for script in "$_____SCRIPT_DIR"/../src/func/*.sh; do source "$script"; done
 
@@ -110,6 +109,7 @@ for repository in "${repositories[@]}"; do
 
     echo -e "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C___RESET} $(__repo_status ".")"
     echo -e "   ${GITTER_C_____DIM}\$(${GITTER_C___RESET}${GITTER_C_COMMAND}${command} ${GITTER_C_____ARG}${args_string}${GITTER_C___RESET}${GITTER_C_____DIM})${GITTER_C___RESET}"
+    [[ "$command" == "git" ]] && args=("-c" "color.ui=always" "${args[@]}")
     command -- "$command" "${args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
   )
   exit_code=$?
