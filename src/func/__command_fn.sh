@@ -13,6 +13,7 @@
 # Commands
 ___git()     { __parse_command "git" ; }
 ___exec()    { __parse_command "exec"; }
+___eval()    { __parse_command "eval"; }
 ___list()    { __parse_command "list"; }
 ___config()  { __parse_command "config"; }
 ___version() { __parse_command "version"; }

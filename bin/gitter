@@ -29,6 +29,7 @@ while [[ $# -gt 0 ]]; do
     # Parse Commands
     git     |g ) ___git              ;;
     exec    |x ) ___exec             ;;
+    eval    |e ) ___eval             ;;
     list    |ls) ___list             ;;
              lb) ___lb               ;;
              ll) ___ll               ;;
@@ -37,12 +38,13 @@ while [[ $# -gt 0 ]]; do
     version |v ) ___version          ;;
 
     # Parse Options
-    --max-depth    |-d) shift; __read_max_depth "$1"          ;;
-    --exclude      |-e)        GITTER_FILTER_EXCLUDE=true     ;;
-    --filter       |-f) shift; __read_filter "$1"             ;;
-    --ask-confirm  |-a)        GITTER_ASK_CONFIRMATION=true ;;
-    --no-color        )        GITTER_NO_COLOR=true           ;;
-    --verbose      |-v)        GITTER_VERBOSE=true            ;;
+    --max-depth         |-d) shift; __read_max_depth "$1"          ;;
+    --exclude           |-e)        GITTER_FILTER_EXCLUDE=true     ;;
+    --filter            |-f) shift; __read_filter "$1"             ;;
+    --ask-confirm       |-a)        GITTER_ASK_CONFIRMATION=true   ;;
+    --continue-on-error |-c)        GITTER_CONTINUE_ON_ERROR=true  ;;
+    --no-color             )        GITTER_NO_COLOR=true           ;;
+    --verbose           |-v)        GITTER_VERBOSE=true            ;;
 
     # Parse Command Arguments
     --) __read_command_args "$@"; break ;;
@@ -100,7 +102,9 @@ repo_index=0
 total_repos=${#repositories[@]}
 for repository in "${repositories[@]}"; do
   repo_index=$((repo_index+1))
+
   [[ "$GITTER_CONTINUE_ON_ERROR" == false && "$exit_code" -ne 0 ]] && __ask_on_error "$exit_code" "$repo_index" "$total_repos"
+
   repo_dir=$(dirname "$repository")
   (
     __enter_repo_dir "$repo_dir"
