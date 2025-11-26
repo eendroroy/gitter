@@ -95,17 +95,11 @@ fi
 [[ "$command" == "exec" ]] && command="${args[0]}" && args=("${args[@]:1}")
 
 # -- execute git/exec commands in each repository
+repo_index=1
+total_repos=${#repositories[@]}
 for repository in "${repositories[@]}"; do
-  # Require confirmation to proceed to the next repository (press q to quit or any other key to continue)
-  if [[ "$GITTER_ASK_CONFIRMATION" == true ]]; then
-    echo -ne "   ${GITTER_C_____DIM}Press any key to continue to the next repository or 'q' to quit...${GITTER_C___RESET}"
-    read -rsn1 input_key
-    if [[ "$input_key" == "q" || "$input_key" == "Q" ]]; then
-      echo -e "\r   ${GITTER_C___ERROR}Quitting...${GITTER_C___RESET}                                                           "
-      exit 0
-    fi
-    echo -ne "\r                                                                         "
-  fi
+  [[ "$GITTER_ASK_CONFIRMATION" == true && "$exit_code" -eq 0 ]] && __ask_to_proceed "$repo_index" "$total_repos"
+  repo_index=$((repo_index+1))
   repo_dir=$(dirname "$repository")
   (
     __enter_repo_dir "$repo_dir"
@@ -114,12 +108,12 @@ for repository in "${repositories[@]}"; do
     args_string="${args[*]}"
     [[ ${#args_string} -gt 80 ]] && args_string="${args_string:0:77}..."
 
-    echo
     echo -e "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C___RESET} $(__repo_status ".")"
     echo -e "   ${GITTER_C_____DIM}\$(${GITTER_C___RESET}${GITTER_C_COMMAND}${command} ${GITTER_C_____ARG}${args_string}${GITTER_C___RESET}${GITTER_C_____DIM})${GITTER_C___RESET}"
-    echo
     command -- "$command" "${args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
-    echo
   )
+  exit_code=$?
+  [[ "$GITTER_CONTINUE_ON_ERROR" == false && "$exit_code" -ne 0 ]] && __ask_on_error "$exit_code" "$repo_index" "$total_repos"
 done
+
 exit 0

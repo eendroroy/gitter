@@ -14,17 +14,18 @@
 ____CURRENT_DIR=$(pwd)
 
 # Default variables
-[[ -z "${GITTER_SUCCESS_SYMBOL+x}"   ]] && GITTER_SUCCESS_SYMBOL=" ░"
-[[ -z "${GITTER___ERROR_SYMBOL+x}"   ]] && GITTER___ERROR_SYMBOL=" ░"
-[[ -z "${GITTER_PRIMARY_SYMBOL+x}"   ]] && GITTER_PRIMARY_SYMBOL=" ━"
+[[ -z "${GITTER_SUCCESS_SYMBOL+x}"    ]] && GITTER_SUCCESS_SYMBOL=" ░"
+[[ -z "${GITTER___ERROR_SYMBOL+x}"    ]] && GITTER___ERROR_SYMBOL=" ░"
+[[ -z "${GITTER_PRIMARY_SYMBOL+x}"    ]] && GITTER_PRIMARY_SYMBOL=" ━"
 
 # Arg defaults
-[[ -z "${GITTER_MAX_DEPTH+x}"        ]] && GITTER_MAX_DEPTH=2
-[[ -z "${GITTER_FILTERS+x}"          ]] && GITTER_FILTERS=()
-[[ -z "${GITTER_VERBOSE+x}"          ]] && GITTER_VERBOSE=false
-[[ -z "${GITTER_FILTER_EXCLUDE+x}"   ]] && GITTER_FILTER_EXCLUDE=false
-[[ -z "${GITTER_NO_COLOR+x}"         ]] && GITTER_NO_COLOR=false
-[[ -z "${GITTER_ASK_CONFIRMATION+x}" ]] && GITTER_ASK_CONFIRMATION=false
+[[ -z "${GITTER_MAX_DEPTH+x}"         ]] && GITTER_MAX_DEPTH=2
+[[ -z "${GITTER_FILTERS+x}"           ]] && GITTER_FILTERS=()
+[[ -z "${GITTER_VERBOSE+x}"           ]] && GITTER_VERBOSE=false
+[[ -z "${GITTER_FILTER_EXCLUDE+x}"    ]] && GITTER_FILTER_EXCLUDE=false
+[[ -z "${GITTER_NO_COLOR+x}"          ]] && GITTER_NO_COLOR=false
+[[ -z "${GITTER_ASK_CONFIRMATION+x}"  ]] && GITTER_ASK_CONFIRMATION=false
+[[ -z "${GITTER_CONTINUE_ON_ERROR+x}" ]] && GITTER_CONTINUE_ON_ERROR=false
 
 if [[ -z "${GITTER_REPO_STATUS+x}" ]]; then
   GITTER_REPO_STATUS=(" on " "[branch]")
