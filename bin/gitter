@@ -37,11 +37,12 @@ while [[ $# -gt 0 ]]; do
     help     ) ___help "$@"; break ;;
 
     # Parse Options
-    --max-depth|-d) shift; __read_max_depth "$1"      ;;
-    --exclude  |-e)        GITTER_FILTER_EXCLUDE=true ;;
-    --filter   |-f) shift; __read_filter "$1"         ;;
-    --no-color    )        GITTER_NO_COLOR=true       ;;
-    --verbose  |-v)        GITTER_VERBOSE=true        ;;
+    --max-depth    |-d) shift; __read_max_depth "$1"          ;;
+    --exclude      |-e)        GITTER_FILTER_EXCLUDE=true     ;;
+    --filter       |-f) shift; __read_filter "$1"             ;;
+    --ask-confirm  |-a)        GITTER_ASK_CONFIRMATION=true ;;
+    --no-color        )        GITTER_NO_COLOR=true           ;;
+    --verbose      |-v)        GITTER_VERBOSE=true            ;;
 
     # Parse Command Arguments
     --) __read_command_args "$@"; break ;;
@@ -95,6 +96,16 @@ fi
 
 # -- execute git/exec commands in each repository
 for repository in "${repositories[@]}"; do
+  # Require confirmation to proceed to the next repository (press q to quit or any other key to continue)
+  if [[ "$GITTER_ASK_CONFIRMATION" == true ]]; then
+    echo -ne "   ${GITTER_C_____DIM}Press any key to continue to the next repository or 'q' to quit...${GITTER_C___RESET}"
+    read -rsn1 input_key
+    if [[ "$input_key" == "q" || "$input_key" == "Q" ]]; then
+      echo -e "\r   ${GITTER_C___ERROR}Quitting...${GITTER_C___RESET}                                                           "
+      exit 0
+    fi
+    echo -ne "\r                                                                         "
+  fi
   repo_dir=$(dirname "$repository")
   (
     __enter_repo_dir "$repo_dir"

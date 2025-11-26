@@ -32,11 +32,12 @@ __help() {
   echo -e "  ${GITTER_C__OPTION}help     ${GITTER_C___RESET} [${GITTER_C___VALUE}item${GITTER_C___RESET}] Show help"
   echo
   echo -e "${GITTER_C_HEADING}Options:${GITTER_C___RESET}"
-  echo -e "  ${GITTER_C__OPTION}--max-depth -d <${GITTER_C___VALUE}depth${GITTER_C___RESET}>${GITTER_C___RESET}   Look for git repositories up to specified depth (default: ${GITTER_C_____ARG}2${GITTER_C___RESET})"
-  echo -e "  ${GITTER_C__OPTION}--filter    -f <${GITTER_C___VALUE}pattern${GITTER_C___RESET}>${GITTER_C___RESET} Filter repositories matching the given pattern (can be specified multiple times)"
-  echo -e "  ${GITTER_C__OPTION}--exclude   -e          ${GITTER_C___RESET} Exclude matched repositories instead of including"
-  echo -e "  ${GITTER_C__OPTION}--verbose   -v          ${GITTER_C___RESET} Enable verbose mode"
-  echo -e "  ${GITTER_C__OPTION}--no-color              ${GITTER_C___RESET} Disable colored output"
+  echo -e "  ${GITTER_C__OPTION}--max-depth        -d <${GITTER_C___VALUE}depth${GITTER_C___RESET}>${GITTER_C___RESET}   Look for git repositories up to specified depth (default: ${GITTER_C_____ARG}2${GITTER_C___RESET})"
+  echo -e "  ${GITTER_C__OPTION}--filter           -f <${GITTER_C___VALUE}pattern${GITTER_C___RESET}>${GITTER_C___RESET} Filter repositories matching the given pattern (can be specified multiple times)"
+  echo -e "  ${GITTER_C__OPTION}--exclude          -e          ${GITTER_C___RESET} Exclude matched repositories instead of including"
+  echo -e "  ${GITTER_C__OPTION}--ask-confirmation -a          ${GITTER_C___RESET} Ask for confirmation before executing commands in each repository"
+  echo -e "  ${GITTER_C__OPTION}--verbose          -v          ${GITTER_C___RESET} Enable verbose mode"
+  echo -e "  ${GITTER_C__OPTION}--no-color                     ${GITTER_C___RESET} Disable colored output"
   echo
   echo -e "${GITTER_C_HEADING}Help items:${GITTER_C___RESET}"
   echo -ne "  ${GITTER_C_COMMAND}gitter${GITTER_C___RESET}"

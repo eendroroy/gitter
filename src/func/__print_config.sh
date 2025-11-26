@@ -26,6 +26,7 @@ __print_config() {
   ___print_config_value "" "                      GITTER_VERBOSE" "'${GITTER_VERBOSE}'"
   ___print_config_value "" "               GITTER_FILTER_EXCLUDE" "'${GITTER_FILTER_EXCLUDE}'"
   ___print_config_value "" "                     GITTER_NO_COLOR" "'${GITTER_NO_COLOR}'"
+  ___print_config_value "" "           GITTER_ASK_CONFIRMATION" "'${GITTER_ASK_CONFIRMATION}'"
   ___print_config_value "" "                  GITTER_REPO_STATUS" "(${GITTER_REPO_STATUS[*]})"
   ___print_config_value "" "          GITTER_REPO_STATUS_VERBOSE" "(${GITTER_REPO_STATUS_VERBOSE[*]})"
   echo
