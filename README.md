@@ -52,6 +52,7 @@ export GITTER_FILTER_EXCLUDE=false     # Do not exclude matched repositories by 
 export GITTER_NO_COLOR=false           # Enable colored output by default
 export GITTER_ASK_CONFIRMATION=false   # Proceed without asking for confirmation by default
 export GITTER_CONTINUE_ON_ERROR=false  # ASk to continue on error by default
+export GITTER_QUIET=false              # Quiet mode disabled by default, when enabled, only show stderr
 
 # Color configuration
 export GITTER_C___ERROR='\e[38;5;9m'   # Error color

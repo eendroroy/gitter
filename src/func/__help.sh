@@ -27,6 +27,7 @@ __help() {
   echo -e "  ${GITTER_C__OPTION}--exclude           -e          ${GITTER_C___RESET} Exclude matched repositories instead of including"
   echo -e "  ${GITTER_C__OPTION}--ask-confirmation  -a          ${GITTER_C___RESET} Ask for confirmation before executing commands in each repository"
   echo -e "  ${GITTER_C__OPTION}--continue-on-error -c          ${GITTER_C___RESET} Continue executing commands in other repositories even if an error occurs in one"
+  echo -e "  ${GITTER_C__OPTION}--quiet             -q          ${GITTER_C___RESET} Enable quiet mode (suppress output of successful commands)"
   echo -e "  ${GITTER_C__OPTION}--verbose           -v          ${GITTER_C___RESET} Enable verbose mode"
   echo -e "  ${GITTER_C__OPTION}--no-color                      ${GITTER_C___RESET} Disable colored output"
   echo
@@ -41,13 +42,13 @@ __help() {
   echo -e "  ${GITTER_C__OPTION}help      ${GITTER_C___RESET} [${GITTER_C___VALUE}item${GITTER_C___RESET}] Show help"
   echo
 
-  echo -e "${GITTER_C_HEADING}Help items:${GITTER_C___RESET}"
+  echo -e  "${GITTER_C_HEADING}Help items:${GITTER_C___RESET}"
   echo -ne "  ${GITTER_C_COMMAND}gitter${GITTER_C___RESET}"
   echo -ne " ${GITTER_C__OPTION}help${GITTER_C___RESET}"
   echo -ne " [${GITTER_C_____ARG}filter${GITTER_C___RESET}|"
   echo -ne "${GITTER_C_____ARG}gitterignore${GITTER_C___RESET}"
   echo -ne "|${GITTER_C_____ARG}placeholder${GITTER_C___RESET}"
-  echo -e "|${GITTER_C_____ARG}status${GITTER_C___RESET}]"
+  echo -e  "|${GITTER_C_____ARG}status${GITTER_C___RESET}]"
   echo
   echo -e "  ${GITTER_C_____ARG}filter      ${GITTER_C___RESET} Show help about filter patterns"
   echo -e "  ${GITTER_C_____ARG}gitterignore${GITTER_C___RESET} Show help about .gitterignore file"

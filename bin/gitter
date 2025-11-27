@@ -31,7 +31,6 @@ while [[ $# -gt 0 ]]; do
     exec    |x ) ___exec             ;;
     eval    |e ) ___eval             ;;
     list    |ls) ___list             ;;
-             lb) ___lb               ;;
              ll) ___ll               ;;
     config  |c ) ___config           ;;
     help       ) ___help "$@"; break ;;
@@ -43,6 +42,7 @@ while [[ $# -gt 0 ]]; do
     --filter            |-f) shift; __read_filter "$1"             ;;
     --ask-confirm       |-a)        GITTER_ASK_CONFIRMATION=true   ;;
     --continue-on-error |-c)        GITTER_CONTINUE_ON_ERROR=true  ;;
+    --quiet             |-q)        GITTER_QUIET=true              ;;
     --no-color             )        GITTER_NO_COLOR=true           ;;
     --verbose           |-v)        GITTER_VERBOSE=true            ;;
 

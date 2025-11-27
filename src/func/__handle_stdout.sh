@@ -11,6 +11,6 @@
 
 __handle_stdout() {
   while IFS= read -r line || [ -n "$line" ]; do
-    printf '%b\n' "${GITTER_C_SUCCESS}${GITTER_SUCCESS_SYMBOL}${GITTER_C___RESET}  ${line}"
+    [[ "$GITTER_QUIET" == true ]] || printf '%b\n' "${GITTER_C_SUCCESS}${GITTER_SUCCESS_SYMBOL}${GITTER_C___RESET}  ${line}"
   done
 }

@@ -24,6 +24,7 @@ ____CURRENT_DIR=$(pwd)
 [[ -z "${GITTER_VERBOSE+x}"             ]] && GITTER_VERBOSE=false
 [[ -z "${GITTER_FILTER_EXCLUDE+x}"      ]] && GITTER_FILTER_EXCLUDE=false
 [[ -z "${GITTER_NO_COLOR+x}"            ]] && GITTER_NO_COLOR=false
+[[ -z "${GITTER_QUIET+x}"               ]] && GITTER_QUIET=false
 [[ -z "${GITTER_ASK_CONFIRMATION+x}"    ]] && GITTER_ASK_CONFIRMATION=false
 [[ -z "${GITTER_CONTINUE_ON_ERROR+x}"   ]] && GITTER_CONTINUE_ON_ERROR=false
 [[ -z "${GITTER_REPO_STATUS+x}"         ]] && GITTER_REPO_STATUS=(" on " "[branch]")
