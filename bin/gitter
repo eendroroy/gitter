@@ -116,7 +116,9 @@ for repository in "${repositories[@]}"; do
   args_string="${parsed_args[*]}"
   [[ ${#args_string} -gt 60 ]] && args_string="${args_string:0:57}..."
 
-  echo -e  "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C___RESET} ${GITTER_C_____DIM}[${repo_index}]${GITTER_C___RESET} $(__repo_status ".")"
+  echo -ne  "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C___RESET}"
+  echo -ne  " ${GITTER_C_____DIM}[${repo_index}/${total_repos}]${GITTER_C___RESET}"
+  echo -e   " $(__repo_status ".")"
 
   parsed_args=("${additional_args[@]}" "${parsed_args[@]}")
   if [[ "$GITTER_DRY_RUN" == true ]]; then
@@ -126,7 +128,7 @@ for repository in "${repositories[@]}"; do
     echo -e  " ${GITTER_C_____ARG}${args_string}${GITTER_C___RESET}${GITTER_C_____DIM})${GITTER_C___RESET}"
 
     if [[ "$GITTER_ASK_CONFIRMATION"  == true  && "$exit_code" -eq 0 ]]; then
-      __ask_to_proceed "$repo_index" "$total_repos"
+      __ask_to_proceed
       ask_to_proceed_rc=$?
       case $ask_to_proceed_rc in
         0 ) ;;
@@ -139,7 +141,7 @@ for repository in "${repositories[@]}"; do
     exit_code=$?
 
     if [[ "$GITTER_CONTINUE_ON_ERROR" == false && "$exit_code" -ne 0 ]]; then
-      __ask_on_error   "$exit_code" "$repo_index" "$total_repos"
+      __ask_on_error "$exit_code"
     fi
   fi
 
