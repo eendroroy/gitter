@@ -10,6 +10,65 @@
 # License, or (at your option) any later version.
 
 # shellcheck disable=SC2034
+
+__parse_command() {
+  if [[ -n "$command" ]]; then
+    echo
+    echo -e "${GITTER_C___ERROR}Multiple command types specified${GITTER_C___RESET}" 1>&2
+    echo
+    echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+    echo
+    exit 1
+  fi
+  command="${1}"
+}
+
+__read_filter() {
+  if [[ -z "$1" || "$1" == -* ]]; then
+    echo
+    echo -e "${GITTER_C___ERROR}Missing or invalid argument for:${GITTER_C___RESET} ${GITTER_C__OPTION}--filter${GITTER_C___RESET}" 1>&2
+    echo
+    echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+    echo
+    exit 1
+  fi
+  GITTER_FILTERS+=("$1")
+}
+
+__read_command_args() {
+  shift
+  while [[ $# -gt 0 ]]; do
+    args+=("$1")
+    shift
+  done
+}
+
+__read_max_depth() {
+  if [[ -z "$1" || "$1" == -* ]]; then
+    echo
+    echo -e "${GITTER_C___ERROR}Missing or invalid argument for:${GITTER_C___RESET} ${GITTER_C__OPTION}--max-depth${GITTER_C___RESET}" 1>&2
+    echo
+    echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+    echo
+    exit 1
+  fi
+  GITTER_MAX_DEPTH="$1"
+}
+
+__disable_color_output() {
+  GITTER_C___RESET=''
+  GITTER_C____PATH=''
+  GITTER_C_PATH_DM=''
+  GITTER_C_COMMAND=''
+  GITTER_C_____ARG=''
+  GITTER_C__OPTION=''
+  GITTER_C_____DIM=''
+  GITTER_C___VALUE=''
+  GITTER_C_SUCCESS=''
+  GITTER_C___ERROR=''
+  GITTER_C_HEADING=''
+}
+
 # Commands
 ___git()     { __parse_command "git"    ; }
 ___exec()    { __parse_command "exec"   ; }

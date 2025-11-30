@@ -9,7 +9,37 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-__filter_repos() {
+__match_filter() {
+  local value="$1" pattern="$2"
+
+  # Special-case: single '+' matches everything
+  [[ "$pattern" == "+" ]] && return 0
+
+  local has_leading has_trailing
+  if [[ "$pattern" == \+* ]]; then
+    has_leading=1
+    pattern="${pattern#\+}"
+  fi
+  if [[ "$pattern" == *\+ ]]; then
+    has_trailing=1
+    pattern="${pattern%\+}"
+  fi
+
+  [[ -z "$pattern" ]] && return 0
+
+  if [[ -n "$has_leading" && -n "$has_trailing" ]]; then
+    [[ "$value" == *"$pattern"* ]]
+  elif [[ -n "$has_leading" ]]; then
+    [[ "$value" == *"$pattern" ]]
+  elif [[ -n "$has_trailing" ]]; then
+    [[ "$value" == "$pattern"* ]]
+  else
+    [[ "$value" == "$pattern" ]]
+  fi
+}
+
+
+__filter_repositories() {
   local -n repo_list="$1"
   local filtered_repo_git_dirs=()
 

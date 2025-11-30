@@ -9,6 +9,22 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+__print_path() {
+  local path
+  if [[ -z ${1} ]]; then
+    path=${PWD/"${____CURRENT_DIR}"/.}
+  else
+    path=${1/"${____CURRENT_DIR}"/.}
+  fi
+
+  if [[ "$path" == "." ]]; then
+    path="$(basename "${____CURRENT_DIR}")"
+  else
+    echo -ne "${GITTER_C_PATH_DM}${path%/*}/${GITTER_C___RESET}"
+  fi
+  echo -ne "${GITTER_C____PATH}${path##*/}${GITTER_C___RESET}"
+}
+
 __repo_status() {
   if [[ "$GITTER_VERBOSE" == true ]]; then
     local -a PATTERNS=("${GITTER_REPO_STATUS_VERBOSE[@]}")
@@ -21,7 +37,7 @@ __repo_status() {
       exit 1
     }
 
-    echo -ne "$(__print_path)"
+    echo -ne "$(__print_path "")"
     for pattern in "${PATTERNS[@]}"; do
       case "$pattern" in
         "[branch]"   ) echo -ne "${GITTER_C_COMMAND}$(git branch --show-current)${GITTER_C___RESET}";;

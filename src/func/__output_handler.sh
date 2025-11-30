@@ -9,14 +9,14 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-__parse_command() {
-  if [[ -n "$command" ]]; then
-    echo
-    echo -e "\n${GITTER_C___ERROR}Multiple command types specified${GITTER_C___RESET}" 1>&2
-    echo
-    echo -e "Run ${GITTER_C_COMMAND}gitter --help${GITTER_C___RESET} for usage information." 1>&2
-    echo
-    exit 1
-  fi
-  command="${1}"
+__handle_stderr() {
+  while IFS= read -r line || [ -n "$line" ]; do
+    printf '%b\n' "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}${GITTER_C___RESET}  ${line}" 1>&2
+  done
+}
+
+__handle_stdout() {
+  while IFS= read -r line || [ -n "$line" ]; do
+    [[ "$GITTER_QUIET" == true ]] || printf '%b\n' "${GITTER_C_SUCCESS}${GITTER_SUCCESS_SYMBOL}${GITTER_C___RESET}  ${line}"
+  done
 }

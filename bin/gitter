@@ -37,15 +37,15 @@ while [[ $# -gt 0 ]]; do
     version |v ) ___version          ;;
 
     # Parse Options
-    --max-depth         |-d) shift; __read_max_depth "$1"          ;;
-    --exclude           |-e)        GITTER_FILTER_EXCLUDE=true     ;;
-    --filter            |-f) shift; __read_filter "$1"             ;;
-    --ask-confirm       |-a)        GITTER_ASK_CONFIRMATION=true   ;;
-    --continue-on-error |-c)        GITTER_CONTINUE_ON_ERROR=true  ;;
-    --quiet             |-q)        GITTER_QUIET=true              ;;
-    --no-color             )        GITTER_NO_COLOR=true           ;;
-    --verbose           |-v)        GITTER_VERBOSE=true            ;;
-    --dry-run           |-n)        GITTER_DRY_RUN=true            ;;
+    --max-depth         |-d) opts=("${opts[@]}" "${1}"); shift; __read_max_depth "$1"        ;;
+    --exclude           |-e) opts=("${opts[@]}" "${1}");        GITTER_FILTER_EXCLUDE=true   ;;
+    --filter            |-f) opts=("${opts[@]}" "${1}"); shift; __read_filter "$1"           ;;
+    --ask-confirmation  |-a) opts=("${opts[@]}" "${1}");        GITTER_ASK_CONFIRMATION=true ;;
+    --continue-on-error |-c) opts=("${opts[@]}" "${1}");        GITTER_CONTINUE_ON_ERROR=true;;
+    --quiet             |-q) opts=("${opts[@]}" "${1}");        GITTER_QUIET=true            ;;
+    --no-color             ) opts=("${opts[@]}" "${1}");        GITTER_NO_COLOR=true         ;;
+    --verbose           |-v) opts=("${opts[@]}" "${1}");        GITTER_VERBOSE=true          ;;
+    --dry-run           |-n) opts=("${opts[@]}" "${1}");        GITTER_DRY_RUN=true          ;;
 
     # Parse Command Arguments
     --) __read_command_args "$@"; break ;;
@@ -56,6 +56,8 @@ while [[ $# -gt 0 ]]; do
   esac
   shift
 done
+
+__validate_command "$command"
 
 [[ "$GITTER_NO_COLOR" == true ]] && __disable_color_output
 
@@ -80,7 +82,7 @@ readarray -d '' -t repositories < <(find . -name ".git" -maxdepth "$((GITTER_MAX
 [[ ${#repositories[@]} -eq 0 ]] && __all_repositories_ignored
 
 # -- apply user specified filters
-__filter_repos repositories
+__filter_repositories repositories
 [[ ${#repositories[@]} -eq 0 ]] && __all_repositories_filtered_out
 
 # -- execute 'list' command
