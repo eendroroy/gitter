@@ -10,13 +10,21 @@
 # License, or (at your option) any later version.
 
 __ask_to_proceed() {
-  echo -ne "   ${GITTER_C_____DIM}Press any key to continue (${1}/${2}) or 'q' to quit...${GITTER_C___RESET}"
+  echo -ne "   ${GITTER_C_____DIM}Press any key to continue (${1}/${2}), 's' to skip 'q' to quit...${GITTER_C___RESET}"
   read -rsn1 input_key
+
+  if [[ "$input_key" == "s" || "$input_key" == "S" ]]; then
+    echo -e "\r   ${GITTER_C___ERROR}Skipping...${GITTER_C___RESET}                                                               "
+    return 1
+  fi
+
   if [[ "$input_key" == "q" || "$input_key" == "Q" ]]; then
     echo -e "\r   ${GITTER_C___ERROR}Quitting...${GITTER_C___RESET}                                                               "
-    exit 0
+    return 2
   fi
+
   printf '\r\033[2K'
+  return 0
 }
 
 __ask_on_error() {
