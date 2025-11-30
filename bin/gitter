@@ -57,11 +57,11 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
+[[ -z "$command" ]] && command="git"
+
 __validate_command "$command"
 
 [[ "$GITTER_NO_COLOR" == true ]] && __disable_color_output
-
-[[ -z "$command" ]] && command="git"
 
 [[ "$command" == "help"              ]] && { __help;              exit 0; }
 [[ "$command" == "help-filter"       ]] && { __help_filter;       exit 0; }
