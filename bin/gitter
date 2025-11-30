@@ -123,8 +123,8 @@ for repository in "${repositories[@]}"; do
   if [[ "$GITTER_DRY_RUN" == true ]]; then
     echo -e "   ${GITTER_C_COMMAND}${command}${GITTER_C___RESET} ${GITTER_C_____ARG}${parsed_args[*]}${GITTER_C___RESET}"
   else
-    [[ "$GITTER_VERBOSE" == true ]] && echo -ne "   ${GITTER_C_____DIM}\$(${GITTER_C___RESET}${GITTER_C_COMMAND}${command}"
-    [[ "$GITTER_VERBOSE" == true ]] && echo -e  " ${GITTER_C_____ARG}${args_string}${GITTER_C___RESET}${GITTER_C_____DIM})${GITTER_C___RESET}"
+    echo -ne "   ${GITTER_C_____DIM}\$(${GITTER_C___RESET}${GITTER_C_COMMAND}${command}"
+    echo -e  " ${GITTER_C_____ARG}${args_string}${GITTER_C___RESET}${GITTER_C_____DIM})${GITTER_C___RESET}"
 
     command -- "$command" "${parsed_args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
     exit_code=$?
