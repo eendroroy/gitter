@@ -117,14 +117,14 @@ for repository in "${repositories[@]}"; do
   args_string="${parsed_args[*]}"
   [[ ${#args_string} -gt 60 ]] && args_string="${args_string:0:57}..."
 
-  echo -e  "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C___RESET} $(__repo_status ".")"
+  echo -e  "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C___RESET} ${GITTER_C_____DIM}[${repo_index}]${GITTER_C___RESET} $(__repo_status ".")"
 
   parsed_args=("${additional_args[@]}" "${parsed_args[@]}")
   if [[ "$GITTER_DRY_RUN" == true ]]; then
-    echo -e "   ${GITTER_C_____DIM} $command ${parsed_args[*]}${GITTER_C___RESET}"
+    echo -e "   ${GITTER_C_COMMAND}${command}${GITTER_C___RESET} ${GITTER_C_____ARG}${parsed_args[*]}${GITTER_C___RESET}"
   else
-    echo -ne "   ${GITTER_C_____DIM}\$(${GITTER_C___RESET}${GITTER_C_COMMAND}${command}"
-    echo -e  " ${GITTER_C_____ARG}${args_string}${GITTER_C___RESET}${GITTER_C_____DIM})${GITTER_C___RESET}"
+    [[ "$GITTER_VERBOSE" == true ]] && echo -ne "   ${GITTER_C_____DIM}\$(${GITTER_C___RESET}${GITTER_C_COMMAND}${command}"
+    [[ "$GITTER_VERBOSE" == true ]] && echo -e  " ${GITTER_C_____ARG}${args_string}${GITTER_C___RESET}${GITTER_C_____DIM})${GITTER_C___RESET}"
 
     command -- "$command" "${parsed_args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
     exit_code=$?
