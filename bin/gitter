@@ -128,6 +128,7 @@ for repository in "${repositories[@]}"; do
     echo -e  " ${GITTER_C_____ARG}${args_string}${GITTER_C___RESET}${GITTER_C_____DIM})${GITTER_C___RESET}"
 
     if [[ "$GITTER_ASK_CONFIRMATION"  == true  && "$exit_code" -eq 0 ]]; then
+      sleep 0.1
       __ask_to_proceed
       ask_to_proceed_rc=$?
       case $ask_to_proceed_rc in
@@ -141,6 +142,7 @@ for repository in "${repositories[@]}"; do
     exit_code=$?
 
     if [[ "$GITTER_CONTINUE_ON_ERROR" == false && "$exit_code" -ne 0 ]]; then
+      sleep 0.1
       __ask_on_error "$exit_code"
     fi
   fi
