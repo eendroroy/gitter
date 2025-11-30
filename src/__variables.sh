@@ -42,4 +42,7 @@ ____CURRENT_DIR=$(pwd)
 [[ -z "${GITTER_C_____ARG+x}" ]] && GITTER_C_____ARG='\e[33m'
 [[ -z "${GITTER_C__OPTION+x}" ]] && GITTER_C__OPTION='\e[36m'
 [[ -z "${GITTER_C___VALUE+x}" ]] && GITTER_C___VALUE='\e[2;35;1;3m'
+
+# Non configurable variables
 GITTER_C___RESET='\e[0m'
+GITTER_DRY_RUN=false

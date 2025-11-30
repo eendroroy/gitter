@@ -45,6 +45,7 @@ while [[ $# -gt 0 ]]; do
     --quiet             |-q)        GITTER_QUIET=true              ;;
     --no-color             )        GITTER_NO_COLOR=true           ;;
     --verbose           |-v)        GITTER_VERBOSE=true            ;;
+    --dry-run           |-n)        GITTER_DRY_RUN=true            ;;
 
     # Parse Command Arguments
     --) __read_command_args "$@"; break ;;
@@ -120,7 +121,11 @@ for repository in "${repositories[@]}"; do
 
     [[ "$GITTER_ASK_CONFIRMATION" == true && "$exit_code" -eq 0 ]] && __ask_to_proceed "$repo_index" "$total_repos"
 
-    command -- "$command" "${args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
+    if [[ "$GITTER_DRY_RUN" == true ]]; then
+      echo -e "   ${GITTER_C_____DIM} $command ${args[*]}${GITTER_C___RESET}"
+    else
+      command -- "$command" "${args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
+    fi
   )
   exit_code=$?
 done
