@@ -11,7 +11,7 @@
 
 __expand_args() {
   local -n args_ref=$1
-  local parsed_args=()
+  local -n parsed_args_ref=$2
   for arg in "${args_ref[@]}"; do
     [[ $arg == *"{_repo_}"* ]] && arg="${arg//\{_repo_\}/$(basename "$(pwd)")}"
     [[ $arg == *"{_path:r_}"* ]] && arg="${arg//\{_path:r_\}/${PWD/"${____CURRENT_DIR}"/.}}"
@@ -28,7 +28,6 @@ __expand_args() {
     [[ $arg == *"{_author:e_}"* ]] && arg="${arg//\{_author:e_\}/$(git log -1 --format="%ae" 2>/dev/null)}"
     [[ $arg == *"{_author:n_}"* ]] && arg="${arg//\{_author:n_\}/$(git log -1 --format="%an" 2>/dev/null)}"
 
-    parsed_args+=("$arg")
+    parsed_args_ref+=("$arg")
   done
-  args_ref=("${parsed_args[@]}")
 }

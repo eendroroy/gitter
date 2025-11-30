@@ -95,39 +95,42 @@ if [[ "$command" == "list" ]]; then
   exit 0
 fi
 
+additional_args=()
 # -- set command and args for 'exec' command
+[[ "$command" == "git"  ]] && additional_args=("-c" "color.ui=always")
 [[ "$command" == "exec" ]] && command="${args[0]}" && args=("${args[@]:1}")
 
 # -- execute git/exec commands in each repository
 repo_index=0
 total_repos=${#repositories[@]}
 for repository in "${repositories[@]}"; do
+  parsed_args=()
   repo_index=$((repo_index+1))
-
-  [[ "$GITTER_CONTINUE_ON_ERROR" == false && "$exit_code" -ne 0 ]] && __ask_on_error "$exit_code" "$repo_index" "$total_repos"
-
   repo_dir=$(dirname "$repository")
-  (
-    __enter_repo_dir "$repo_dir"
-    __expand_args args
 
-    args_string="${args[*]}"
-    [[ ${#args_string} -gt 80 ]] && args_string="${args_string:0:77}..."
+  [[ "$GITTER_CONTINUE_ON_ERROR" == false && "$exit_code" -ne 0 ]] && __ask_on_error   "$exit_code" "$repo_index" "$total_repos"
+  [[ "$GITTER_ASK_CONFIRMATION"  == true  && "$exit_code" -eq 0 ]] && __ask_to_proceed              "$repo_index" "$total_repos"
 
-    echo -e "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C___RESET} $(__repo_status ".")"
+  __enter_repo_dir "$repo_dir"
+
+  __expand_args args parsed_args
+  args_string="${parsed_args[*]}"
+  [[ ${#args_string} -gt 60 ]] && args_string="${args_string:0:57}..."
+
+  echo -e  "${GITTER_C_SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C___RESET} $(__repo_status ".")"
+
+  parsed_args=("${additional_args[@]}" "${parsed_args[@]}")
+  if [[ "$GITTER_DRY_RUN" == true ]]; then
+    echo -e "   ${GITTER_C_____DIM} $command ${parsed_args[*]}${GITTER_C___RESET}"
+  else
     echo -ne "   ${GITTER_C_____DIM}\$(${GITTER_C___RESET}${GITTER_C_COMMAND}${command}"
     echo -e  " ${GITTER_C_____ARG}${args_string}${GITTER_C___RESET}${GITTER_C_____DIM})${GITTER_C___RESET}"
-    [[ "$command" == "git" ]] && args=("-c" "color.ui=always" "${args[@]}")
 
-    [[ "$GITTER_ASK_CONFIRMATION" == true && "$exit_code" -eq 0 ]] && __ask_to_proceed "$repo_index" "$total_repos"
+    command -- "$command" "${parsed_args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
+    exit_code=$?
+  fi
 
-    if [[ "$GITTER_DRY_RUN" == true ]]; then
-      echo -e "   ${GITTER_C_____DIM} $command ${args[*]}${GITTER_C___RESET}"
-    else
-      command -- "$command" "${args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
-    fi
-  )
-  exit_code=$?
+  __exit_repo_dir
 done
 
 exit 0
