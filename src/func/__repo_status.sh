@@ -9,6 +9,8 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+___NO_COMMIT="${GITTER_C___RESET}${GITTER_C___ERROR}no_commit_yet${GITTER_C___RESET}"
+
 __print_path() {
   local path
   if [[ -z ${1} ]]; then
@@ -23,6 +25,31 @@ __print_path() {
     echo -ne "${GITTER_C_PATH_DM}${path%/*}/${GITTER_C___RESET}"
   fi
   echo -ne "${GITTER_C____PATH}${path##*/}${GITTER_C___RESET}"
+}
+
+___branch() {
+  git branch --show-current 2>/dev/null || echo "${___NO_COMMIT}"
+}
+
+___commit_abbrev() {
+  git log -1 --format="%h" --abbrev=8 2>/dev/null || echo "${___NO_COMMIT}"
+}
+
+___commit_full() {
+  git log -1 --format="%H" 2>/dev/null || echo "${___NO_COMMIT}"
+}
+
+___time_relative() {
+  git log -1 --format="%cr" 2>/dev/null || echo "${___NO_COMMIT}"
+}
+___time_date() {
+  git log -1 --format="%cd" 2>/dev/null || echo "${___NO_COMMIT}"
+}
+___author_email() {
+  git log -1 --format="%ae" 2>/dev/null || echo "${___NO_COMMIT}"
+}
+___author_name() {
+  git log -1 --format="%an" 2>/dev/null || echo "${___NO_COMMIT}"
 }
 
 __repo_status() {
@@ -40,13 +67,13 @@ __repo_status() {
     echo -ne "$(__print_path "")"
     for pattern in "${PATTERNS[@]}"; do
       case "$pattern" in
-        "[branch]"   ) echo -ne "${GITTER_C_COMMAND}$(git branch --show-current)${GITTER_C___RESET}";;
-        "[commit:a]" ) echo -ne "${GITTER_C___VALUE}$(git log -1 --format="%h" --abbrev=8)${GITTER_C___RESET}";;
-        "[commit:f]" ) echo -ne "${GITTER_C___VALUE}$(git log -1 --format="%H")${GITTER_C___RESET}";;
-        "[time:r]"   ) echo -ne "${GITTER_C_____ARG}$(git log -1 --format="%cr")${GITTER_C___RESET}";;
-        "[time:d]"   ) echo -ne "${GITTER_C_____ARG}$(git log -1 --format="%cd")${GITTER_C___RESET}";;
-        "[author:e]" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%ae")${GITTER_C___RESET}";;
-        "[author:n]" ) echo -ne "${GITTER_C__OPTION}$(git log -1 --format="%an")${GITTER_C___RESET}";;
+        "[branch]"   ) echo -ne "${GITTER_C_COMMAND}$(___branch)${GITTER_C___RESET}";;
+        "[commit:a]" ) echo -ne "${GITTER_C___VALUE}$(___commit_abbrev)${GITTER_C___RESET}";;
+        "[commit:f]" ) echo -ne "${GITTER_C___VALUE}$(___commit_full)${GITTER_C___RESET}";;
+        "[time:r]"   ) echo -ne "${GITTER_C_____ARG}$(___time_relative)${GITTER_C___RESET}";;
+        "[time:d]"   ) echo -ne "${GITTER_C_____ARG}$(___time_date)${GITTER_C___RESET}";;
+        "[author:e]" ) echo -ne "${GITTER_C__OPTION}$(___author_email)${GITTER_C___RESET}";;
+        "[author:n]" ) echo -ne "${GITTER_C__OPTION}$(___author_name)${GITTER_C___RESET}";;
         *            ) echo -ne "${GITTER_C_____DIM}${pattern}${GITTER_C___RESET}" ;;
       esac
     done
