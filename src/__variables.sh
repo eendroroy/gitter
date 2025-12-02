@@ -48,3 +48,7 @@ GITTER_C___RESET='\e[0m'
 GITTER_DRY_RUN=false
 option=()
 PATTERNS=()
+
+# Gitter project variables
+____GITTER____LINK="https://github.com/eendroroy/gitter"
+____GITTER_VERSION="0.0.4"
