@@ -16,17 +16,18 @@ __expand_args() {
     [[ $arg == *"{_repo_}"* ]] && arg="${arg//\{_repo_\}/$(basename "$(pwd)")}"
     [[ $arg == *"{_path:r_}"* ]] && arg="${arg//\{_path:r_\}/${PWD/"${____CURRENT_DIR}"/.}}"
     [[ $arg == *"{_path:a_}"* ]] && arg="${arg//\{_path:a_\}/$(pwd)}"
-    [[ $arg == *"{_branch_}"* ]] && arg="${arg//\{_branch_\}/$(git branch --show-current 2>/dev/null)}"
-    [[ $arg == *"{_commit:f_}"* ]] && arg="${arg//\{_commit:f_\}/$(git log -1 --format="%H" 2>/dev/null)}"
+    [[ $arg == *"{_branch_}"* ]] && arg="${arg//\{_branch_\}/$(git branch --show-current)}"
+    [[ $arg == *"{_commit:f_}"* ]] && arg="${arg//\{_commit:f_\}/$(git log -1 --format="%H")}"
     [[ $arg =~ \{_commit:([0-9]+)_\} ]] && {
       abbrev_length="${BASH_REMATCH[1]}"
-      abbrev_commit="$(git log -1 --format="%h" --abbrev="$abbrev_length" 2>/dev/null)"
+      abbrev_commit="$(git log -1 --format="%h" --abbrev="$abbrev_length")"
       arg="${arg//\{_commit:${abbrev_length}_\}/$abbrev_commit}"
     }
-    [[ $arg == *"{_time:r_}"* ]] && arg="${arg//\{_time:r_\}/$(git log -1 --format="%cr" 2>/dev/null)}"
-    [[ $arg == *"{_time:d_}"* ]] && arg="${arg//\{_time:d_\}/$(git log -1 --format="%cd" 2>/dev/null)}"
-    [[ $arg == *"{_author:e_}"* ]] && arg="${arg//\{_author:e_\}/$(git log -1 --format="%ae" 2>/dev/null)}"
-    [[ $arg == *"{_author:n_}"* ]] && arg="${arg//\{_author:n_\}/$(git log -1 --format="%an" 2>/dev/null)}"
+    [[ $arg == *"{_commit:c_}"* ]] && arg="${arg//\{_commit:c_\}/$(git rev-list --count HEAD)}"
+    [[ $arg == *"{_time:r_}"* ]] && arg="${arg//\{_time:r_\}/$(git log -1 --format="%cr")}"
+    [[ $arg == *"{_time:d_}"* ]] && arg="${arg//\{_time:d_\}/$(git log -1 --format="%cd")}"
+    [[ $arg == *"{_author:e_}"* ]] && arg="${arg//\{_author:e_\}/$(git log -1 --format="%ae")}"
+    [[ $arg == *"{_author:n_}"* ]] && arg="${arg//\{_author:n_\}/$(git log -1 --format="%an")}"
 
     parsed_args_ref+=("$arg")
   done

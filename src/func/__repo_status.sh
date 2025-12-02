@@ -27,30 +27,15 @@ __print_path() {
   echo -ne "${GITTER_C____PATH}${path##*/}${GITTER_C___RESET}"
 }
 
-___branch() {
-  git branch --show-current 2>/dev/null || echo "${___NO_COMMIT}"
-}
-
-___commit_abbrev() {
-  git log -1 --format="%h" --abbrev=8 2>/dev/null || echo "${___NO_COMMIT}"
-}
-
-___commit_full() {
-  git log -1 --format="%H" 2>/dev/null || echo "${___NO_COMMIT}"
-}
-
-___time_relative() {
-  git log -1 --format="%cr" 2>/dev/null || echo "${___NO_COMMIT}"
-}
-___time_date() {
-  git log -1 --format="%cd" 2>/dev/null || echo "${___NO_COMMIT}"
-}
-___author_email() {
-  git log -1 --format="%ae" 2>/dev/null || echo "${___NO_COMMIT}"
-}
-___author_name() {
-  git log -1 --format="%an" 2>/dev/null || echo "${___NO_COMMIT}"
-}
+___git_or_no_commit() { git "$@" 2>/dev/null || echo "${___NO_COMMIT}"; }
+___branch()           { ___git_or_no_commit branch --show-current;           }
+___commit_abbrev()    { ___git_or_no_commit log -1 --format="%h" --abbrev=8; }
+___commit_full()      { ___git_or_no_commit log -1 --format="%H";            }
+___commit_count()     { ___git_or_no_commit rev-list --count HEAD;           }
+___time_relative()    { ___git_or_no_commit log -1 --format="%cr";           }
+___time_date()        { ___git_or_no_commit log -1 --format="%cd";           }
+___author_email()     { ___git_or_no_commit log -1 --format="%ae";           }
+___author_name()      { ___git_or_no_commit log -1 --format="%an";           }
 
 __repo_status() {
   if [[ "$GITTER_VERBOSE" == true ]]; then
@@ -67,14 +52,15 @@ __repo_status() {
     echo -ne "$(__print_path "")"
     for pattern in "${PATTERNS[@]}"; do
       case "$pattern" in
-        "[branch]"   ) echo -ne "${GITTER_C_COMMAND}$(___branch)${GITTER_C___RESET}";;
-        "[commit:a]" ) echo -ne "${GITTER_C___VALUE}$(___commit_abbrev)${GITTER_C___RESET}";;
-        "[commit:f]" ) echo -ne "${GITTER_C___VALUE}$(___commit_full)${GITTER_C___RESET}";;
-        "[time:r]"   ) echo -ne "${GITTER_C_____ARG}$(___time_relative)${GITTER_C___RESET}";;
-        "[time:d]"   ) echo -ne "${GITTER_C_____ARG}$(___time_date)${GITTER_C___RESET}";;
-        "[author:e]" ) echo -ne "${GITTER_C__OPTION}$(___author_email)${GITTER_C___RESET}";;
-        "[author:n]" ) echo -ne "${GITTER_C__OPTION}$(___author_name)${GITTER_C___RESET}";;
-        *            ) echo -ne "${GITTER_C_____DIM}${pattern}${GITTER_C___RESET}" ;;
+        "[branch]"   ) echo -ne "${GITTER_C_COMMAND}$(___branch)${GITTER_C___RESET}"        ;;
+        "[commit:a]" ) echo -ne "${GITTER_C___VALUE}$(___commit_abbrev)${GITTER_C___RESET}" ;;
+        "[commit:f]" ) echo -ne "${GITTER_C___VALUE}$(___commit_full)${GITTER_C___RESET}"   ;;
+        "[commit:c]" ) echo -ne "${GITTER_C___VALUE}$(___commit_count)${GITTER_C___RESET}"  ;;
+        "[time:r]"   ) echo -ne "${GITTER_C_____ARG}$(___time_relative)${GITTER_C___RESET}" ;;
+        "[time:d]"   ) echo -ne "${GITTER_C_____ARG}$(___time_date)${GITTER_C___RESET}"     ;;
+        "[author:e]" ) echo -ne "${GITTER_C__OPTION}$(___author_email)${GITTER_C___RESET}"  ;;
+        "[author:n]" ) echo -ne "${GITTER_C__OPTION}$(___author_name)${GITTER_C___RESET}"   ;;
+        *            ) echo -ne "${GITTER_C_____DIM}${pattern}${GITTER_C___RESET}"          ;;
       esac
     done
   )
