@@ -55,6 +55,18 @@ __read_max_depth() {
   GITTER_MAX_DEPTH="$1"
 }
 
+__read_status() {
+  if [[ -z "$1" || "$1" == -* ]]; then
+    echo
+    echo -e "${GITTER_C___ERROR}Missing or invalid argument for:${GITTER_C___RESET} ${GITTER_C__OPTION}--status${GITTER_C___RESET}" 1>&2
+    echo
+    echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+    echo
+    exit 1
+  fi
+  status="$1"
+}
+
 __disable_color_output() {
   GITTER_C___RESET=''
   GITTER_C____PATH=''
@@ -84,10 +96,10 @@ ___help()    {
   else
     while [[ $# -gt 0 ]]; do
       case "$1" in
-        filter      ) __parse_command "help-filter" ;;
-        status      ) __parse_command "help-status" ;;
+        filter      ) __parse_command "help-filter"       ;;
+        status      ) __parse_command "help-status"       ;;
         gitterignore) __parse_command "help-gitterignore" ;;
-        placeholder ) __parse_command "help-placeholder" ;;
+        expander    ) __parse_command "help-expander"     ;;
         *           ) __unknown_arg "$1" ;;
       esac
       shift

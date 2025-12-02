@@ -27,9 +27,9 @@ ____CURRENT_DIR=$(pwd)
 [[ -z "${GITTER_QUIET+x}"               ]] && GITTER_QUIET=false
 [[ -z "${GITTER_ASK_CONFIRMATION+x}"    ]] && GITTER_ASK_CONFIRMATION=false
 [[ -z "${GITTER_CONTINUE_ON_ERROR+x}"   ]] && GITTER_CONTINUE_ON_ERROR=false
-[[ -z "${GITTER_REPO_STATUS+x}"         ]] && GITTER_REPO_STATUS=(" on " "[branch]")
+[[ -z "${GITTER_REPO_STATUS+x}"         ]] && GITTER_REPO_STATUS=" on |[branch]"
 [[ -z "${GITTER_REPO_STATUS_VERBOSE+x}" ]] && \
-  GITTER_REPO_STATUS_VERBOSE=(" on " "[branch]" " " "[commit:a]" " by " "[author:e]" " " "[time:r]")
+  GITTER_REPO_STATUS_VERBOSE=" on |[branch]| |[commit:a]| by |[author:e]| |[time:r]"
 
 # Color defaults
 [[ -z "${GITTER_C_SUCCESS+x}" ]] && GITTER_C_SUCCESS='\e[38;5;2m'
@@ -46,4 +46,5 @@ ____CURRENT_DIR=$(pwd)
 # Non configurable variables
 GITTER_C___RESET='\e[0m'
 GITTER_DRY_RUN=false
-opts=()
+option=()
+PATTERNS=()

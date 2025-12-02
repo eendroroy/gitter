@@ -31,7 +31,7 @@ export fpath=("${fpath[@]}" "${HOME}/.gitter/completions")
 ## Usage
 
 ```shell
-gitter [[--exclude] --filter <pattern> ...] [--<option> ...] [git -- <args ...>|exec -- <args ...>|list|help [item]]
+gitter  [--<option> ...] [command [-- <args ...>]]
 ```
 
 Run `gitter help` for details.
@@ -74,25 +74,26 @@ The default patterns are as follows:
 
 ```shell
 # gitter list | gitter ls
-export GITTER_REPO_STATUS=(" on " "[branch]") # default pattern
+export GITTER_REPO_STATUS=" on |[branch]" # default pattern
 
 # gitter list --verbose | gitter ll
-export GITTER_REPO_STATUS_VERBOSE=(" on " "[branch]" " " "[commit:a]" " by " "[author:e]" " " "[time:r]")  # default pattern
+export GITTER_REPO_STATUS_VERBOSE=" on |[branch]| |[commit:a]| by |[author:e]| |[time:r]"  # default pattern
 ```
 
 #### Available placeholders for repository status patterns
 
-- `[branch]`   : Current git branch name
-- `[commit:a]` : Abbreviated (8) current git commit hash
-- `[commit:f]` : Full current git commit hash
-- `[time:r]`   : Relative time of the current git commit (e.g., "2 days ago")
-- `[time:d]`   : Date and time of the current git commit (e.g., "2024-01-01 12:00:00")
-- `[author:e]` : Current git commit author email
-- `[author:n]` : Current git commit author name
+- `[branch]`    : Current git branch name
+- `[commit:a]`  : Abbreviated (8) current git commit hash
+- `[commit:f]`  : Full current git commit hash
+- `[commit:<n>]`: Current git commit hash abbreviated to `<n>` characters. e.g., `[commit:10]`
+- `[time:r]`    : Relative time of the current git commit (e.g., "2 days ago")
+- `[time:d]`    : Date and time of the current git commit (e.g., "2024-01-01 12:00:00")
+- `[author:e]`  : Current git commit author email
+- `[author:n]`  : Current git commit author name
 
 ## Filters
 
-Filters allow you to include or exclude repositories based on specific criteria such as path, repository name, 
+Filters allow you to include or exclude repositories based on specific criteria such as path, repository name,
 or branch name. You can use multiple filters to narrow down the selection of repositories.
 
 #### Filter Format
@@ -124,7 +125,7 @@ or branch name. You can use multiple filters to narrow down the selection of rep
 ## .gitterignore
 
 You can create a `.gitterignore` file in the current directory to specify repositories that should be ignored by
-`gitter`. Each line in the file should contain a pattern to match repository names or paths. 
+`gitter`. Each line in the file should contain a pattern to match repository names or paths.
 Lines starting with `#` are treated as comments and ignored.
 
 #### Patterns
@@ -135,18 +136,18 @@ Lines starting with `#` are treated as comments and ignored.
 
 ## Argument expansion
 
-Within `exec` and `git` commands, you can use the following placeholders in arguments:
+Within `exec` and `git` commands, you can use the following expanders in arguments:
 
-- `{_repo_}`        : Name of the current git repository
-- `{_path:r_}`      : Relative path of the current working directory from where gitter was invoked
-- `{_path:a_}`      : Absolute path of the current working directory
-- `{_branch_}`      : Current git branch name
-- `{_commit:f_}`    : Current git commit hash
-- `{_commit:[int]_}`: Current git commit hash abbreviated to `[int]` characters. i.e. `{_commit:8_}`
-- `{_time:r_}`      : Relative time of the current git commit (e.g., "2 days ago")
-- `{_time:d_}`      : Date and time of the current git commit (e.g., "2024-01-01 12:00:00")
-- `{_author:e_}`    : Current git commit author email
-- `{_author:n_}`    : Current git commit author name
+- `{_repo_}`      : Name of the current git repository
+- `{_path:r_}`    : Relative path of the current working directory from where gitter was invoked
+- `{_path:a_}`    : Absolute path of the current working directory
+- `{_branch_}`    : Current git branch name
+- `{_commit:f_}`  : Current git commit hash
+- `{_commit:<n>_}`: Current git commit hash abbreviated to `<n>` characters. i.e. `{_commit:8_}`
+- `{_time:r_}`    : Relative time of the current git commit (e.g., "2 days ago")
+- `{_time:d_}`    : Date and time of the current git commit (e.g., "2024-01-01 12:00:00")
+- `{_author:e_}`  : Current git commit author email
+- `{_author:n_}`  : Current git commit author name
 
 ## License
 

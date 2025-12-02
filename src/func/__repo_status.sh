@@ -38,11 +38,6 @@ ___author_email()     {                    ___git_or_no_commit log -1 --format="
 ___author_name()      {                    ___git_or_no_commit log -1 --format="%an";           }
 
 __repo_status() {
-  if [[ "$GITTER_VERBOSE" == true ]]; then
-    local -a PATTERNS=("${GITTER_REPO_STATUS_VERBOSE[@]}")
-  else
-    local -a PATTERNS=("${GITTER_REPO_STATUS[@]}")
-  fi
   (
     cd "$1" 2>/dev/null || {
       echo -e "${GITTER_C___ERROR}${GITTER_PRIMARY_SYMBOL}  Failed to enter: ${1}${GITTER_C___RESET}" 1>&2

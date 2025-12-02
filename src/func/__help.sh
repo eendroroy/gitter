@@ -22,6 +22,7 @@ __help() {
   echo -e  " [${GITTER_C__OPTION}command${GITTER_C___RESET} [${GITTER_C__OPTION}--${GITTER_C___RESET} <${GITTER_C_____ARG}args ...${GITTER_C___RESET}>${GITTER_C___RESET}]]"
   echo
   echo -e "${GITTER_C_HEADING}Options:${GITTER_C___RESET}"
+  echo -e "  ${GITTER_C__OPTION}--status            -s <${GITTER_C___VALUE}status${GITTER_C___RESET}>${GITTER_C___RESET}  Set repository status format (overrides ${GITTER_C_COMMAND}GITTER_REPO_STATUS${GITTER_C___RESET} and ${GITTER_C_COMMAND}GITTER_REPO_STATUS_VERBOSE${GITTER_C___RESET} variables)"
   echo -e "  ${GITTER_C__OPTION}--max-depth         -d <${GITTER_C___VALUE}depth${GITTER_C___RESET}>${GITTER_C___RESET}   Look for git repositories up to specified depth (default: ${GITTER_C_____ARG}2${GITTER_C___RESET})"
   echo -e "  ${GITTER_C__OPTION}--filter            -f <${GITTER_C___VALUE}pattern${GITTER_C___RESET}>${GITTER_C___RESET} Filter repositories matching the given pattern (can be specified multiple times)"
   echo -e "  ${GITTER_C__OPTION}--exclude           -e          ${GITTER_C___RESET} Exclude matched repositories instead of including"
@@ -48,12 +49,12 @@ __help() {
   echo -ne " ${GITTER_C__OPTION}help${GITTER_C___RESET}"
   echo -ne " [${GITTER_C_____ARG}filter${GITTER_C___RESET}|"
   echo -ne "${GITTER_C_____ARG}gitterignore${GITTER_C___RESET}"
-  echo -ne "|${GITTER_C_____ARG}placeholder${GITTER_C___RESET}"
+  echo -ne "|${GITTER_C_____ARG}expander${GITTER_C___RESET}"
   echo -e  "|${GITTER_C_____ARG}status${GITTER_C___RESET}]"
   echo
   echo -e "  ${GITTER_C_____ARG}filter      ${GITTER_C___RESET} Show help about filter patterns"
   echo -e "  ${GITTER_C_____ARG}gitterignore${GITTER_C___RESET} Show help about .gitterignore file"
-  echo -e "  ${GITTER_C_____ARG}placeholder ${GITTER_C___RESET} Show help about available placeholders"
+  echo -e "  ${GITTER_C_____ARG}expander ${GITTER_C___RESET} Show help about available expanders"
   echo -e "  ${GITTER_C_____ARG}status      ${GITTER_C___RESET} Show help about status placeholders"
   echo
   echo -e "${GITTER_C_HEADING}For more information, visit: ${GITTER_C___RESET} ${____GITTER____LINK}"
@@ -109,13 +110,13 @@ __help_gitterignore() {
   echo
 }
 
-__help_placeholder() {
+__help_expander() {
   echo
   echo -e "${GITTER_C_HEADING}Gitter${GITTER_C___RESET}"
   echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
   echo
-  echo -e "${GITTER_C_HEADING}Placeholders:${GITTER_C___RESET}"
-  echo -e "  Within ${GITTER_C__OPTION}exec${GITTER_C___RESET} and ${GITTER_C__OPTION}git${GITTER_C___RESET} commands, the following placeholders can be used in arguments:"
+  echo -e "${GITTER_C_HEADING}Expanders:${GITTER_C___RESET}"
+  echo -e "  Within ${GITTER_C__OPTION}exec${GITTER_C___RESET} and ${GITTER_C__OPTION}git${GITTER_C___RESET} commands, the following expanders can be used in arguments:"
   echo -e "    ${GITTER_C_____ARG}{_repo_}      ${GITTER_C___RESET} Name of the current git repository"
   echo -e "    ${GITTER_C_____ARG}{_path:r_}    ${GITTER_C___RESET} Relative path of the current working directory from where gitter was invoked"
   echo -e "    ${GITTER_C_____ARG}{_path:a_}    ${GITTER_C___RESET} Absolute path of the current working directory"
@@ -132,7 +133,7 @@ __help_placeholder() {
   echo -e "  ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C__OPTION}exec${GITTER_C___RESET} -- echo \
 \"Repository: ${GITTER_C_____ARG}{_repo_}${GITTER_C___RESET}, \
 Branch: ${GITTER_C_____ARG}{_branch_}${GITTER_C___RESET}, \
-Commit: ${GITTER_C_____ARG}{_commit:8_}${GITTER_C___RESET}\
+Commit: ${GITTER_C_____ARG}{_commit:8_}${GITTER_C___RESET}, \
 Author: ${GITTER_C_____ARG}{_author:e_}${GITTER_C___RESET}, \
 Date: ${GITTER_C_____ARG}{_time:d_}${GITTER_C___RESET}\""
   echo
@@ -142,6 +143,9 @@ __help_status() {
   echo
   echo -e "${GITTER_C_HEADING}Gitter${GITTER_C___RESET}"
   echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
+  echo
+  echo -e "${GITTER_C_HEADING}Repository status patters:${GITTER_C___RESET}"
+  echo -e "    ${GITTER_C_____DIM}[${GITTER_C___RESET}${GITTER_C_____ARG}text${GITTER_C___RESET}${GITTER_C_____DIM}]${GITTER_C___RESET}${GITTER_C_____ARG}|${GITTER_C___RESET}${GITTER_C_____DIM}[${GITTER_C___RESET}${GITTER_C_____ARG}placeholder${GITTER_C___RESET}${GITTER_C_____DIM}]...${GITTER_C___RESET}"
   echo
   echo -e "${GITTER_C_HEADING}Available placeholders:${GITTER_C___RESET}"
   echo -e "    ${GITTER_C_____ARG}[branch]    ${GITTER_C___RESET} Current git branch name"
@@ -155,11 +159,11 @@ __help_status() {
   echo -e "    ${GITTER_C_____ARG}[author:n]  ${GITTER_C___RESET} Current git commit author name"
   echo
   echo -e "${GITTER_C_HEADING}Example Configuration for status:${GITTER_C___RESET}"
-  echo -e " Set ${GITTER_C_COMMAND}GITTER_REPO_STATUS${GITTER_C___RESET}=${GITTER_C_____ARG}(\"on\" \"[branch]\")${GITTER_C___RESET}"
+  echo -e " Set ${GITTER_C_COMMAND}GITTER_REPO_STATUS${GITTER_C___RESET}=${GITTER_C_____ARG}\" on |[branch]\"${GITTER_C___RESET}"
   echo
   echo -e  "${GITTER_C_HEADING}Example Configuration for verbose status:${GITTER_C___RESET}"
   echo -ne " Set ${GITTER_C_COMMAND}GITTER_REPO_STATUS_VERBOSE${GITTER_C___RESET}="
-  echo -e  "${GITTER_C_____ARG}(\" on \" \"[branch]\" \" \" \"[commit:a]\" \" by \" \"[author:e]\" \" \" \"[time:r]\")${GITTER_C___RESET}"
+  echo -e  "${GITTER_C_____ARG}\" on |[branch]| |[commit:a]| by |[author:e]| |[time:r]\"${GITTER_C___RESET}"
   echo
 }
 
@@ -186,8 +190,8 @@ __print_config() {
   ___print_config_value "" "                     GITTER_NO_COLOR" "'${GITTER_NO_COLOR}'"
   ___print_config_value "" "             GITTER_ASK_CONFIRMATION" "'${GITTER_ASK_CONFIRMATION}'"
   ___print_config_value "" "            GITTER_CONTINUE_ON_ERROR" "'${GITTER_CONTINUE_ON_ERROR}'"
-  ___print_config_value "" "                  GITTER_REPO_STATUS" "(${GITTER_REPO_STATUS[*]})"
-  ___print_config_value "" "          GITTER_REPO_STATUS_VERBOSE" "(${GITTER_REPO_STATUS_VERBOSE[*]})"
+  ___print_config_value "" "                  GITTER_REPO_STATUS" "'${GITTER_REPO_STATUS}'"
+  ___print_config_value "" "          GITTER_REPO_STATUS_VERBOSE" "'${GITTER_REPO_STATUS_VERBOSE}'"
   echo
   echo -e "${GITTER_C_HEADING}Colors:${GITTER_C___RESET}"
   ___print_config_value "(${GITTER_C_SUCCESS}Success color ${GITTER_C___RESET})    " "GITTER_C_SUCCESS" "'\\${GITTER_C_SUCCESS}'"

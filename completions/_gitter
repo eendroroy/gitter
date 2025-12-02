@@ -26,6 +26,8 @@ _gitter() {
     "ll:Equivalent to list --verbose command"
     "help:Show help, takes optional topic argument"
     "config:Print current (effective) configuration"
+    "--status:Custom status format using placeholders"
+    "-s:Custom status format using placeholders"
     "--max-depth:Max depth to search for git repositories (default: infinite)"
     "-d:Max depth to search for git repositories (default: infinite)"
     "--exclude:Exclude matched repositories instead of including"
@@ -64,7 +66,7 @@ _gitter() {
   helps=(
     "filter:Show help about filter patterns"
     "gitterignore:Show help about .gitterignore file"
-    "placeholder:Show help about available placeholders"
+    "expander:Show help about available expanders"
     "status:Show help about status placeholders"
   )
 

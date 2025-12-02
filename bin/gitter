@@ -10,6 +10,8 @@
 # License, or (at your option) any later version.
 
 # shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
 ____GITTER____LINK="https://github.com/eendroroy/gitter"
 ____GITTER_VERSION="0.0.3"
 _____SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -37,15 +39,16 @@ while [[ $# -gt 0 ]]; do
     version |v ) ___version          ;;
 
     # Parse Options
-    --max-depth         |-d) opts=("${opts[@]}" "${1}"); shift; __read_max_depth "$1"        ;;
-    --exclude           |-e) opts=("${opts[@]}" "${1}");        GITTER_FILTER_EXCLUDE=true   ;;
-    --filter            |-f) opts=("${opts[@]}" "${1}"); shift; __read_filter "$1"           ;;
-    --ask-confirmation  |-a) opts=("${opts[@]}" "${1}");        GITTER_ASK_CONFIRMATION=true ;;
-    --continue-on-error |-c) opts=("${opts[@]}" "${1}");        GITTER_CONTINUE_ON_ERROR=true;;
-    --quiet             |-q) opts=("${opts[@]}" "${1}");        GITTER_QUIET=true            ;;
-    --no-color             ) opts=("${opts[@]}" "${1}");        GITTER_NO_COLOR=true         ;;
-    --verbose           |-v) opts=("${opts[@]}" "${1}");        GITTER_VERBOSE=true          ;;
-    --dry-run           |-n) opts=("${opts[@]}" "${1}");        GITTER_DRY_RUN=true          ;;
+    --status            |-s) option=("${option[@]}" "${1}"); shift; __read_status "$1"           ;;
+    --max-depth         |-d) option=("${option[@]}" "${1}"); shift; __read_max_depth "$1"        ;;
+    --exclude           |-e) option=("${option[@]}" "${1}");        GITTER_FILTER_EXCLUDE=true   ;;
+    --filter            |-f) option=("${option[@]}" "${1}"); shift; __read_filter "$1"           ;;
+    --ask-confirmation  |-a) option=("${option[@]}" "${1}");        GITTER_ASK_CONFIRMATION=true ;;
+    --continue-on-error |-c) option=("${option[@]}" "${1}");        GITTER_CONTINUE_ON_ERROR=true;;
+    --quiet             |-q) option=("${option[@]}" "${1}");        GITTER_QUIET=true            ;;
+    --no-color             ) option=("${option[@]}" "${1}");        GITTER_NO_COLOR=true         ;;
+    --verbose           |-v) option=("${option[@]}" "${1}");        GITTER_VERBOSE=true          ;;
+    --dry-run           |-n) option=("${option[@]}" "${1}");        GITTER_DRY_RUN=true          ;;
 
     # Parse Command Arguments
     --) __read_command_args "$@"; break ;;
@@ -57,6 +60,14 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
+if [[ -n "${status+x}" ]]; then
+  IFS='|' read -r -a PATTERNS <<< "${status}"
+elif [[ "${GITTER_VERBOSE}" == true ]] ; then
+  IFS='|' read -r -a PATTERNS <<< "${GITTER_REPO_STATUS_VERBOSE}"
+else
+  IFS='|' read -r -a PATTERNS <<< "${GITTER_REPO_STATUS}"
+fi
+
 [[ -z "$command" ]] && command="git"
 
 __validate_command "$command"
@@ -66,10 +77,10 @@ __validate_command "$command"
 [[ "$command" == "help"              ]] && { __help;              exit 0; }
 [[ "$command" == "help-filter"       ]] && { __help_filter;       exit 0; }
 [[ "$command" == "help-gitterignore" ]] && { __help_gitterignore; exit 0; }
-[[ "$command" == "help-placeholder"  ]] && { __help_placeholder;  exit 0; }
+[[ "$command" == "help-expander"     ]] && { __help_expander;     exit 0; }
 [[ "$command" == "help-status"       ]] && { __help_status;       exit 0; }
 [[ "$command" == "config"            ]] && { __print_config;      exit 0; }
-[[ "$command" == "version"           ]] && { __version;      exit 0; }
+[[ "$command" == "version"           ]] && { __version;           exit 0; }
 
 [[ "$command" != "list" && ${#args[@]} -eq 0 ]] && __invalid_args_for_command "$command"
 
