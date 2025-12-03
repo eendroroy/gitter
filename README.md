@@ -47,7 +47,6 @@ export GITTER_PRIMARY_SYMBOL=" ━"      # Symbol to indicate primary informatio
 # Arg defaults
 export GITTER_MAX_DEPTH=2              # Maximum directory depth to search for git repositories (default: 2)
 export GITTER_FILTERS=()               # Default empty filters
-export GITTER_VERBOSE=false            # Disable verbose mode by default
 export GITTER_FILTER_EXCLUDE=false     # Do not exclude matched repositories by default
 export GITTER_NO_COLOR=false           # Enable colored output by default
 export GITTER_ASK_CONFIRMATION=false   # Proceed without asking for confirmation by default
@@ -92,10 +91,7 @@ The default patterns are as follows:
 
 ```shell
 # gitter list | gitter ls
-export GITTER_REPO_STATUS=" on |[branch]" # default pattern
-
-# gitter list --verbose | gitter ll
-export GITTER_REPO_STATUS_VERBOSE=" on |[branch]| |[commit:a]| by |[author:e]| |[time:r]"  # default pattern
+export GITTER_REPO_STATUS=" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]" # default pattern
 ```
 
 #### Available placeholders for repository status patterns

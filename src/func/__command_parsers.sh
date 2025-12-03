@@ -105,6 +105,3 @@ ___help()    {
   __too_many_args "help" "1" "$#"
   fi
 }
-
-# Command aliases
-___ll()      { __parse_command "list"; GITTER_VERBOSE=true; }

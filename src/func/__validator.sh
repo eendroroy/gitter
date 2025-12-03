@@ -11,17 +11,17 @@
 
 declare -A __COMMAND_ARG_MAP
 
-             __COMMAND_ARG_MAP["list"]="--status -s --max-depth -d --exclude -e --filter -f                                                         --no-color --verbose -v             "
-              __COMMAND_ARG_MAP["git"]="--status -s --max-depth -d --exclude -e --filter -f --ask-confirmation -a --continue-on-error -c --quiet -q --no-color --verbose -v --dry-run -n"
-             __COMMAND_ARG_MAP["exec"]="--status -s --max-depth -d --exclude -e --filter -f --ask-confirmation -a --continue-on-error -c --quiet -q --no-color --verbose -v --dry-run -n"
-             __COMMAND_ARG_MAP["eval"]="--status -s --max-depth -d --exclude -e --filter -f --ask-confirmation -a --continue-on-error -c --quiet -q --no-color --verbose -v --dry-run -n"
-           __COMMAND_ARG_MAP["config"]="                                                                                                            --no-color                          "
-          __COMMAND_ARG_MAP["version"]="                                                                                                            --no-color                          "
-             __COMMAND_ARG_MAP["help"]="                                                                                                            --no-color                          "
-      __COMMAND_ARG_MAP["help-filter"]="                                                                                                            --no-color                          "
-__COMMAND_ARG_MAP["help-gitterignore"]="                                                                                                            --no-color                          "
-    __COMMAND_ARG_MAP["help-expander"]="                                                                                                            --no-color                          "
-      __COMMAND_ARG_MAP["help-status"]="                                                                                                            --no-color                          "
+             __COMMAND_ARG_MAP["list"]="--status -s --max-depth -d --exclude -e --filter -f                                                         --no-color             "
+              __COMMAND_ARG_MAP["git"]="--status -s --max-depth -d --exclude -e --filter -f --ask-confirmation -a --continue-on-error -c --quiet -q --no-color --dry-run -n"
+             __COMMAND_ARG_MAP["exec"]="--status -s --max-depth -d --exclude -e --filter -f --ask-confirmation -a --continue-on-error -c --quiet -q --no-color --dry-run -n"
+             __COMMAND_ARG_MAP["eval"]="--status -s --max-depth -d --exclude -e --filter -f --ask-confirmation -a --continue-on-error -c --quiet -q --no-color --dry-run -n"
+           __COMMAND_ARG_MAP["config"]="                                                                                                            --no-color             "
+          __COMMAND_ARG_MAP["version"]="                                                                                                            --no-color             "
+             __COMMAND_ARG_MAP["help"]="                                                                                                            --no-color             "
+      __COMMAND_ARG_MAP["help-filter"]="                                                                                                            --no-color             "
+__COMMAND_ARG_MAP["help-gitterignore"]="                                                                                                            --no-color             "
+    __COMMAND_ARG_MAP["help-expander"]="                                                                                                            --no-color             "
+      __COMMAND_ARG_MAP["help-status"]="                                                                                                            --no-color             "
 
 __print_command_error() {
   local option="$1"

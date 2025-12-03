@@ -22,7 +22,7 @@ __help() {
   echo -e  " [${GITTER_C___OPTION}command${GITTER_C____RESET} [${GITTER_C___OPTION}--${GITTER_C____RESET} <${GITTER_C______ARG}args ...${GITTER_C____RESET}>${GITTER_C____RESET}]]"
   echo
   echo -e "${GITTER_C__HEADING}Options:${GITTER_C____RESET}"
-  echo -e "  ${GITTER_C___OPTION}--status            -s <${GITTER_C____VALUE}status${GITTER_C____RESET}>${GITTER_C____RESET}  Set repository status format (overrides ${GITTER_C__COMMAND}GITTER_REPO_STATUS${GITTER_C____RESET} and ${GITTER_C__COMMAND}GITTER_REPO_STATUS_VERBOSE${GITTER_C____RESET} variables)"
+  echo -e "  ${GITTER_C___OPTION}--status            -s <${GITTER_C____VALUE}status${GITTER_C____RESET}>${GITTER_C____RESET}  Set repository status format (overrides ${GITTER_C__COMMAND}GITTER_REPO_STATUS${GITTER_C____RESET} variable)"
   echo -e "  ${GITTER_C___OPTION}--max-depth         -d <${GITTER_C____VALUE}depth${GITTER_C____RESET}>${GITTER_C____RESET}   Look for git repositories up to specified depth (default: ${GITTER_C______ARG}2${GITTER_C____RESET})"
   echo -e "  ${GITTER_C___OPTION}--filter            -f <${GITTER_C____VALUE}pattern${GITTER_C____RESET}>${GITTER_C____RESET} Filter repositories matching the given pattern (can be specified multiple times)"
   echo -e "  ${GITTER_C___OPTION}--exclude           -e          ${GITTER_C____RESET} Exclude matched repositories instead of including"
@@ -30,7 +30,6 @@ __help() {
   echo -e "  ${GITTER_C___OPTION}--continue-on-error -c          ${GITTER_C____RESET} Continue executing commands in other repositories even if an error occurs in one"
   echo -e "  ${GITTER_C___OPTION}--quiet             -q          ${GITTER_C____RESET} Enable quiet mode (suppress output of successful commands)"
   echo -e "  ${GITTER_C___OPTION}--no-color                      ${GITTER_C____RESET} Disable colored output"
-  echo -e "  ${GITTER_C___OPTION}--verbose           -v          ${GITTER_C____RESET} Enable verbose mode"
   echo -e "  ${GITTER_C___OPTION}--dry-run           -n          ${GITTER_C____RESET} Show what would be executed without actually running the commands"
   echo
   echo -e "${GITTER_C__HEADING}Commands:${GITTER_C____RESET}"
@@ -38,7 +37,6 @@ __help() {
   echo -e "  ${GITTER_C___OPTION}exec    x ${GITTER_C____RESET}        Run an arbitrary command"
   echo -e "  ${GITTER_C___OPTION}eval    e ${GITTER_C____RESET}        Evaluate a shell command - useful for complex commands involving pipes and redirections"
   echo -e "  ${GITTER_C___OPTION}list    ls${GITTER_C____RESET}        List repositories only"
-  echo -e "  ${GITTER_C___OPTION}        ll${GITTER_C____RESET}        Equivalent to ${GITTER_C___OPTION}list --verbose${GITTER_C____RESET} command"
   echo -e "  ${GITTER_C___OPTION}config  c ${GITTER_C____RESET}        Print current (effective) configuration"
   echo -e "  ${GITTER_C___OPTION}version v ${GITTER_C____RESET}        Show version"
   echo -e "  ${GITTER_C___OPTION}help      ${GITTER_C____RESET} [${GITTER_C____VALUE}item${GITTER_C____RESET}] Show help"
@@ -161,10 +159,6 @@ __help_status() {
   echo -e "${GITTER_C__HEADING}Example Configuration for status:${GITTER_C____RESET}"
   echo -e " Set ${GITTER_C__COMMAND}GITTER_REPO_STATUS${GITTER_C____RESET}=${GITTER_C______ARG}\" on |[branch]\"${GITTER_C____RESET}"
   echo
-  echo -e  "${GITTER_C__HEADING}Example Configuration for verbose status:${GITTER_C____RESET}"
-  echo -ne " Set ${GITTER_C__COMMAND}GITTER_REPO_STATUS_VERBOSE${GITTER_C____RESET}="
-  echo -e  "${GITTER_C______ARG}\" on |[branch]| |[commit:a]| by |[author:e]| |[time:r]\"${GITTER_C____RESET}"
-  echo
 }
 
 __version() {
@@ -185,13 +179,11 @@ __print_config() {
   echo -e "${GITTER_C__HEADING}Configurations:${GITTER_C____RESET}"
   ___print_config_value "" "                    GITTER_MAX_DEPTH" "'${GITTER_MAX_DEPTH}'"
   ___print_config_value "" "                      GITTER_FILTERS" "(${GITTER_FILTERS[*]})"
-  ___print_config_value "" "                      GITTER_VERBOSE" "'${GITTER_VERBOSE}'"
   ___print_config_value "" "               GITTER_FILTER_EXCLUDE" "'${GITTER_FILTER_EXCLUDE}'"
   ___print_config_value "" "                     GITTER_NO_COLOR" "'${GITTER_NO_COLOR}'"
   ___print_config_value "" "             GITTER_ASK_CONFIRMATION" "'${GITTER_ASK_CONFIRMATION}'"
   ___print_config_value "" "            GITTER_CONTINUE_ON_ERROR" "'${GITTER_CONTINUE_ON_ERROR}'"
   ___print_config_value "" "                  GITTER_REPO_STATUS" "'${GITTER_REPO_STATUS}'"
-  ___print_config_value "" "          GITTER_REPO_STATUS_VERBOSE" "'${GITTER_REPO_STATUS_VERBOSE}'"
   echo
   echo -e "${GITTER_C__HEADING}Colors:${GITTER_C____RESET}"
   ___print_config_value "(${GITTER_C__SUCCESS}Success color ${GITTER_C____RESET})    " "GITTER_C__SUCCESS" "'\\${GITTER_C__SUCCESS}'"

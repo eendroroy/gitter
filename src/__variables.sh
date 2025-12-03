@@ -21,14 +21,12 @@ ____CURRENT_DIR=$(pwd)
 # Arg defaults
 [[ -z "${GITTER_MAX_DEPTH+x}"           ]] && GITTER_MAX_DEPTH=2
 [[ -z "${GITTER_FILTERS+x}"             ]] && GITTER_FILTERS=()
-[[ -z "${GITTER_VERBOSE+x}"             ]] && GITTER_VERBOSE=false
 [[ -z "${GITTER_FILTER_EXCLUDE+x}"      ]] && GITTER_FILTER_EXCLUDE=false
 [[ -z "${GITTER_NO_COLOR+x}"            ]] && GITTER_NO_COLOR=false
 [[ -z "${GITTER_QUIET+x}"               ]] && GITTER_QUIET=false
 [[ -z "${GITTER_ASK_CONFIRMATION+x}"    ]] && GITTER_ASK_CONFIRMATION=false
 [[ -z "${GITTER_CONTINUE_ON_ERROR+x}"   ]] && GITTER_CONTINUE_ON_ERROR=false
-[[ -z "${GITTER_REPO_STATUS+x}"         ]] && GITTER_REPO_STATUS=" on |[branch]"
-[[ -z "${GITTER_REPO_STATUS_VERBOSE+x}" ]] && GITTER_REPO_STATUS_VERBOSE=" on |[branch]| |[commit:a]| by |[author:e]| |[time:r]"
+[[ -z "${GITTER_REPO_STATUS+x}"         ]] && GITTER_REPO_STATUS=" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]"
 
 # Color defaults
 [[ -z "${GITTER_C__SUCCESS+x}" ]] && GITTER_C__SUCCESS='\e[38;5;2m'

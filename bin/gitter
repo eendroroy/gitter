@@ -45,7 +45,6 @@ while [[ $# -gt 0 ]]; do
     --continue-on-error |-c) OPTION=("${OPTION[@]}" "${1}");        GITTER_CONTINUE_ON_ERROR=true;;
     --quiet             |-q) OPTION=("${OPTION[@]}" "${1}");        GITTER_QUIET=true            ;;
     --no-color             ) OPTION=("${OPTION[@]}" "${1}");        GITTER_NO_COLOR=true         ;;
-    --verbose           |-v) OPTION=("${OPTION[@]}" "${1}");        GITTER_VERBOSE=true          ;;
     --dry-run           |-n) OPTION=("${OPTION[@]}" "${1}");        GITTER_DRY_RUN=true          ;;
 
     # Parse Command Arguments
@@ -60,8 +59,6 @@ done
 
 if [[ -n "${status+x}" ]]; then
   IFS='|' read -r -a PATTERNS <<< "${status}"
-elif [[ "${GITTER_VERBOSE}" == true ]] ; then
-  IFS='|' read -r -a PATTERNS <<< "${GITTER_REPO_STATUS_VERBOSE}"
 else
   IFS='|' read -r -a PATTERNS <<< "${GITTER_REPO_STATUS}"
 fi
