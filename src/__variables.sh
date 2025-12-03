@@ -34,8 +34,8 @@ ____CURRENT_DIR=$(pwd)
 # Color defaults
 [[ -z "${GITTER_C_SUCCESS+x}" ]] && GITTER_C_SUCCESS='\e[38;5;2m'
 [[ -z "${GITTER_C___ERROR+x}" ]] && GITTER_C___ERROR='\e[38;5;9m'
-[[ -z "${GITTER_C____PATH+x}" ]] && GITTER_C____PATH='\e[35m'
-[[ -z "${GITTER_C_PATH_DM+x}" ]] && GITTER_C_PATH_DM='\e[2;35m'
+[[ -z "${GITTER_C____REPO+x}" ]] && GITTER_C____REPO='\e[35m'
+[[ -z "${GITTER_C____PATH+x}" ]] && GITTER_C____PATH='\e[2;35m'
 [[ -z "${GITTER_C_____DIM+x}" ]] && GITTER_C_____DIM='\e[2;38;5;3m'
 [[ -z "${GITTER_C_HEADING+x}" ]] && GITTER_C_HEADING='\e[1;37m'
 [[ -z "${GITTER_C_COMMAND+x}" ]] && GITTER_C_COMMAND='\e[32m'

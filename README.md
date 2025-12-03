@@ -57,8 +57,8 @@ export GITTER_QUIET=false              # Quiet mode disabled by default, when en
 # Color configuration
 export GITTER_C___ERROR='\e[38;5;9m'   # Error color
 export GITTER_C_SUCCESS='\e[38;5;2m'   # Success color
-export GITTER_C____PATH='\e[35m'       # Path color
-export GITTER_C_PATH_DM='\e[2;35m'     # Dimmed path color
+export GITTER_C____REPO='\e[35m'       # Path color
+export GITTER_C____PATH='\e[2;35m'     # Dimmed path color
 export GITTER_C_____DIM='\e[2;38;5;3m' # Dim color
 export GITTER_C_HEADING='\e[1;37m'     # Heading color
 export GITTER_C_COMMAND='\e[32m'       # Command color

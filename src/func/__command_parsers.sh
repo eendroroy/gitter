@@ -69,7 +69,7 @@ __read_status() {
 
 __disable_color_output() {
   GITTER_C___RESET=''
-  GITTER_C____PATH=''
+  GITTER_C____REPO=''
   GITTER_C_PATH_DM=''
   GITTER_C_COMMAND=''
   GITTER_C_____ARG=''
@@ -93,17 +93,16 @@ ___help()    {
   if [[ $# -eq 0 ]]; then
     __parse_command "help"
     return
+  elif [[ $# -eq 1 ]]; then
+    case "$1" in
+      filter      ) __parse_command "help-filter"       ;;
+      status      ) __parse_command "help-status"       ;;
+      gitterignore) __parse_command "help-gitterignore" ;;
+      expander    ) __parse_command "help-expander"     ;;
+      *           ) __unknown_arg "$1" ;;
+    esac
   else
-    while [[ $# -gt 0 ]]; do
-      case "$1" in
-        filter      ) __parse_command "help-filter"       ;;
-        status      ) __parse_command "help-status"       ;;
-        gitterignore) __parse_command "help-gitterignore" ;;
-        expander    ) __parse_command "help-expander"     ;;
-        *           ) __unknown_arg "$1" ;;
-      esac
-      shift
-    done
+  __too_many_args "help" "1" "$#"
   fi
 }
 

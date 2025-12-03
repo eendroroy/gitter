@@ -54,7 +54,7 @@ __help() {
   echo
   echo -e "  ${GITTER_C_____ARG}filter      ${GITTER_C___RESET} Show help about filter patterns"
   echo -e "  ${GITTER_C_____ARG}gitterignore${GITTER_C___RESET} Show help about .gitterignore file"
-  echo -e "  ${GITTER_C_____ARG}expander ${GITTER_C___RESET} Show help about available expanders"
+  echo -e "  ${GITTER_C_____ARG}expander    ${GITTER_C___RESET} Show help about available expanders"
   echo -e "  ${GITTER_C_____ARG}status      ${GITTER_C___RESET} Show help about status placeholders"
   echo
   echo -e "${GITTER_C_HEADING}For more information, visit: ${GITTER_C___RESET} ${____GITTER____LINK}"
@@ -99,14 +99,14 @@ __help_gitterignore() {
   echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
   echo
   echo -e "${GITTER_C_HEADING}Ignore-file:${GITTER_C___RESET}"
-  echo -e "  Gitter will look for a ${GITTER_C____PATH}.gitterignore${GITTER_C___RESET} file ${GITTER_C_____ARG}in the current directory.${GITTER_C___RESET}"
+  echo -e "  Gitter will look for a ${GITTER_C____REPO}.gitterignore${GITTER_C___RESET} file ${GITTER_C_____ARG}in the current directory.${GITTER_C___RESET}"
   echo -e "  If found, it will read patterns from the file to ignore matching repositories."
   echo -e "  Each line in the file should contain a pattern to match repository names or paths."
   echo -e "  Lines starting with ${GITTER_C___ERROR}#${GITTER_C___RESET} are treated as comments and ignored."
   echo -e "  Patterns:"
-  echo -e "    ${GITTER_C___ERROR}relative/path/to/directory${GITTER_C___RESET} Ignore directory at exact relative path ${GITTER_C____PATH}relative/path/to/directory${GITTER_C___RESET}"
-  echo -e "    ${GITTER_C___ERROR}*/directory_name${GITTER_C___RESET}           Ignore directories under any parent directory named ${GITTER_C____PATH}directory_name${GITTER_C___RESET}"
-  echo -e "    ${GITTER_C___ERROR}directory_name/*${GITTER_C___RESET}           Ignore directories directly under the top-level directory named ${GITTER_C____PATH}directory_name${GITTER_C___RESET}"
+  echo -e "    ${GITTER_C___ERROR}relative/path/to/directory${GITTER_C___RESET} Ignore directory at exact relative path ${GITTER_C____REPO}relative/path/to/directory${GITTER_C___RESET}"
+  echo -e "    ${GITTER_C___ERROR}*/directory_name${GITTER_C___RESET}           Ignore directories under any parent directory named ${GITTER_C____REPO}directory_name${GITTER_C___RESET}"
+  echo -e "    ${GITTER_C___ERROR}directory_name/*${GITTER_C___RESET}           Ignore directories directly under the top-level directory named ${GITTER_C____REPO}directory_name${GITTER_C___RESET}"
   echo
 }
 
@@ -196,8 +196,8 @@ __print_config() {
   echo -e "${GITTER_C_HEADING}Colors:${GITTER_C___RESET}"
   ___print_config_value "(${GITTER_C_SUCCESS}Success color ${GITTER_C___RESET})    " "GITTER_C_SUCCESS" "'\\${GITTER_C_SUCCESS}'"
   ___print_config_value "(${GITTER_C___ERROR}Error color   ${GITTER_C___RESET})    " "GITTER_C___ERROR" "'\\${GITTER_C___ERROR}'"
-  ___print_config_value "(${GITTER_C____PATH}Path color    ${GITTER_C___RESET})    " "GITTER_C____PATH" "'\\${GITTER_C____PATH}'"
-  ___print_config_value "(${GITTER_C_PATH_DM}Path Dim color${GITTER_C___RESET})    " "GITTER_C_PATH_DM" "'\\${GITTER_C_PATH_DM}'"
+  ___print_config_value "(${GITTER_C____REPO}Path color    ${GITTER_C___RESET})    " "GITTER_C____REPO" "'\\${GITTER_C____REPO}'"
+  ___print_config_value "(${GITTER_C____PATH}Path Dim color${GITTER_C___RESET})    " "GITTER_C____PATH" "'\\${GITTER_C_PATH_DM}'"
   ___print_config_value "(${GITTER_C_____DIM}Dim color     ${GITTER_C___RESET})    " "GITTER_C_____DIM" "'\\${GITTER_C_____DIM}'"
   ___print_config_value "(${GITTER_C_HEADING}Heading color ${GITTER_C___RESET})    " "GITTER_C_HEADING" "'\\${GITTER_C_HEADING}'"
   ___print_config_value "(${GITTER_C_COMMAND}Command color ${GITTER_C___RESET})    " "GITTER_C_COMMAND" "'\\${GITTER_C_COMMAND}'"

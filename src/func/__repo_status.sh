@@ -22,9 +22,9 @@ __print_path() {
   if [[ "$path" == "." ]]; then
     path="$(basename "${____CURRENT_DIR}")"
   else
-    echo -ne "${GITTER_C_PATH_DM}${path%/*}/${GITTER_C___RESET}"
+    echo -ne "${GITTER_C____PATH}${path%/*}/${GITTER_C___RESET}"
   fi
-  echo -ne "${GITTER_C____PATH}${path##*/}${GITTER_C___RESET}"
+  echo -ne "${GITTER_C____REPO}${path##*/}${GITTER_C___RESET}"
 }
 
 ___git_or_no_commit() { git "$@" 2>/dev/null || echo "${___NO_COMMIT}"; }

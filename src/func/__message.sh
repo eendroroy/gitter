@@ -42,6 +42,16 @@ __unknown_arg() {
   exit 1
 }
 
+__too_many_args() {
+  echo
+  echo -ne "${GITTER_C___ERROR}Too many arguments for:${GITTER_C___RESET} ${GITTER_C__OPTION}${1}${GITTER_C___RESET}" 1>&2
+  echo -e " ${GITTER_C___ERROR}(expected ${2} argument(s) but got ${3})${GITTER_C___RESET}" 1>&2
+  echo
+  echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+  echo
+  exit 1
+}
+
 __unknown_option() {
   echo
   echo -e "${GITTER_C___ERROR}Unknown option:${GITTER_C___RESET} $1" 1>&2
