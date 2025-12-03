@@ -21,11 +21,14 @@ Clone the repository:
 git clone https://github.com/eendroroy/gitter.git ~/.gitter
 ```
 
-Add below line to your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.):
+Add below line to your shell configuration file:
 
 ```shell
 export PATH="$HOME/.gitter/bin:$PATH"
-export fpath=("${fpath[@]}" "${HOME}/.gitter/completions")
+
+export fpath=("${fpath[@]}" "${HOME}/.gitter/completion/zsh") # ZSH Completion
+source ~/.gitter/completion/bash/gitter.bash # Bash Completion
+source ~/.gitter/completion/fish/gitter.fish # Fish Completion
 ```
 
 ## Usage
