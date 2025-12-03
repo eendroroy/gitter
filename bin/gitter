@@ -31,7 +31,6 @@ while [[ $# -gt 0 ]]; do
     exec    |x ) ___exec             ;;
     eval    |e ) ___eval             ;;
     list    |ls) ___list             ;;
-             ll) ___ll               ;;
     config  |c ) ___config           ;;
     help       ) ___help "$@"; break ;;
     version |v ) ___version          ;;
