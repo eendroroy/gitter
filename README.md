@@ -55,16 +55,16 @@ export GITTER_CONTINUE_ON_ERROR=false  # ASk to continue on error by default
 export GITTER_QUIET=false              # Quiet mode disabled by default, when enabled, only show stderr
 
 # Color configuration
-export GITTER_C___ERROR='\e[38;5;9m'   # Error color
-export GITTER_C_SUCCESS='\e[38;5;2m'   # Success color
-export GITTER_C____REPO='\e[35m'       # Path color
-export GITTER_C____PATH='\e[2;35m'     # Dimmed path color
-export GITTER_C_____DIM='\e[2;38;5;3m' # Dim color
-export GITTER_C_HEADING='\e[1;37m'     # Heading color
-export GITTER_C_COMMAND='\e[32m'       # Command color
-export GITTER_C_____ARG='\e[33m'       # Arguments color
-export GITTER_C__OPTION='\e[36m'       # Option color
-export GITTER_C___VALUE='\e[2;35;1;3m' # Value color
+export GITTER_C___ERROR='\e[38;5;9m'   # Error
+export GITTER_C_SUCCESS='\e[38;5;2m'   # Success
+export GITTER_C____REPO='\e[35m'       # Repository name
+export GITTER_C____PATH='\e[2;35m'     # Path
+export GITTER_C_____DIM='\e[2;38;5;3m' # Dim text
+export GITTER_C_HEADING='\e[1;37m'     # Heading
+export GITTER_C_COMMAND='\e[32m'       # Command
+export GITTER_C_____ARG='\e[33m'       # Argument
+export GITTER_C__OPTION='\e[36m'       # Option
+export GITTER_C___VALUE='\e[2;35;1;3m' # Value
 ```
 
 ## Repository status patterns
