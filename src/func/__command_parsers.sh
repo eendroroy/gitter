@@ -14,9 +14,9 @@
 __parse_command() {
   if [[ -n "$command" ]]; then
     echo
-    echo -e "${GITTER_C___ERROR}Multiple command types specified${GITTER_C___RESET}" 1>&2
+    echo -e "${GITTER_C____ERROR}Multiple command types specified${GITTER_C____RESET}" 1>&2
     echo
-    echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+    echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
     echo
     exit 1
   fi
@@ -26,9 +26,9 @@ __parse_command() {
 __read_filter() {
   if [[ -z "$1" || "$1" == -* ]]; then
     echo
-    echo -e "${GITTER_C___ERROR}Missing or invalid argument for:${GITTER_C___RESET} ${GITTER_C__OPTION}--filter${GITTER_C___RESET}" 1>&2
+    echo -e "${GITTER_C____ERROR}Missing or invalid argument for:${GITTER_C____RESET} ${GITTER_C___OPTION}--filter${GITTER_C____RESET}" 1>&2
     echo
-    echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+    echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
     echo
     exit 1
   fi
@@ -46,9 +46,9 @@ __read_command_args() {
 __read_max_depth() {
   if [[ -z "$1" || "$1" == -* ]]; then
     echo
-    echo -e "${GITTER_C___ERROR}Missing or invalid argument for:${GITTER_C___RESET} ${GITTER_C__OPTION}--max-depth${GITTER_C___RESET}" 1>&2
+    echo -e "${GITTER_C____ERROR}Missing or invalid argument for:${GITTER_C____RESET} ${GITTER_C___OPTION}--max-depth${GITTER_C____RESET}" 1>&2
     echo
-    echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+    echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
     echo
     exit 1
   fi
@@ -58,9 +58,9 @@ __read_max_depth() {
 __read_status() {
   if [[ -z "$1" || "$1" == -* ]]; then
     echo
-    echo -e "${GITTER_C___ERROR}Missing or invalid argument for:${GITTER_C___RESET} ${GITTER_C__OPTION}--status${GITTER_C___RESET}" 1>&2
+    echo -e "${GITTER_C____ERROR}Missing or invalid argument for:${GITTER_C____RESET} ${GITTER_C___OPTION}--status${GITTER_C____RESET}" 1>&2
     echo
-    echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+    echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
     echo
     exit 1
   fi
@@ -68,17 +68,17 @@ __read_status() {
 }
 
 __disable_color_output() {
-  GITTER_C___RESET=''
-  GITTER_C____REPO=''
+  GITTER_C____RESET=''
+  GITTER_C_____REPO=''
   GITTER_C_PATH_DM=''
-  GITTER_C_COMMAND=''
-  GITTER_C_____ARG=''
-  GITTER_C__OPTION=''
-  GITTER_C_____DIM=''
-  GITTER_C___VALUE=''
-  GITTER_C_SUCCESS=''
-  GITTER_C___ERROR=''
-  GITTER_C_HEADING=''
+  GITTER_C__COMMAND=''
+  GITTER_C______ARG=''
+  GITTER_C___OPTION=''
+  GITTER_C______DIM=''
+  GITTER_C____VALUE=''
+  GITTER_C__SUCCESS=''
+  GITTER_C____ERROR=''
+  GITTER_C__HEADING=''
 }
 
 # Commands

@@ -28,25 +28,32 @@ ____CURRENT_DIR=$(pwd)
 [[ -z "${GITTER_ASK_CONFIRMATION+x}"    ]] && GITTER_ASK_CONFIRMATION=false
 [[ -z "${GITTER_CONTINUE_ON_ERROR+x}"   ]] && GITTER_CONTINUE_ON_ERROR=false
 [[ -z "${GITTER_REPO_STATUS+x}"         ]] && GITTER_REPO_STATUS=" on |[branch]"
-[[ -z "${GITTER_REPO_STATUS_VERBOSE+x}" ]] && \
-  GITTER_REPO_STATUS_VERBOSE=" on |[branch]| |[commit:a]| by |[author:e]| |[time:r]"
+[[ -z "${GITTER_REPO_STATUS_VERBOSE+x}" ]] && GITTER_REPO_STATUS_VERBOSE=" on |[branch]| |[commit:a]| by |[author:e]| |[time:r]"
 
 # Color defaults
-[[ -z "${GITTER_C_SUCCESS+x}" ]] && GITTER_C_SUCCESS='\e[38;5;2m'
-[[ -z "${GITTER_C___ERROR+x}" ]] && GITTER_C___ERROR='\e[38;5;9m'
-[[ -z "${GITTER_C____REPO+x}" ]] && GITTER_C____REPO='\e[35m'
-[[ -z "${GITTER_C____PATH+x}" ]] && GITTER_C____PATH='\e[2;35m'
-[[ -z "${GITTER_C_____DIM+x}" ]] && GITTER_C_____DIM='\e[2;38;5;3m'
-[[ -z "${GITTER_C_HEADING+x}" ]] && GITTER_C_HEADING='\e[1;37m'
-[[ -z "${GITTER_C_COMMAND+x}" ]] && GITTER_C_COMMAND='\e[32m'
-[[ -z "${GITTER_C_____ARG+x}" ]] && GITTER_C_____ARG='\e[33m'
-[[ -z "${GITTER_C__OPTION+x}" ]] && GITTER_C__OPTION='\e[36m'
-[[ -z "${GITTER_C___VALUE+x}" ]] && GITTER_C___VALUE='\e[2;35;1;3m'
+[[ -z "${GITTER_C__SUCCESS+x}" ]] && GITTER_C__SUCCESS='\e[38;5;2m'
+[[ -z "${GITTER_C____ERROR+x}" ]] && GITTER_C____ERROR='\e[38;5;9m'
+[[ -z "${GITTER_C_____REPO+x}" ]] && GITTER_C_____REPO='\e[35m'
+[[ -z "${GITTER_C_____PATH+x}" ]] && GITTER_C_____PATH='\e[2;35m'
+[[ -z "${GITTER_C______DIM+x}" ]] && GITTER_C______DIM='\e[2;38;5;3m'
+[[ -z "${GITTER_C__HEADING+x}" ]] && GITTER_C__HEADING='\e[1;37m'
+[[ -z "${GITTER_C__COMMAND+x}" ]] && GITTER_C__COMMAND='\e[32m'
+[[ -z "${GITTER_C______ARG+x}" ]] && GITTER_C______ARG='\e[33m'
+[[ -z "${GITTER_C___OPTION+x}" ]] && GITTER_C___OPTION='\e[36m'
+[[ -z "${GITTER_C____VALUE+x}" ]] && GITTER_C____VALUE='\e[2;35;1;3m'
+# Status colors
+[[ -z "${GITTER_C___BRANCH+x}" ]] && GITTER_C___BRANCH='\e[32m'
+[[ -z "${GITTER_C___COMMIT+x}" ]] && GITTER_C___COMMIT='\e[2;35;1;3m'
+[[ -z "${GITTER_C__COMMITS+x}" ]] && GITTER_C__COMMITS='\e[2;35;1;3m'
+[[ -z "${GITTER_C_TIME_REL+x}" ]] && GITTER_C_TIME_REL='\e[33m'
+[[ -z "${GITTER_C_TIME_ABS+x}" ]] && GITTER_C_TIME_ABS='\e[33m'
+[[ -z "${GITTER_C_AUTHOR_E+x}" ]] && GITTER_C_AUTHOR_E='\e[36m'
+[[ -z "${GITTER_C_AUTHOR_N+x}" ]] && GITTER_C_AUTHOR_N='\e[36m'
 
 # Non configurable variables
-GITTER_C___RESET='\e[0m'
+GITTER_C____RESET='\e[0m'
 GITTER_DRY_RUN=false
-option=()
+OPTION=()
 PATTERNS=()
 
 # Gitter project variables

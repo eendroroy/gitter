@@ -11,178 +11,178 @@
 
 __help() {
   echo
-  echo -e "${GITTER_C_HEADING}Gitter${GITTER_C___RESET}"
+  echo -e "${GITTER_C__HEADING}Gitter${GITTER_C____RESET}"
   echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
   echo
-  echo -e "${GITTER_C_HEADING}Version:${GITTER_C___RESET} ${GITTER_C__OPTION}${____GITTER_VERSION}${GITTER_C___RESET}"
+  echo -e "${GITTER_C__HEADING}Version:${GITTER_C____RESET} ${GITTER_C___OPTION}${____GITTER_VERSION}${GITTER_C____RESET}"
   echo
-  echo -e "${GITTER_C_HEADING}Usage:${GITTER_C___RESET}"
-  echo -ne "  ${GITTER_C_COMMAND}gitter${GITTER_C___RESET}"
-  echo -ne "  [${GITTER_C__OPTION}--<option>${GITTER_C___RESET} ...]"
-  echo -e  " [${GITTER_C__OPTION}command${GITTER_C___RESET} [${GITTER_C__OPTION}--${GITTER_C___RESET} <${GITTER_C_____ARG}args ...${GITTER_C___RESET}>${GITTER_C___RESET}]]"
+  echo -e "${GITTER_C__HEADING}Usage:${GITTER_C____RESET}"
+  echo -ne "  ${GITTER_C__COMMAND}gitter${GITTER_C____RESET}"
+  echo -ne "  [${GITTER_C___OPTION}--<option>${GITTER_C____RESET} ...]"
+  echo -e  " [${GITTER_C___OPTION}command${GITTER_C____RESET} [${GITTER_C___OPTION}--${GITTER_C____RESET} <${GITTER_C______ARG}args ...${GITTER_C____RESET}>${GITTER_C____RESET}]]"
   echo
-  echo -e "${GITTER_C_HEADING}Options:${GITTER_C___RESET}"
-  echo -e "  ${GITTER_C__OPTION}--status            -s <${GITTER_C___VALUE}status${GITTER_C___RESET}>${GITTER_C___RESET}  Set repository status format (overrides ${GITTER_C_COMMAND}GITTER_REPO_STATUS${GITTER_C___RESET} and ${GITTER_C_COMMAND}GITTER_REPO_STATUS_VERBOSE${GITTER_C___RESET} variables)"
-  echo -e "  ${GITTER_C__OPTION}--max-depth         -d <${GITTER_C___VALUE}depth${GITTER_C___RESET}>${GITTER_C___RESET}   Look for git repositories up to specified depth (default: ${GITTER_C_____ARG}2${GITTER_C___RESET})"
-  echo -e "  ${GITTER_C__OPTION}--filter            -f <${GITTER_C___VALUE}pattern${GITTER_C___RESET}>${GITTER_C___RESET} Filter repositories matching the given pattern (can be specified multiple times)"
-  echo -e "  ${GITTER_C__OPTION}--exclude           -e          ${GITTER_C___RESET} Exclude matched repositories instead of including"
-  echo -e "  ${GITTER_C__OPTION}--ask-confirmation  -a          ${GITTER_C___RESET} Ask for confirmation before executing commands in each repository"
-  echo -e "  ${GITTER_C__OPTION}--continue-on-error -c          ${GITTER_C___RESET} Continue executing commands in other repositories even if an error occurs in one"
-  echo -e "  ${GITTER_C__OPTION}--quiet             -q          ${GITTER_C___RESET} Enable quiet mode (suppress output of successful commands)"
-  echo -e "  ${GITTER_C__OPTION}--no-color                      ${GITTER_C___RESET} Disable colored output"
-  echo -e "  ${GITTER_C__OPTION}--verbose           -v          ${GITTER_C___RESET} Enable verbose mode"
-  echo -e "  ${GITTER_C__OPTION}--dry-run           -n          ${GITTER_C___RESET} Show what would be executed without actually running the commands"
+  echo -e "${GITTER_C__HEADING}Options:${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C___OPTION}--status            -s <${GITTER_C____VALUE}status${GITTER_C____RESET}>${GITTER_C____RESET}  Set repository status format (overrides ${GITTER_C__COMMAND}GITTER_REPO_STATUS${GITTER_C____RESET} and ${GITTER_C__COMMAND}GITTER_REPO_STATUS_VERBOSE${GITTER_C____RESET} variables)"
+  echo -e "  ${GITTER_C___OPTION}--max-depth         -d <${GITTER_C____VALUE}depth${GITTER_C____RESET}>${GITTER_C____RESET}   Look for git repositories up to specified depth (default: ${GITTER_C______ARG}2${GITTER_C____RESET})"
+  echo -e "  ${GITTER_C___OPTION}--filter            -f <${GITTER_C____VALUE}pattern${GITTER_C____RESET}>${GITTER_C____RESET} Filter repositories matching the given pattern (can be specified multiple times)"
+  echo -e "  ${GITTER_C___OPTION}--exclude           -e          ${GITTER_C____RESET} Exclude matched repositories instead of including"
+  echo -e "  ${GITTER_C___OPTION}--ask-confirmation  -a          ${GITTER_C____RESET} Ask for confirmation before executing commands in each repository"
+  echo -e "  ${GITTER_C___OPTION}--continue-on-error -c          ${GITTER_C____RESET} Continue executing commands in other repositories even if an error occurs in one"
+  echo -e "  ${GITTER_C___OPTION}--quiet             -q          ${GITTER_C____RESET} Enable quiet mode (suppress output of successful commands)"
+  echo -e "  ${GITTER_C___OPTION}--no-color                      ${GITTER_C____RESET} Disable colored output"
+  echo -e "  ${GITTER_C___OPTION}--verbose           -v          ${GITTER_C____RESET} Enable verbose mode"
+  echo -e "  ${GITTER_C___OPTION}--dry-run           -n          ${GITTER_C____RESET} Show what would be executed without actually running the commands"
   echo
-  echo -e "${GITTER_C_HEADING}Commands:${GITTER_C___RESET}"
-  echo -e "  ${GITTER_C__OPTION}git     g ${GITTER_C___RESET}        Run a git command (${GITTER_C_____ARG}default${GITTER_C___RESET})"
-  echo -e "  ${GITTER_C__OPTION}exec    x ${GITTER_C___RESET}        Run an arbitrary command"
-  echo -e "  ${GITTER_C__OPTION}eval    e ${GITTER_C___RESET}        Evaluate a shell command - useful for complex commands involving pipes and redirections"
-  echo -e "  ${GITTER_C__OPTION}list    ls${GITTER_C___RESET}        List repositories only"
-  echo -e "  ${GITTER_C__OPTION}        ll${GITTER_C___RESET}        Equivalent to ${GITTER_C__OPTION}list --verbose${GITTER_C___RESET} command"
-  echo -e "  ${GITTER_C__OPTION}config  c ${GITTER_C___RESET}        Print current (effective) configuration"
-  echo -e "  ${GITTER_C__OPTION}version v ${GITTER_C___RESET}        Show version"
-  echo -e "  ${GITTER_C__OPTION}help      ${GITTER_C___RESET} [${GITTER_C___VALUE}item${GITTER_C___RESET}] Show help"
+  echo -e "${GITTER_C__HEADING}Commands:${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C___OPTION}git     g ${GITTER_C____RESET}        Run a git command (${GITTER_C______ARG}default${GITTER_C____RESET})"
+  echo -e "  ${GITTER_C___OPTION}exec    x ${GITTER_C____RESET}        Run an arbitrary command"
+  echo -e "  ${GITTER_C___OPTION}eval    e ${GITTER_C____RESET}        Evaluate a shell command - useful for complex commands involving pipes and redirections"
+  echo -e "  ${GITTER_C___OPTION}list    ls${GITTER_C____RESET}        List repositories only"
+  echo -e "  ${GITTER_C___OPTION}        ll${GITTER_C____RESET}        Equivalent to ${GITTER_C___OPTION}list --verbose${GITTER_C____RESET} command"
+  echo -e "  ${GITTER_C___OPTION}config  c ${GITTER_C____RESET}        Print current (effective) configuration"
+  echo -e "  ${GITTER_C___OPTION}version v ${GITTER_C____RESET}        Show version"
+  echo -e "  ${GITTER_C___OPTION}help      ${GITTER_C____RESET} [${GITTER_C____VALUE}item${GITTER_C____RESET}] Show help"
   echo
 
-  echo -e  "${GITTER_C_HEADING}Help items:${GITTER_C___RESET}"
-  echo -ne "  ${GITTER_C_COMMAND}gitter${GITTER_C___RESET}"
-  echo -ne " ${GITTER_C__OPTION}help${GITTER_C___RESET}"
-  echo -ne " [${GITTER_C_____ARG}filter${GITTER_C___RESET}|"
-  echo -ne "${GITTER_C_____ARG}gitterignore${GITTER_C___RESET}"
-  echo -ne "|${GITTER_C_____ARG}expander${GITTER_C___RESET}"
-  echo -e  "|${GITTER_C_____ARG}status${GITTER_C___RESET}]"
+  echo -e  "${GITTER_C__HEADING}Help items:${GITTER_C____RESET}"
+  echo -ne "  ${GITTER_C__COMMAND}gitter${GITTER_C____RESET}"
+  echo -ne " ${GITTER_C___OPTION}help${GITTER_C____RESET}"
+  echo -ne " [${GITTER_C______ARG}filter${GITTER_C____RESET}|"
+  echo -ne "${GITTER_C______ARG}gitterignore${GITTER_C____RESET}"
+  echo -ne "|${GITTER_C______ARG}expander${GITTER_C____RESET}"
+  echo -e  "|${GITTER_C______ARG}status${GITTER_C____RESET}]"
   echo
-  echo -e "  ${GITTER_C_____ARG}filter      ${GITTER_C___RESET} Show help about filter patterns"
-  echo -e "  ${GITTER_C_____ARG}gitterignore${GITTER_C___RESET} Show help about .gitterignore file"
-  echo -e "  ${GITTER_C_____ARG}expander    ${GITTER_C___RESET} Show help about available expanders"
-  echo -e "  ${GITTER_C_____ARG}status      ${GITTER_C___RESET} Show help about status placeholders"
+  echo -e "  ${GITTER_C______ARG}filter      ${GITTER_C____RESET} Show help about filter patterns"
+  echo -e "  ${GITTER_C______ARG}gitterignore${GITTER_C____RESET} Show help about .gitterignore file"
+  echo -e "  ${GITTER_C______ARG}expander    ${GITTER_C____RESET} Show help about available expanders"
+  echo -e "  ${GITTER_C______ARG}status      ${GITTER_C____RESET} Show help about status placeholders"
   echo
-  echo -e "${GITTER_C_HEADING}For more information, visit: ${GITTER_C___RESET} ${____GITTER____LINK}"
+  echo -e "${GITTER_C__HEADING}For more information, visit: ${GITTER_C____RESET} ${____GITTER____LINK}"
   echo
 }
 
 __help_filter() {
   echo
-  echo -e "${GITTER_C_HEADING}Gitter${GITTER_C___RESET}"
+  echo -e "${GITTER_C__HEADING}Gitter${GITTER_C____RESET}"
   echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
   echo
-  echo -ne "${GITTER_C_HEADING}Syntax:${GITTER_C___RESET}"
-  echo -ne "   ${GITTER_C_____DIM}<${GITTER_C___RESET}${GITTER_C___ERROR}prefix${GITTER_C___RESET}${GITTER_C_____DIM}>${GITTER_C___RESET}"
-  echo -ne "${GITTER_C_____DIM}<${GITTER_C___RESET}${GITTER_C_HEADING}:${GITTER_C___RESET}${GITTER_C_____DIM}>${GITTER_C___RESET}"
-  echo -ne "${GITTER_C_____DIM}[${GITTER_C___RESET}${GITTER_C___ERROR}+${GITTER_C___RESET}${GITTER_C_____DIM}]${GITTER_C___RESET}"
-  echo -ne "${GITTER_C_____DIM}<${GITTER_C___RESET}${GITTER_C___VALUE}pattern${GITTER_C___RESET}${GITTER_C_____DIM}>${GITTER_C___RESET}"
-  echo -e  "${GITTER_C_____DIM}[${GITTER_C___RESET}${GITTER_C___ERROR}+${GITTER_C___RESET}${GITTER_C_____DIM}]${GITTER_C___RESET}"
+  echo -ne "${GITTER_C__HEADING}Syntax:${GITTER_C____RESET}"
+  echo -ne "   ${GITTER_C______DIM}<${GITTER_C____RESET}${GITTER_C____ERROR}prefix${GITTER_C____RESET}${GITTER_C______DIM}>${GITTER_C____RESET}"
+  echo -ne "${GITTER_C______DIM}<${GITTER_C____RESET}${GITTER_C__HEADING}:${GITTER_C____RESET}${GITTER_C______DIM}>${GITTER_C____RESET}"
+  echo -ne "${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C______DIM}]${GITTER_C____RESET}"
+  echo -ne "${GITTER_C______DIM}<${GITTER_C____RESET}${GITTER_C____VALUE}pattern${GITTER_C____RESET}${GITTER_C______DIM}>${GITTER_C____RESET}"
+  echo -e  "${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C______DIM}]${GITTER_C____RESET}"
   echo
-  echo -e "${GITTER_C_HEADING}Prefixes:${GITTER_C___RESET}"
-  echo -e "  ${GITTER_C___ERROR}path  ${GITTER_C___RESET}  Match for path name"
-  echo -e "  ${GITTER_C___ERROR}repo  ${GITTER_C___RESET}  Match for repository name"
-  echo -e "  ${GITTER_C___ERROR}branch${GITTER_C___RESET}  Match for current git branch"
+  echo -e "${GITTER_C__HEADING}Prefixes:${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}path  ${GITTER_C____RESET}  Match for path name"
+  echo -e "  ${GITTER_C____ERROR}repo  ${GITTER_C____RESET}  Match for repository name"
+  echo -e "  ${GITTER_C____ERROR}branch${GITTER_C____RESET}  Match for current git branch"
   echo
-  echo -e "${GITTER_C_HEADING}Patterns:${GITTER_C___RESET}"
-  echo -e "  ${GITTER_C___ERROR}+${GITTER_C___RESET}          Matches anywhere in the value (default if no anchors specified)"
-  echo -e "   ${GITTER_C___VALUE}pattern${GITTER_C___RESET}${GITTER_C___ERROR}+${GITTER_C___RESET}  Matches the beginning of the value"
-  echo -e "  ${GITTER_C___ERROR}+${GITTER_C___RESET}${GITTER_C___VALUE}pattern${GITTER_C___RESET}   Matches the end of the value"
-  echo -e "  ${GITTER_C___ERROR}+${GITTER_C___RESET}${GITTER_C___VALUE}pattern${GITTER_C___RESET}${GITTER_C___ERROR}+${GITTER_C___RESET}  Matches substring anywhere in the value"
-  echo -e "   ${GITTER_C___VALUE}pattern${GITTER_C___RESET}   Matches exactly the value"
+  echo -e "${GITTER_C__HEADING}Patterns:${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}          Matches anywhere in the value (default if no anchors specified)"
+  echo -e "   ${GITTER_C____VALUE}pattern${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}  Matches the beginning of the value"
+  echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C____VALUE}pattern${GITTER_C____RESET}   Matches the end of the value"
+  echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C____VALUE}pattern${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}  Matches substring anywhere in the value"
+  echo -e "   ${GITTER_C____VALUE}pattern${GITTER_C____RESET}   Matches exactly the value"
   echo
-  echo -e "${GITTER_C_HEADING}Examples:${GITTER_C___RESET}"
-  echo -e "  ${GITTER_C_COMMAND}gitter ${GITTER_C__OPTION}--filter${GITTER_C___RESET} ${GITTER_C___VALUE}path:src/+${GITTER_C___RESET}                     Filter repositories with path starting with 'src/'"
-  echo -e "  ${GITTER_C_COMMAND}gitter ${GITTER_C__OPTION}--exclude --filter${GITTER_C___RESET} ${GITTER_C___VALUE}repo:+-test${GITTER_C___RESET}          Filter repositories with name NOT ending with '-test'"
-  echo -e "  ${GITTER_C_COMMAND}gitter ${GITTER_C__OPTION}--filter${GITTER_C___RESET} ${GITTER_C___VALUE}branch:master${GITTER_C___RESET}                  Filter repositories on branch 'master'"
-  echo -e "  ${GITTER_C_COMMAND}gitter ${GITTER_C__OPTION}--filter${GITTER_C___RESET} ${GITTER_C___VALUE}path:+src/${GITTER_C___RESET} ${GITTER_C__OPTION}--filter${GITTER_C___RESET} ${GITTER_C___VALUE}path:+test${GITTER_C___RESET} Filter repositories with path containing 'src/' or 'test'"
+  echo -e "${GITTER_C__HEADING}Examples:${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} ${GITTER_C____VALUE}path:src/+${GITTER_C____RESET}                     Filter repositories with path starting with 'src/'"
+  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--exclude --filter${GITTER_C____RESET} ${GITTER_C____VALUE}repo:+-test${GITTER_C____RESET}          Filter repositories with name NOT ending with '-test'"
+  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} ${GITTER_C____VALUE}branch:master${GITTER_C____RESET}                  Filter repositories on branch 'master'"
+  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} ${GITTER_C____VALUE}path:+src/${GITTER_C____RESET} ${GITTER_C___OPTION}--filter${GITTER_C____RESET} ${GITTER_C____VALUE}path:+test${GITTER_C____RESET} Filter repositories with path containing 'src/' or 'test'"
   echo
 }
 
 __help_gitterignore() {
   echo
-  echo -e "${GITTER_C_HEADING}Gitter${GITTER_C___RESET}"
+  echo -e "${GITTER_C__HEADING}Gitter${GITTER_C____RESET}"
   echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
   echo
-  echo -e "${GITTER_C_HEADING}Ignore-file:${GITTER_C___RESET}"
-  echo -e "  Gitter will look for a ${GITTER_C____REPO}.gitterignore${GITTER_C___RESET} file ${GITTER_C_____ARG}in the current directory.${GITTER_C___RESET}"
+  echo -e "${GITTER_C__HEADING}Ignore-file:${GITTER_C____RESET}"
+  echo -e "  Gitter will look for a ${GITTER_C_____REPO}.gitterignore${GITTER_C____RESET} file ${GITTER_C______ARG}in the current directory.${GITTER_C____RESET}"
   echo -e "  If found, it will read patterns from the file to ignore matching repositories."
   echo -e "  Each line in the file should contain a pattern to match repository names or paths."
-  echo -e "  Lines starting with ${GITTER_C___ERROR}#${GITTER_C___RESET} are treated as comments and ignored."
+  echo -e "  Lines starting with ${GITTER_C____ERROR}#${GITTER_C____RESET} are treated as comments and ignored."
   echo -e "  Patterns:"
-  echo -e "    ${GITTER_C___ERROR}relative/path/to/directory${GITTER_C___RESET} Ignore directory at exact relative path ${GITTER_C____REPO}relative/path/to/directory${GITTER_C___RESET}"
-  echo -e "    ${GITTER_C___ERROR}*/directory_name${GITTER_C___RESET}           Ignore directories under any parent directory named ${GITTER_C____REPO}directory_name${GITTER_C___RESET}"
-  echo -e "    ${GITTER_C___ERROR}directory_name/*${GITTER_C___RESET}           Ignore directories directly under the top-level directory named ${GITTER_C____REPO}directory_name${GITTER_C___RESET}"
+  echo -e "    ${GITTER_C____ERROR}relative/path/to/directory${GITTER_C____RESET} Ignore directory at exact relative path ${GITTER_C_____REPO}relative/path/to/directory${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C____ERROR}*/directory_name${GITTER_C____RESET}           Ignore directories under any parent directory named ${GITTER_C_____REPO}directory_name${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C____ERROR}directory_name/*${GITTER_C____RESET}           Ignore directories directly under the top-level directory named ${GITTER_C_____REPO}directory_name${GITTER_C____RESET}"
   echo
 }
 
 __help_expander() {
   echo
-  echo -e "${GITTER_C_HEADING}Gitter${GITTER_C___RESET}"
+  echo -e "${GITTER_C__HEADING}Gitter${GITTER_C____RESET}"
   echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
   echo
-  echo -e "${GITTER_C_HEADING}Expanders:${GITTER_C___RESET}"
-  echo -e "  Within ${GITTER_C__OPTION}exec${GITTER_C___RESET} and ${GITTER_C__OPTION}git${GITTER_C___RESET} commands, the following expanders can be used in arguments:"
-  echo -e "    ${GITTER_C_____ARG}{_repo_}      ${GITTER_C___RESET} Name of the current git repository"
-  echo -e "    ${GITTER_C_____ARG}{_path:r_}    ${GITTER_C___RESET} Relative path of the current working directory from where gitter was invoked"
-  echo -e "    ${GITTER_C_____ARG}{_path:a_}    ${GITTER_C___RESET} Absolute path of the current working directory"
-  echo -e "    ${GITTER_C_____ARG}{_branch_}    ${GITTER_C___RESET} Current git branch name"
-  echo -e "    ${GITTER_C_____ARG}{_commit:f_}  ${GITTER_C___RESET} Current git commit hash"
-  echo -e "    ${GITTER_C_____ARG}{_commit:<n>_}${GITTER_C___RESET} Current git commit hash abbreviated to <n> characters. i.e. ${GITTER_C_____ARG}{_commit:8_}${GITTER_C___RESET}"
-  echo -e "    ${GITTER_C_____ARG}{_commit:c_}  ${GITTER_C___RESET} Current git commit count"
-  echo -e "    ${GITTER_C_____ARG}{_author:e_}  ${GITTER_C___RESET} Current git commit author email"
-  echo -e "    ${GITTER_C_____ARG}{_author:n_}  ${GITTER_C___RESET} Current git commit author name"
-  echo -e "    ${GITTER_C_____ARG}{_time:r_}    ${GITTER_C___RESET} Relative time of the current git commit (e.g., \"2 days ago\")"
-  echo -e "    ${GITTER_C_____ARG}{_time:d_}    ${GITTER_C___RESET} Date and time of the current git commit (e.g., \"2024-01-01 12:00:00\")"
+  echo -e "${GITTER_C__HEADING}Expanders:${GITTER_C____RESET}"
+  echo -e "  Within ${GITTER_C___OPTION}exec${GITTER_C____RESET} and ${GITTER_C___OPTION}git${GITTER_C____RESET} commands, the following expanders can be used in arguments:"
+  echo -e "    ${GITTER_C______ARG}{_repo_}      ${GITTER_C____RESET} Name of the current git repository"
+  echo -e "    ${GITTER_C______ARG}{_path:r_}    ${GITTER_C____RESET} Relative path of the current working directory from where gitter was invoked"
+  echo -e "    ${GITTER_C______ARG}{_path:a_}    ${GITTER_C____RESET} Absolute path of the current working directory"
+  echo -e "    ${GITTER_C______ARG}{_branch_}    ${GITTER_C____RESET} Current git branch name"
+  echo -e "    ${GITTER_C______ARG}{_commit:f_}  ${GITTER_C____RESET} Current git commit hash"
+  echo -e "    ${GITTER_C______ARG}{_commit:<n>_}${GITTER_C____RESET} Current git commit hash abbreviated to <n> characters. i.e. ${GITTER_C______ARG}{_commit:8_}${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C______ARG}{_commit:c_}  ${GITTER_C____RESET} Current git commit count"
+  echo -e "    ${GITTER_C______ARG}{_author:e_}  ${GITTER_C____RESET} Current git commit author email"
+  echo -e "    ${GITTER_C______ARG}{_author:n_}  ${GITTER_C____RESET} Current git commit author name"
+  echo -e "    ${GITTER_C______ARG}{_time:r_}    ${GITTER_C____RESET} Relative time of the current git commit (e.g., \"2 days ago\")"
+  echo -e "    ${GITTER_C______ARG}{_time:d_}    ${GITTER_C____RESET} Date and time of the current git commit (e.g., \"2024-01-01 12:00:00\")"
   echo
-  echo -e "${GITTER_C_HEADING}Example Usage:${GITTER_C___RESET}"
-  echo -e "  ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C__OPTION}exec${GITTER_C___RESET} -- echo \
-\"Repository: ${GITTER_C_____ARG}{_repo_}${GITTER_C___RESET}, \
-Branch: ${GITTER_C_____ARG}{_branch_}${GITTER_C___RESET}, \
-Commit: ${GITTER_C_____ARG}{_commit:8_}${GITTER_C___RESET}, \
-Author: ${GITTER_C_____ARG}{_author:e_}${GITTER_C___RESET}, \
-Date: ${GITTER_C_____ARG}{_time:d_}${GITTER_C___RESET}\""
+  echo -e "${GITTER_C__HEADING}Example Usage:${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C___OPTION}exec${GITTER_C____RESET} -- echo \
+\"Repository: ${GITTER_C______ARG}{_repo_}${GITTER_C____RESET}, \
+Branch: ${GITTER_C______ARG}{_branch_}${GITTER_C____RESET}, \
+Commit: ${GITTER_C______ARG}{_commit:8_}${GITTER_C____RESET}, \
+Author: ${GITTER_C______ARG}{_author:e_}${GITTER_C____RESET}, \
+Date: ${GITTER_C______ARG}{_time:d_}${GITTER_C____RESET}\""
   echo
 }
 
 __help_status() {
   echo
-  echo -e "${GITTER_C_HEADING}Gitter${GITTER_C___RESET}"
+  echo -e "${GITTER_C__HEADING}Gitter${GITTER_C____RESET}"
   echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
   echo
-  echo -e "${GITTER_C_HEADING}Repository status patters:${GITTER_C___RESET}"
-  echo -e "    ${GITTER_C_____DIM}[${GITTER_C___RESET}${GITTER_C_____ARG}text${GITTER_C___RESET}${GITTER_C_____DIM}]${GITTER_C___RESET}${GITTER_C_____ARG}|${GITTER_C___RESET}${GITTER_C_____DIM}[${GITTER_C___RESET}${GITTER_C_____ARG}placeholder${GITTER_C___RESET}${GITTER_C_____DIM}]...${GITTER_C___RESET}"
+  echo -e "${GITTER_C__HEADING}Repository status patters:${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C______ARG}text${GITTER_C____RESET}${GITTER_C______DIM}]${GITTER_C____RESET}${GITTER_C______ARG}|${GITTER_C____RESET}${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C______ARG}placeholder${GITTER_C____RESET}${GITTER_C______DIM}]...${GITTER_C____RESET}"
   echo
-  echo -e "${GITTER_C_HEADING}Available placeholders:${GITTER_C___RESET}"
-  echo -e "    ${GITTER_C_____ARG}[branch]    ${GITTER_C___RESET} Current git branch name"
-  echo -e "    ${GITTER_C_____ARG}[commit:a]  ${GITTER_C___RESET} Abbreviated (8) current git commit hash"
-  echo -e "    ${GITTER_C_____ARG}[commit:<n>]${GITTER_C___RESET} Abbreviated (<n>) current git commit hash"
-  echo -e "    ${GITTER_C_____ARG}[commit:f]  ${GITTER_C___RESET} Full current git commit hash"
-  echo -e "    ${GITTER_C_____ARG}[commit:c]  ${GITTER_C___RESET} Current git commit count"
-  echo -e "    ${GITTER_C_____ARG}[time:r]    ${GITTER_C___RESET} Relative time of the current git commit (e.g., "2 days ago")"
-  echo -e "    ${GITTER_C_____ARG}[time:d]    ${GITTER_C___RESET} Date and time of the current git commit (e.g., "2024-01-01 12:00:00")"
-  echo -e "    ${GITTER_C_____ARG}[author:e]  ${GITTER_C___RESET} Current git commit author email"
-  echo -e "    ${GITTER_C_____ARG}[author:n]  ${GITTER_C___RESET} Current git commit author name"
+  echo -e "${GITTER_C__HEADING}Available placeholders:${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C______ARG}[branch]    ${GITTER_C____RESET} Current git branch name"
+  echo -e "    ${GITTER_C______ARG}[commit:a]  ${GITTER_C____RESET} Abbreviated (8) current git commit hash"
+  echo -e "    ${GITTER_C______ARG}[commit:<n>]${GITTER_C____RESET} Abbreviated (<n>) current git commit hash"
+  echo -e "    ${GITTER_C______ARG}[commit:f]  ${GITTER_C____RESET} Full current git commit hash"
+  echo -e "    ${GITTER_C______ARG}[commit:c]  ${GITTER_C____RESET} Current git commit count"
+  echo -e "    ${GITTER_C______ARG}[time:r]    ${GITTER_C____RESET} Relative time of the current git commit (e.g., "2 days ago")"
+  echo -e "    ${GITTER_C______ARG}[time:d]    ${GITTER_C____RESET} Date and time of the current git commit (e.g., "2024-01-01 12:00:00")"
+  echo -e "    ${GITTER_C______ARG}[author:e]  ${GITTER_C____RESET} Current git commit author email"
+  echo -e "    ${GITTER_C______ARG}[author:n]  ${GITTER_C____RESET} Current git commit author name"
   echo
-  echo -e "${GITTER_C_HEADING}Example Configuration for status:${GITTER_C___RESET}"
-  echo -e " Set ${GITTER_C_COMMAND}GITTER_REPO_STATUS${GITTER_C___RESET}=${GITTER_C_____ARG}\" on |[branch]\"${GITTER_C___RESET}"
+  echo -e "${GITTER_C__HEADING}Example Configuration for status:${GITTER_C____RESET}"
+  echo -e " Set ${GITTER_C__COMMAND}GITTER_REPO_STATUS${GITTER_C____RESET}=${GITTER_C______ARG}\" on |[branch]\"${GITTER_C____RESET}"
   echo
-  echo -e  "${GITTER_C_HEADING}Example Configuration for verbose status:${GITTER_C___RESET}"
-  echo -ne " Set ${GITTER_C_COMMAND}GITTER_REPO_STATUS_VERBOSE${GITTER_C___RESET}="
-  echo -e  "${GITTER_C_____ARG}\" on |[branch]| |[commit:a]| by |[author:e]| |[time:r]\"${GITTER_C___RESET}"
+  echo -e  "${GITTER_C__HEADING}Example Configuration for verbose status:${GITTER_C____RESET}"
+  echo -ne " Set ${GITTER_C__COMMAND}GITTER_REPO_STATUS_VERBOSE${GITTER_C____RESET}="
+  echo -e  "${GITTER_C______ARG}\" on |[branch]| |[commit:a]| by |[author:e]| |[time:r]\"${GITTER_C____RESET}"
   echo
 }
 
 __version() {
-  echo -e "${GITTER_C__OPTION}${____GITTER_VERSION}${GITTER_C___RESET}"
+  echo -e "${GITTER_C___OPTION}${____GITTER_VERSION}${GITTER_C____RESET}"
 }
 
 ___print_config_value() {
-  echo -e "  ${GITTER_C__OPTION}${1}${GITTER_C___RESET}${GITTER_C_COMMAND}${2}${GITTER_C___RESET}=${GITTER_C_____ARG}${3}${GITTER_C___RESET}"
+  echo -e "  ${GITTER_C___OPTION}${1}${GITTER_C____RESET}${GITTER_C__COMMAND}${2}${GITTER_C____RESET}=${GITTER_C______ARG}${3}${GITTER_C____RESET}"
 }
 
 __print_config() {
   echo
-  echo -e "${GITTER_C_HEADING}Symbols:${GITTER_C___RESET}"
+  echo -e "${GITTER_C__HEADING}Symbols:${GITTER_C____RESET}"
   ___print_config_value "" "               GITTER_SUCCESS_SYMBOL" "'${GITTER_SUCCESS_SYMBOL}'"
   ___print_config_value "" "               GITTER___ERROR_SYMBOL" "'${GITTER___ERROR_SYMBOL}'"
   ___print_config_value "" "               GITTER_PRIMARY_SYMBOL" "'${GITTER_PRIMARY_SYMBOL}'"
   echo
-  echo -e "${GITTER_C_HEADING}Configurations:${GITTER_C___RESET}"
+  echo -e "${GITTER_C__HEADING}Configurations:${GITTER_C____RESET}"
   ___print_config_value "" "                    GITTER_MAX_DEPTH" "'${GITTER_MAX_DEPTH}'"
   ___print_config_value "" "                      GITTER_FILTERS" "(${GITTER_FILTERS[*]})"
   ___print_config_value "" "                      GITTER_VERBOSE" "'${GITTER_VERBOSE}'"
@@ -193,16 +193,16 @@ __print_config() {
   ___print_config_value "" "                  GITTER_REPO_STATUS" "'${GITTER_REPO_STATUS}'"
   ___print_config_value "" "          GITTER_REPO_STATUS_VERBOSE" "'${GITTER_REPO_STATUS_VERBOSE}'"
   echo
-  echo -e "${GITTER_C_HEADING}Colors:${GITTER_C___RESET}"
-  ___print_config_value "(${GITTER_C_SUCCESS}Success color ${GITTER_C___RESET})    " "GITTER_C_SUCCESS" "'\\${GITTER_C_SUCCESS}'"
-  ___print_config_value "(${GITTER_C___ERROR}Error color   ${GITTER_C___RESET})    " "GITTER_C___ERROR" "'\\${GITTER_C___ERROR}'"
-  ___print_config_value "(${GITTER_C____REPO}Path color    ${GITTER_C___RESET})    " "GITTER_C____REPO" "'\\${GITTER_C____REPO}'"
-  ___print_config_value "(${GITTER_C____PATH}Path Dim color${GITTER_C___RESET})    " "GITTER_C____PATH" "'\\${GITTER_C_PATH_DM}'"
-  ___print_config_value "(${GITTER_C_____DIM}Dim color     ${GITTER_C___RESET})    " "GITTER_C_____DIM" "'\\${GITTER_C_____DIM}'"
-  ___print_config_value "(${GITTER_C_HEADING}Heading color ${GITTER_C___RESET})    " "GITTER_C_HEADING" "'\\${GITTER_C_HEADING}'"
-  ___print_config_value "(${GITTER_C_COMMAND}Command color ${GITTER_C___RESET})    " "GITTER_C_COMMAND" "'\\${GITTER_C_COMMAND}'"
-  ___print_config_value "(${GITTER_C_____ARG}Argument color${GITTER_C___RESET})    " "GITTER_C_____ARG" "'\\${GITTER_C_____ARG}'"
-  ___print_config_value "(${GITTER_C__OPTION}Option color  ${GITTER_C___RESET})    " "GITTER_C__OPTION" "'\\${GITTER_C__OPTION}'"
-  ___print_config_value "(${GITTER_C___VALUE}Value color   ${GITTER_C___RESET})    " "GITTER_C___VALUE" "'\\${GITTER_C___VALUE}'"
+  echo -e "${GITTER_C__HEADING}Colors:${GITTER_C____RESET}"
+  ___print_config_value "(${GITTER_C__SUCCESS}Success color ${GITTER_C____RESET})    " "GITTER_C__SUCCESS" "'\\${GITTER_C__SUCCESS}'"
+  ___print_config_value "(${GITTER_C____ERROR}Error color   ${GITTER_C____RESET})    " "GITTER_C____ERROR" "'\\${GITTER_C____ERROR}'"
+  ___print_config_value "(${GITTER_C_____REPO}Path color    ${GITTER_C____RESET})    " "GITTER_C_____REPO" "'\\${GITTER_C_____REPO}'"
+  ___print_config_value "(${GITTER_C_____PATH}Path Dim color${GITTER_C____RESET})    " "GITTER_C_____PATH" "'\\${GITTER_C_PATH_DM}'"
+  ___print_config_value "(${GITTER_C______DIM}Dim color     ${GITTER_C____RESET})    " "GITTER_C______DIM" "'\\${GITTER_C______DIM}'"
+  ___print_config_value "(${GITTER_C__HEADING}Heading color ${GITTER_C____RESET})    " "GITTER_C__HEADING" "'\\${GITTER_C__HEADING}'"
+  ___print_config_value "(${GITTER_C__COMMAND}Command color ${GITTER_C____RESET})    " "GITTER_C__COMMAND" "'\\${GITTER_C__COMMAND}'"
+  ___print_config_value "(${GITTER_C______ARG}Argument color${GITTER_C____RESET})    " "GITTER_C______ARG" "'\\${GITTER_C______ARG}'"
+  ___print_config_value "(${GITTER_C___OPTION}Option color  ${GITTER_C____RESET})    " "GITTER_C___OPTION" "'\\${GITTER_C___OPTION}'"
+  ___print_config_value "(${GITTER_C____VALUE}Value color   ${GITTER_C____RESET})    " "GITTER_C____VALUE" "'\\${GITTER_C____VALUE}'"
   echo
 }

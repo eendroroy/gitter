@@ -26,7 +26,7 @@ __COMMAND_ARG_MAP["help-gitterignore"]="                                        
 __print_command_error() {
   local option="$1"
   local command="$2"
-  echo -e " ${GITTER_C___ERROR}Error: option (${GITTER_C___RESET}${GITTER_C__OPTION}${option}${GITTER_C___RESET}${GITTER_C___ERROR}) is not applicable for [${GITTER_C_COMMAND}${command}${GITTER_C___ERROR}]" 1>&2
+  echo -e " ${GITTER_C____ERROR}Error: option (${GITTER_C____RESET}${GITTER_C___OPTION}${option}${GITTER_C____RESET}${GITTER_C____ERROR}) is not applicable for [${GITTER_C__COMMAND}${command}${GITTER_C____ERROR}]" 1>&2
 }
 
 # shellcheck disable=SC2154
@@ -36,7 +36,7 @@ __validate_command() {
 
   read -r -a allowed_options <<< "${__COMMAND_ARG_MAP["$command"]}"
 
-  for opt in "${opts[@]}"; do
+  for opt in "${OPTION[@]}"; do
     local valid_option=false
 
     for allowed_opt in "${allowed_options[@]}"; do

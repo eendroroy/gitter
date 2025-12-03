@@ -11,52 +11,52 @@
 
 __invalid_args_for_command() {
   echo
-  echo -e "${GITTER_C___ERROR}No arguments provided for command:${GITTER_C___RESET} ${GITTER_C_COMMAND}${1}${GITTER_C___RESET}" 1>&2
+  echo -e "${GITTER_C____ERROR}No arguments provided for command:${GITTER_C____RESET} ${GITTER_C__COMMAND}${1}${GITTER_C____RESET}" 1>&2
   echo
-  echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+  echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
   echo
   exit 1
 }
 
 __no_repository_found() {
-  echo -e "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}  No git repositories found in the current directory${GITTER_C___RESET}" 1>&2
+  echo -e "${GITTER_C____ERROR}${GITTER___ERROR_SYMBOL}  No git repositories found in the current directory${GITTER_C____RESET}" 1>&2
   exit 1
 }
 
 __all_repositories_ignored() {
-  echo -e "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}  All git repositories are ignored by .gitterignore${GITTER_C___RESET}" 1>&2
+  echo -e "${GITTER_C____ERROR}${GITTER___ERROR_SYMBOL}  All git repositories are ignored by .gitterignore${GITTER_C____RESET}" 1>&2
   exit 1
 }
 
 __all_repositories_filtered_out() {
-  echo -e "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}${GITTER_C___RESET}  No git repositories found in the current directory with applied filters" 1>&2
+  echo -e "${GITTER_C____ERROR}${GITTER___ERROR_SYMBOL}${GITTER_C____RESET}  No git repositories found in the current directory with applied filters" 1>&2
   exit 1
 }
 
 __unknown_arg() {
   echo
-  echo -e "${GITTER_C___ERROR}Unknown argument:${GITTER_C___RESET} $1" 1>&2
+  echo -e "${GITTER_C____ERROR}Unknown argument:${GITTER_C____RESET} $1" 1>&2
   echo
-  echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+  echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
   echo
   exit 1
 }
 
 __too_many_args() {
   echo
-  echo -ne "${GITTER_C___ERROR}Too many arguments for:${GITTER_C___RESET} ${GITTER_C__OPTION}${1}${GITTER_C___RESET}" 1>&2
-  echo -e " ${GITTER_C___ERROR}(expected ${2} argument(s) but got ${3})${GITTER_C___RESET}" 1>&2
+  echo -ne "${GITTER_C____ERROR}Too many arguments for:${GITTER_C____RESET} ${GITTER_C___OPTION}${1}${GITTER_C____RESET}" 1>&2
+  echo -e " ${GITTER_C____ERROR}(expected ${2} argument(s) but got ${3})${GITTER_C____RESET}" 1>&2
   echo
-  echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+  echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
   echo
   exit 1
 }
 
 __unknown_option() {
   echo
-  echo -e "${GITTER_C___ERROR}Unknown option:${GITTER_C___RESET} $1" 1>&2
+  echo -e "${GITTER_C____ERROR}Unknown option:${GITTER_C____RESET} $1" 1>&2
   echo
-  echo -e "Run ${GITTER_C_COMMAND}gitter${GITTER_C___RESET} ${GITTER_C_____ARG}help${GITTER_C___RESET} for usage information." 1>&2
+  echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
   echo
   exit 1
 }

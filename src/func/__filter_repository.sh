@@ -62,7 +62,7 @@ __filter_repositories() {
         repo  ) value="$(basename "$repo_dir")" ;;
         branch) value="$(git -C "$repo_dir" branch --show-current 2>/dev/null)" ;;
         *)
-          echo -e "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}  Unknown filter key: ${filter_key}${GITTER_C___RESET}" 1>&2
+          echo -e "${GITTER_C____ERROR}${GITTER___ERROR_SYMBOL}  Unknown filter key: ${filter_key}${GITTER_C____RESET}" 1>&2
           exit 1
           ;;
       esac

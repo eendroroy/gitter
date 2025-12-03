@@ -11,12 +11,12 @@
 
 __handle_stderr() {
   while IFS= read -r line || [ -n "$line" ]; do
-    printf '%b\n' "${GITTER_C___ERROR}${GITTER___ERROR_SYMBOL}${GITTER_C___RESET}  ${line}" 1>&2
+    printf '%b\n' "${GITTER_C____ERROR}${GITTER___ERROR_SYMBOL}${GITTER_C____RESET}  ${line}" 1>&2
   done
 }
 
 __handle_stdout() {
   while IFS= read -r line || [ -n "$line" ]; do
-    [[ "$GITTER_QUIET" == true ]] || printf '%b\n' "${GITTER_C_SUCCESS}${GITTER_SUCCESS_SYMBOL}${GITTER_C___RESET}  ${line}"
+    [[ "$GITTER_QUIET" == true ]] || printf '%b\n' "${GITTER_C__SUCCESS}${GITTER_SUCCESS_SYMBOL}${GITTER_C____RESET}  ${line}"
   done
 }

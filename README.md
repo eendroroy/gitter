@@ -55,21 +55,39 @@ export GITTER_CONTINUE_ON_ERROR=false  # ASk to continue on error by default
 export GITTER_QUIET=false              # Quiet mode disabled by default, when enabled, only show stderr
 
 # Color configuration
-export GITTER_C___ERROR='\e[38;5;9m'   # Error
-export GITTER_C_SUCCESS='\e[38;5;2m'   # Success
-export GITTER_C____REPO='\e[35m'       # Repository name
-export GITTER_C____PATH='\e[2;35m'     # Path
-export GITTER_C_____DIM='\e[2;38;5;3m' # Dim text
-export GITTER_C_HEADING='\e[1;37m'     # Heading
-export GITTER_C_COMMAND='\e[32m'       # Command
-export GITTER_C_____ARG='\e[33m'       # Argument
-export GITTER_C__OPTION='\e[36m'       # Option
-export GITTER_C___VALUE='\e[2;35;1;3m' # Value
+export GITTER_C____ERROR='\e[38;5;9m'   # Error
+export GITTER_C__SUCCESS='\e[38;5;2m'   # Success
+export GITTER_C_____REPO='\e[35m'       # Repository name
+export GITTER_C_____PATH='\e[2;35m'     # Path
+export GITTER_C______DIM='\e[2;38;5;3m' # Dim text
+export GITTER_C__HEADING='\e[1;37m'     # Heading
+export GITTER_C__COMMAND='\e[32m'       # Command
+export GITTER_C______ARG='\e[33m'       # Argument
+export GITTER_C___OPTION='\e[36m'       # Option
+export GITTER_C____VALUE='\e[2;35;1;3m' # Value
+
+# Status colors
+export GITTER_C___BRANCH='\e[32m'       # Branch
+export GITTER_C___COMMIT='\e[2;35;1;3m' # Commit
+export GITTER_C__COMMITS='\e[2;35;1;3m' # Commit count
+export GITTER_C_TIME_REL='\e[33m'       # Relative time
+export GITTER_C_TIME_ABS='\e[33m'       # Absolute time
+export GITTER_C_AUTHOR_E='\e[36m'       # Author email
+export GITTER_C_AUTHOR_N='\e[36m'       # Author name
 ```
 
 ## Repository status patterns
 
 When running git commands, gitter will display the repository status based on the configured patterns.
+
+
+#### Examples
+- To customize the repository status pattern for `gitter list` command:
+
+```shell
+gitter list --status " on |[branch]| #|[commit:7]|(commits: |[commit:c]|) by |[author:e]| at |[time:d]"
+```
+
 The default patterns are as follows:
 
 ```shell

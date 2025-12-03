@@ -10,16 +10,16 @@
 # License, or (at your option) any later version.
 
 __ask_to_proceed() {
-  echo -ne "   ${GITTER_C_____DIM}Press any key to continue, 's' to skip 'q' to quit...${GITTER_C___RESET}"
+  echo -ne "   ${GITTER_C______DIM}Press any key to continue, 's' to skip 'q' to quit...${GITTER_C____RESET}"
   read -rsn1 input_key
 
   if [[ "$input_key" == "s" || "$input_key" == "S" ]]; then
-    echo -e "\r   ${GITTER_C___ERROR}Skipping...${GITTER_C___RESET}                                                               "
+    echo -e "\r   ${GITTER_C____ERROR}Skipping...${GITTER_C____RESET}                                                               "
     return 1
   fi
 
   if [[ "$input_key" == "q" || "$input_key" == "Q" ]]; then
-    echo -e "\r   ${GITTER_C___ERROR}Quitting...${GITTER_C___RESET}                                                               "
+    echo -e "\r   ${GITTER_C____ERROR}Quitting...${GITTER_C____RESET}                                                               "
     return 2
   fi
 
@@ -28,10 +28,10 @@ __ask_to_proceed() {
 }
 
 __ask_on_error() {
-  echo -ne "   ${GITTER_C___ERROR}Errors occurred (${1}). Press any key to continue or 'q' to quit...${GITTER_C___RESET}"
+  echo -ne "   ${GITTER_C____ERROR}Errors occurred (${1}). Press any key to continue or 'q' to quit...${GITTER_C____RESET}"
   read -rsn1 input_key
   if [[ "$input_key" == "q" || "$input_key" == "Q" ]]; then
-    echo -e "\r   ${GITTER_C___ERROR}Quitting...${GITTER_C___RESET}                                                               "
+    echo -e "\r   ${GITTER_C____ERROR}Quitting...${GITTER_C____RESET}                                                               "
     exit "$1"
   fi
   printf '\r\033[2K'

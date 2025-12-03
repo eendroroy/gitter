@@ -12,14 +12,14 @@
 __enter_repo_dir() {
   local dir="$1"
   pushd "$dir" >/dev/null || {
-    echo -e "${GITTER_C___ERROR}${GITTER_PRIMARY_SYMBOL}  Failed to enter: ${GITTER_C___RESET} $(__print_path "$dir")" 1>&2
+    echo -e "${GITTER_C____ERROR}${GITTER_PRIMARY_SYMBOL}  Failed to enter: ${GITTER_C____RESET} $(__print_path "$dir")" 1>&2
     exit 1
   }
 }
 
 __exit_repo_dir() {
   popd >/dev/null || {
-    echo -e "${GITTER_C___ERROR}${GITTER_PRIMARY_SYMBOL}  Failed to exit repository directory${GITTER_C___RESET}" 1>&2
+    echo -e "${GITTER_C____ERROR}${GITTER_PRIMARY_SYMBOL}  Failed to exit repository directory${GITTER_C____RESET}" 1>&2
     exit 1
   }
 }
