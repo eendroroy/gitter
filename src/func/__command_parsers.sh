@@ -71,12 +71,12 @@ __expand_status() {
   [[ -z "${status+x}" ]] && status="${GITTER_REPO_STATUS}"
 
   case "${status}" in
-    "branch"           ) status="${GITTER_STATUS_BRANCH}"        ;;
-    "updated"          ) status="${GITTER_STATUS_UPDATED}"       ;;
-    "updated-at"       ) status="${GITTER_STATUS_UPDATED_AT}"    ;;
-    "updated-by"       ) status="${GITTER_STATUS_UPDATED_BY}"    ;;
-    "updated-by-at"    ) status="${GITTER_STATUS_UPDATED_BY_AT}" ;;
-    *                  )                                         ;;
+    "branch"        ) status="${GITTER_STATUS_BRANCH}"        ;;
+    "updated"       ) status="${GITTER_STATUS_UPDATED}"       ;;
+    "updated-at"    ) status="${GITTER_STATUS_UPDATED_AT}"    ;;
+    "updated-by"    ) status="${GITTER_STATUS_UPDATED_BY}"    ;;
+    "updated-by-at" ) status="${GITTER_STATUS_UPDATED_BY_AT}" ;;
+    *               )                                         ;;
   esac
 
   IFS='|' read -r -a PATTERNS <<< "${status}"
@@ -104,7 +104,7 @@ ___expand_options() {
     -c ) echo "--continue-on-error" ;;
     -q ) echo "--quiet"             ;;
     -n ) echo "--dry-run"           ;;
-    *  ) echo "$1"                  ;;
+     * ) echo "$1"                  ;;
   esac
 }
 
@@ -121,7 +121,6 @@ ___already_tracked_option() {
 __disable_color_output() {
   GITTER_C____RESET=''
   GITTER_C_____REPO=''
-  GITTER_C_PATH_DM=''
   GITTER_C__COMMAND=''
   GITTER_C______ARG=''
   GITTER_C___OPTION=''
