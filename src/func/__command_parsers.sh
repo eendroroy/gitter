@@ -67,6 +67,21 @@ __read_status() {
   status="$1"
 }
 
+__expand_status() {
+  [[ -z "${status+x}" ]] && status="${GITTER_REPO_STATUS}"
+
+  case "${status}" in
+    "branch"           ) status="${GITTER_STATUS_BRANCH}"        ;;
+    "updated"          ) status="${GITTER_STATUS_UPDATED}"       ;;
+    "updated-at"       ) status="${GITTER_STATUS_UPDATED_AT}"    ;;
+    "updated-by"       ) status="${GITTER_STATUS_UPDATED_BY}"    ;;
+    "updated-by-at"    ) status="${GITTER_STATUS_UPDATED_BY_AT}" ;;
+    *                  )                                         ;;
+  esac
+
+  IFS='|' read -r -a PATTERNS <<< "${status}"
+}
+
 __disable_color_output() {
   GITTER_C____RESET=''
   GITTER_C_____REPO=''

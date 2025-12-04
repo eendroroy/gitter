@@ -26,7 +26,7 @@ ____CURRENT_DIR=$(pwd)
 [[ -z "${GITTER_QUIET+x}"               ]] && GITTER_QUIET=false
 [[ -z "${GITTER_ASK_CONFIRMATION+x}"    ]] && GITTER_ASK_CONFIRMATION=false
 [[ -z "${GITTER_CONTINUE_ON_ERROR+x}"   ]] && GITTER_CONTINUE_ON_ERROR=false
-[[ -z "${GITTER_REPO_STATUS+x}"         ]] && GITTER_REPO_STATUS=" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]"
+[[ -z "${GITTER_REPO_STATUS+x}"         ]] && GITTER_REPO_STATUS="updated-by"
 
 # Color defaults
 [[ -z "${GITTER_C__SUCCESS+x}" ]] && GITTER_C__SUCCESS='\e[38;5;2m'
@@ -53,6 +53,12 @@ GITTER_C____RESET='\e[0m'
 GITTER_DRY_RUN=false
 OPTION=()
 PATTERNS=()
+# Predefined status patterns
+GITTER_STATUS_BRANCH=" on |[branch]"
+GITTER_STATUS_UPDATED=" on |[branch]| |[time:r]"
+GITTER_STATUS_UPDATED_AT=" on |[branch]| |[commit:8]| at |[time:d]"
+GITTER_STATUS_UPDATED_BY=" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]"
+GITTER_STATUS_UPDATED_BY_AT=" on |[branch]| |[commit:8]| by |[author:e]| at |[time:d]"
 
 # Gitter project variables
 ____GITTER____LINK="https://github.com/eendroroy/gitter"

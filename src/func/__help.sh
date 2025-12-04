@@ -138,11 +138,15 @@ Date: ${GITTER_C______ARG}{_time:d_}${GITTER_C____RESET}\""
 }
 
 __help_status() {
+  local separator="${GITTER_C______DIM}|${GITTER_C____RESET}"
   echo
   echo -e "${GITTER_C__HEADING}Gitter${GITTER_C____RESET}"
   echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
   echo
-  echo -e "${GITTER_C__HEADING}Repository status patters:${GITTER_C____RESET}"
+  echo -e "${GITTER_C__HEADING}Usage:${GITTER_C____RESET}"
+  echo -e "  Set ${GITTER_C__COMMAND}GITTER_REPO_STATUS${GITTER_C____RESET} variable or use ${GITTER_C___OPTION}--status${GITTER_C____RESET} option to define custom or predefined repository status format."
+  echo
+  echo -e "${GITTER_C__HEADING}Syntax:${GITTER_C____RESET}"
   echo -e "    ${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C______ARG}text${GITTER_C____RESET}${GITTER_C______DIM}]${GITTER_C____RESET}${GITTER_C______ARG}|${GITTER_C____RESET}${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C______ARG}placeholder${GITTER_C____RESET}${GITTER_C______DIM}]...${GITTER_C____RESET}"
   echo
   echo -e "${GITTER_C__HEADING}Available placeholders:${GITTER_C____RESET}"
@@ -157,7 +161,15 @@ __help_status() {
   echo -e "    ${GITTER_C______ARG}[author:n]  ${GITTER_C____RESET} Current git commit author name"
   echo
   echo -e "${GITTER_C__HEADING}Example Configuration for status:${GITTER_C____RESET}"
-  echo -e " Set ${GITTER_C__COMMAND}GITTER_REPO_STATUS${GITTER_C____RESET}=${GITTER_C______ARG}\" on |[branch]\"${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C___OPTION}list --status${GITTER_C____RESET} ${GITTER_C____VALUE}updated-by${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C___OPTION}list --status${GITTER_C____RESET} ${GITTER_C____VALUE}\" on |[branch]\"${GITTER_C____RESET}"
+  echo
+  echo -e "${GITTER_C__HEADING}Predefined patterns:${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C______ARG}branch${GITTER_C____RESET}           ${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C______ARG}updated${GITTER_C____RESET}          ${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[time:r]${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C______ARG}updated-at${GITTER_C____RESET}       ${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[commit:8]${GITTER_C____RESET}${separator}${GITTER_C______DIM} at ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[time:d]${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C______ARG}updated-by${GITTER_C____RESET}       ${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[commit:8]${GITTER_C____RESET}${separator}${GITTER_C______DIM} by ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[author:e]${GITTER_C____RESET}${separator} ${GITTER_C______ARG}[time:r]${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C______ARG}updated-by-at${GITTER_C____RESET}    ${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[commit:8]${GITTER_C____RESET}${separator}${GITTER_C______DIM} by ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[author:e]${GITTER_C____RESET}${separator} ${GITTER_C______DIM}at${GITTER_C____RESET} ${separator}${GITTER_C______ARG}[time:d]${GITTER_C____RESET}"
   echo
 }
 

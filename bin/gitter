@@ -56,11 +56,7 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
-if [[ -n "${status+x}" ]]; then
-  IFS='|' read -r -a PATTERNS <<< "${status}"
-else
-  IFS='|' read -r -a PATTERNS <<< "${GITTER_REPO_STATUS}"
-fi
+__expand_status
 
 [[ -z "$command" ]] && command="git"
 
