@@ -59,7 +59,7 @@ __filter_repositories() {
 
       case "$filter_key" in
         path  ) value="$repo_dir" ;;
-        repo  ) value="$(basename "$repo_dir")" ;;
+        repo  ) value="$(basename "$repo_dir")"; [[ "$value" == "." ]] && value=$(basename "$(realpath .)") ;;
         branch) value="$(git -C "$repo_dir" branch --show-current 2>/dev/null)" ;;
         *)
           echo -e "${GITTER_C____ERROR}${GITTER___ERROR_SYMBOL}  Unknown filter key: ${filter_key}${GITTER_C____RESET}" 1>&2
