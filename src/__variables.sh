@@ -59,6 +59,7 @@ GITTER_STATUS_UPDATED=" on |[branch]| |[time:r]"
 GITTER_STATUS_UPDATED_AT=" on |[branch]| |[commit:8]| at |[time:d]"
 GITTER_STATUS_UPDATED_BY=" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]"
 GITTER_STATUS_UPDATED_BY_AT=" on |[branch]| |[commit:8]| by |[author:e]| at |[time:d]"
+GITTER_STATUS_COMMIT_COUNT=" (|[commit:c]| commits)| on |[branch]"
 
 # Gitter project variables
 ____GITTER____LINK="https://github.com/eendroroy/gitter"

@@ -76,6 +76,7 @@ __expand_status() {
     "updated-at"    ) status="${GITTER_STATUS_UPDATED_AT}"    ;;
     "updated-by"    ) status="${GITTER_STATUS_UPDATED_BY}"    ;;
     "updated-by-at" ) status="${GITTER_STATUS_UPDATED_BY_AT}" ;;
+    "commit-count"  ) status="${GITTER_STATUS_COMMIT_COUNT}"  ;;
     *               )                                         ;;
   esac
 
