@@ -60,6 +60,16 @@ _gitter() {
     "branch\:+_branch_+:Match by current branch name substring - replace '_branch_' with desired value"
   )
 
+  statuses=(
+    "branch:\" on |[branch]\""
+    "updated:\" on |[branch]| |[time:r]\""
+    "updated-at:\" on |[branch]| |[commit:8]| at |[time:d]\""
+    "updated-by:\" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]\""
+    "updated-by-at:\" on |[branch]| |[commit:8]| by |[author:e]| at |[time:d]\""
+    "commit-count:\" (|[commit:c]| commits)| on |[branch]\""
+    ":provide custom format using placeholders (see 'gitter help status' for details)"
+  )
+
   helps=(
     "filter:Show help about filter patterns"
     "gitterignore:Show help about .gitterignore file"
@@ -70,6 +80,8 @@ _gitter() {
   _arguments -C \
     '--filter:pattern:->pattern' \
     '-f:pattern:->pattern' \
+    '--status:status:->status' \
+    '-s:status:->status' \
     '1:command:->command' \
     '2:help:->help' \
     '*::args:->args'
@@ -81,6 +93,10 @@ _gitter() {
       ;;
     pattern)
       _describe 'pattern prefix' pattern_prefixes
+      return
+      ;;
+    status)
+      _describe 'status' statuses
       return
       ;;
     help)

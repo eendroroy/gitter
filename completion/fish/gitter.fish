@@ -1,21 +1,20 @@
 # fish
 
+set -l gitter_status_fields 'branch updated updated-at updated-by updated-by-at commit-count'
+set -l gitter_filter_args   'path:_path_ path:_path_+ path:+_path_ path:+_path_+ repo:_repo_ repo:_repo_+ repo:+_repo_ repo:+_repo_+ branch:_branch_ branch:_branch_+ branch:+_branch_ branch:+_branch_+'
+
 # Basic command completions (no file completion)
 complete -c gitter -f -a 'git g exec x list ls help config' -d 'gitter command'
 
-# Options that take an argument
-complete -c gitter -l status -s s -r -d 'Show repository status (takes pattern)'
-complete -c gitter -l max-depth -s d -r -d 'Maximum directory depth'
-complete -c gitter -l exclude -s e -r -d 'Exclude pattern'
-# --filter / -f requires an argument; provide pattern-prefix suggestions
-complete -c gitter -l filter -s f -r -a 'path:_path_ path:_path_+ path:+_path_ path:+_path_+ repo:_repo_ repo:_repo_+ repo:+_repo_ repo:+_repo_+ branch:_branch_ branch:_branch_+ branch:+_branch_ branch:+_branch_+' -d 'Filter pattern'
-
-# Flag options
-complete -c gitter -l ask-confirmation -s a -d 'Ask for confirmation'
-complete -c gitter -l continue-on-error -s c -d 'Continue on error'
-complete -c gitter -l quiet -s q -d 'Quiet mode'
-complete -c gitter -l no-color -d 'Disable color output'
-complete -c gitter -l dry-run -s n -d 'Dry run (no changes)'
+complete -c gitter -l max-depth         -s d -r -d 'Maximum directory depth'
+complete -c gitter -l exclude           -s e -r -d 'Exclude pattern'
+complete -c gitter -l filter            -s f -r -d 'Filter pattern'                          -a $gitter_filter_args
+complete -c gitter -l status            -s s -r -d 'Show repository status (takes pattern)'  -a $gitter_status_fields
+complete -c gitter -l ask-confirmation  -s a    -d 'Ask for confirmation'
+complete -c gitter -l continue-on-error -s c    -d 'Continue on error'
+complete -c gitter -l quiet             -s q    -d 'Quiet mode'
+complete -c gitter -l no-color                  -d 'Disable color output'
+complete -c gitter -l dry-run           -s n    -d 'Dry run (no changes)'
 
 # End-of-options marker
 complete -c gitter -a '--' -d 'End of options'

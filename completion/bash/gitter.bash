@@ -24,11 +24,18 @@ _gitter() {
   local pattern_prefixes=("path:_path_" "path:_path_+" "path:+_path_" "path:+_path_+" \
                           "repo:_repo_" "repo:_repo_+" "repo:+_repo_" "repo:+_repo_+" \
                           "branch:_branch_" "branch:_branch_+" "branch:+_branch_" "branch:+_branch_+")
+  local statuses=("branch" "updated" "updated-at" "updated-by" "updated-by-at" "commit-count")
   local helps=("filter" "gitterignore" "expander" "status")
 
   # If previous token expects a pattern (after --filter or -f)
   if [[ "${prev}" == "--filter" || "${prev}" == "-f" ]]; then
     COMPREPLY=( $(compgen -W "${pattern_prefixes[*]}" -- "${cur}") )
+    return 0
+  fi
+
+  # If previous token expects a pattern (after --status or -s)
+  if [[ "${prev}" == "--status" || "${prev}" == "-s" ]]; then
+    COMPREPLY=( $(compgen -W "${statuses[*]}" -- "${cur}") )
     return 0
   fi
 
