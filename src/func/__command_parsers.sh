@@ -120,16 +120,23 @@ ___already_tracked_option() {
 }
 
 __disable_color_output() {
-  GITTER_C____RESET=''
+  GITTER_C__SUCCESS=''
+  GITTER_C____ERROR=''
   GITTER_C_____REPO=''
+  GITTER_C_____PATH=''
+  GITTER_C______DIM=''
+  GITTER_C__HEADING=''
   GITTER_C__COMMAND=''
   GITTER_C______ARG=''
   GITTER_C___OPTION=''
-  GITTER_C______DIM=''
   GITTER_C____VALUE=''
-  GITTER_C__SUCCESS=''
-  GITTER_C____ERROR=''
-  GITTER_C__HEADING=''
+  GITTER_C___BRANCH=''
+  GITTER_C___COMMIT=''
+  GITTER_C__COMMITS=''
+  GITTER_C_TIME_REL=''
+  GITTER_C_TIME_ABS=''
+  GITTER_C_AUTHOR_E=''
+  GITTER_C_AUTHOR_N=''
 }
 
 # Commands
