@@ -62,4 +62,4 @@ GITTER_STATUS_UPDATED_BY_AT=" on |[branch]| |[commit:8]| by |[author:e]| at |[ti
 
 # Gitter project variables
 ____GITTER____LINK="https://github.com/eendroroy/gitter"
-____GITTER_VERSION="0.0.4"
+____GITTER_VERSION="0.0.5"
