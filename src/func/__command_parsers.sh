@@ -82,6 +82,42 @@ __expand_status() {
   IFS='|' read -r -a PATTERNS <<< "${status}"
 }
 
+__track_options() {
+  [[ "$1" != "--filter" && "$1" != "-f" ]] && ___already_tracked_option "$1" && {
+    echo -e "${GITTER_C____ERROR}Duplicate option specified:${GITTER_C____RESET} ${GITTER_C___OPTION}$1${GITTER_C____RESET}" 1>&2
+    echo
+    echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
+    echo
+    exit 1
+  }
+
+  OPTION=("${OPTION[@]}" "${1}")
+}
+
+___expand_options() {
+  case "$1" in
+    -s ) echo "--status"            ;;
+    -d ) echo "--max-depth"         ;;
+    -f ) echo "--filter"            ;;
+    -e ) echo "--exclude"           ;;
+    -a ) echo "--ask-confirmation"  ;;
+    -c ) echo "--continue-on-error" ;;
+    -q ) echo "--quiet"             ;;
+    -n ) echo "--dry-run"           ;;
+    *  ) echo "$1"                  ;;
+  esac
+}
+
+___already_tracked_option() {
+  local opt
+  for opt in "${OPTION[@]}"; do
+    if [[ "$(___expand_options "$opt")" == "$(___expand_options "$1")" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
 __disable_color_output() {
   GITTER_C____RESET=''
   GITTER_C_____REPO=''

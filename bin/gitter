@@ -36,15 +36,15 @@ while [[ $# -gt 0 ]]; do
     version |v ) ___version          ;;
 
     # Parse Options
-    --status            |-s) OPTION=("${OPTION[@]}" "${1}"); shift; __read_status "$1"           ;;
-    --max-depth         |-d) OPTION=("${OPTION[@]}" "${1}"); shift; __read_max_depth "$1"        ;;
-    --exclude           |-e) OPTION=("${OPTION[@]}" "${1}");        GITTER_FILTER_EXCLUDE=true   ;;
-    --filter            |-f) OPTION=("${OPTION[@]}" "${1}"); shift; __read_filter "$1"           ;;
-    --ask-confirmation  |-a) OPTION=("${OPTION[@]}" "${1}");        GITTER_ASK_CONFIRMATION=true ;;
-    --continue-on-error |-c) OPTION=("${OPTION[@]}" "${1}");        GITTER_CONTINUE_ON_ERROR=true;;
-    --quiet             |-q) OPTION=("${OPTION[@]}" "${1}");        GITTER_QUIET=true            ;;
-    --no-color             ) OPTION=("${OPTION[@]}" "${1}");        GITTER_NO_COLOR=true         ;;
-    --dry-run           |-n) OPTION=("${OPTION[@]}" "${1}");        GITTER_DRY_RUN=true          ;;
+    --status            |-s) __track_options "${1}"; shift; __read_status "$1"           ;;
+    --max-depth         |-d) __track_options "${1}"; shift; __read_max_depth "$1"        ;;
+    --exclude           |-e) __track_options "${1}";        GITTER_FILTER_EXCLUDE=true   ;;
+    --filter            |-f) __track_options "${1}"; shift; __read_filter "$1"           ;;
+    --ask-confirmation  |-a) __track_options "${1}";        GITTER_ASK_CONFIRMATION=true ;;
+    --continue-on-error |-c) __track_options "${1}";        GITTER_CONTINUE_ON_ERROR=true;;
+    --quiet             |-q) __track_options "${1}";        GITTER_QUIET=true            ;;
+    --no-color             ) __track_options "${1}";        GITTER_NO_COLOR=true         ;;
+    --dry-run           |-n) __track_options "${1}";        GITTER_DRY_RUN=true          ;;
 
     # Parse Command Arguments
     --) __read_command_args "$@"; break ;;
