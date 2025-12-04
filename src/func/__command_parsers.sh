@@ -91,7 +91,7 @@ __track_options() {
     exit 1
   }
 
-  OPTION=("${OPTION[@]}" "${1}")
+  ___already_tracked_option "$1" || OPTION=("${OPTION[@]}" "${1}")
 }
 
 ___expand_options() {
