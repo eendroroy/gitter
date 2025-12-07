@@ -69,6 +69,10 @@ __filter_repositories() {
   local expr="$FILTER"
   local original_expr eval_expr filter
 
+  if [[ -z "${expr//[[:space:]]/}" ]]; then
+    return
+  fi
+
   for git_repo_dir in "${repos_ref[@]}"; do
     original_expr="$expr"
     eval_expr="${expr//[()&|!]/ }"
