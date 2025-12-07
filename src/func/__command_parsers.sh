@@ -23,18 +23,6 @@ __parse_command() {
   command="${1}"
 }
 
-__read_filter() {
-  if [[ -z "$1" || "$1" == -* ]]; then
-    echo
-    echo -e "${GITTER_C____ERROR}Missing or invalid argument for:${GITTER_C____RESET} ${GITTER_C___OPTION}--filter${GITTER_C____RESET}" 1>&2
-    echo
-    echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
-    echo
-    exit 1
-  fi
-  GITTER_FILTERS+=("$1")
-}
-
 __read_command_args() {
   shift
   while [[ $# -gt 0 ]]; do
@@ -84,7 +72,7 @@ __expand_status() {
 }
 
 __track_options() {
-  [[ "$1" != "--filter" && "$1" != "-f" ]] && ___already_tracked_option "$1" && {
+  ___already_tracked_option "$1" && {
     echo -e "${GITTER_C____ERROR}Duplicate option specified:${GITTER_C____RESET} ${GITTER_C___OPTION}$1${GITTER_C____RESET}" 1>&2
     echo
     echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
@@ -100,7 +88,6 @@ ___expand_options() {
     -s ) echo "--status"            ;;
     -d ) echo "--max-depth"         ;;
     -f ) echo "--filter"            ;;
-    -e ) echo "--exclude"           ;;
     -a ) echo "--ask-confirmation"  ;;
     -c ) echo "--continue-on-error" ;;
     -q ) echo "--quiet"             ;;

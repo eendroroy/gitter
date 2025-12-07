@@ -1,14 +1,12 @@
 # fish
 
 set -l gitter_status_fields 'branch updated updated-at updated-by updated-by-at commit-count'
-set -l gitter_filter_args   'path:_path_ path:_path_+ path:+_path_ path:+_path_+ repo:_repo_ repo:_repo_+ repo:+_repo_ repo:+_repo_+ branch:_branch_ branch:_branch_+ branch:+_branch_ branch:+_branch_+'
 
 # Basic command completions (no file completion)
 complete -c gitter -f -a 'git g exec x list ls help config' -d 'gitter command'
 
 complete -c gitter -l max-depth         -s d -r -d 'Maximum directory depth'
-complete -c gitter -l exclude           -s e -r -d 'Exclude pattern'
-complete -c gitter -l filter            -s f -r -d 'Filter pattern'                          -a $gitter_filter_args
+complete -c gitter -l filter            -s f -r -d 'Filter pattern (Run 'gitter help filter' for details)'
 complete -c gitter -l status            -s s -r -d 'Show repository status (takes pattern)'  -a $gitter_status_fields
 complete -c gitter -l ask-confirmation  -s a    -d 'Ask for confirmation'
 complete -c gitter -l continue-on-error -s c    -d 'Continue on error'

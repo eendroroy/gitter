@@ -38,48 +38,49 @@ __match_filter() {
   fi
 }
 
+__apply_filter() {
+  local repo_git_dir="$1"
+  local filter="$2"
+
+  filter_key="${filter%%:*}"
+  filter_value="${filter#*:}"
+
+  repo_dir="$(dirname "$repo_git_dir")"
+
+  case "$filter_key" in
+    path  ) value="$repo_dir" ;;
+    repo  ) value="$(basename "$repo_dir")"; [[ "$value" == "." ]] && value=$(basename "$(realpath .)") ;;
+    branch) value="$(git -C "$repo_dir" branch --show-current 2>/dev/null)" ;;
+    *)
+      echo -e "${GITTER_C____ERROR}${GITTER___ERROR_SYMBOL}  Unknown filter key: ${filter_key}${GITTER_C____RESET}" 1>&2
+      exit 1
+      ;;
+  esac
+
+  if __match_filter "$value" "$filter_value"; then
+    echo 1
+  else
+    echo 0
+  fi
+}
 
 __filter_repositories() {
-  local -n repo_list="$1"
-  local filtered_repo_git_dirs=()
+  local -n repos_ref="$1"
+  local expr="$FILTER"
+  local original_expr eval_expr filter
 
-  for repo_git_dir in "${repo_list[@]}"; do
+  for git_repo_dir in "${repos_ref[@]}"; do
+    original_expr="$expr"
+    eval_expr="${expr//[()&|!]/ }"
 
-    if [[ ${#GITTER_FILTERS[@]} -eq 0 ]]; then
-      filtered_repo_git_dirs+=("$repo_git_dir")
-      continue
-    fi
-
-    match=false
-    for filter in "${GITTER_FILTERS[@]}"; do
-      filter_key="${filter%%:*}"
-      filter_value="${filter#*:}"
-
-      repo_dir="$(dirname "$repo_git_dir")"
-
-      case "$filter_key" in
-        path  ) value="$repo_dir" ;;
-        repo  ) value="$(basename "$repo_dir")"; [[ "$value" == "." ]] && value=$(basename "$(realpath .)") ;;
-        branch) value="$(git -C "$repo_dir" branch --show-current 2>/dev/null)" ;;
-        *)
-          echo -e "${GITTER_C____ERROR}${GITTER___ERROR_SYMBOL}  Unknown filter key: ${filter_key}${GITTER_C____RESET}" 1>&2
-          exit 1
-          ;;
-      esac
-
-      if __match_filter "$value" "$filter_value"; then
-        match=true && break
-      fi
+    for filter in $eval_expr; do
+      original_expr="${original_expr//$filter/"$(__apply_filter "$git_repo_dir" "$filter")"}"
     done
 
-    if [[ "$GITTER_FILTER_EXCLUDE" == false && "$match" == true ]]; then
-      filtered_repo_git_dirs+=("$repo_git_dir")
-    fi
-
-    if [[ "$GITTER_FILTER_EXCLUDE" == true && "$match" == false ]]; then
-      filtered_repo_git_dirs+=("$repo_git_dir")
+    if (( original_expr )); then
+      filtered_repositories+=("$git_repo_dir")
     fi
   done
 
-  repo_list=("${filtered_repo_git_dirs[@]}")
+  repos_ref=("${filtered_repositories[@]}")
 }

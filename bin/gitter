@@ -38,13 +38,12 @@ while [[ $# -gt 0 ]]; do
     # Parse Options
     --status            |-s) __track_options "${1}"; shift; __read_status "$1"           ;;
     --max-depth         |-d) __track_options "${1}"; shift; __read_max_depth "$1"        ;;
-    --exclude           |-e) __track_options "${1}";        GITTER_FILTER_EXCLUDE=true   ;;
-    --filter            |-f) __track_options "${1}"; shift; __read_filter "$1"           ;;
+    --filter            |-f) __track_options "${1}"; shift; FILTER="$1"                  ;;
     --ask-confirmation  |-a) __track_options "${1}";        GITTER_ASK_CONFIRMATION=true ;;
     --continue-on-error |-c) __track_options "${1}";        GITTER_CONTINUE_ON_ERROR=true;;
-    --quiet             |-q) __track_options "${1}";        GITTER_QUIET=true            ;;
+    --quiet             |-q) __track_options "${1}";        QUIET=true                   ;;
     --no-color             ) __track_options "${1}";        GITTER_NO_COLOR=true         ;;
-    --dry-run           |-n) __track_options "${1}";        GITTER_DRY_RUN=true          ;;
+    --dry-run           |-n) __track_options "${1}";        DRY_RUN=true                 ;;
 
     # Parse Command Arguments
     --) __read_command_args "$@"; break ;;
@@ -122,7 +121,7 @@ for repository in "${repositories[@]}"; do
   echo -e   " $(__repo_status ".")"
 
   parsed_args=("${additional_args[@]}" "${parsed_args[@]}")
-  if [[ "$GITTER_DRY_RUN" == true ]]; then
+  if [[ "$DRY_RUN" == true ]]; then
     echo -e "   ${GITTER_C__COMMAND}${command}${GITTER_C____RESET} ${GITTER_C______ARG}${parsed_args[*]}${GITTER_C____RESET}"
   else
     echo -ne "   ${GITTER_C______DIM}\$(${GITTER_C____RESET}${GITTER_C__COMMAND}${command}"

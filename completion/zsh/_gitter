@@ -31,8 +31,8 @@ _gitter() {
     "-d:Max depth to search for git repositories (default: infinite)"
     "--exclude:Exclude matched repositories instead of including"
     "-e:Exclude matched repositories instead of including"
-    "--filter:Filter repositories matching the given pattern (can be specified multiple times)"
-    "-f:Filter repositories matching the given pattern (can be specified multiple times)"
+    "--filter:Filter repositories matching the given pattern (Run 'gitter help filter' for details)"
+    "-f:Filter repositories matching the given pattern (Run 'gitter help filter' for details)"
     "--ask-confirmation:Ask for confirmation before executing commands"
     "-a:Ask for confirmation before executing commands"
     "--continue-on-error:Continue executing commands even if some repositories result in errors"
@@ -43,21 +43,6 @@ _gitter() {
     "--dry-run:Show what would be done without actually executing commands"
     "-n:Show what would be done without actually executing commands"
     "--:End of command options, all following arguments are treated as positional arguments"
-  )
-
-  pattern_prefixes=(
-    "path\:_path_:Match by full path - replace '_path_' with desired value"
-    "path\:_path_+:Match by path prefix - replace '_path_' with desired value"
-    "path\:+_path_:Match by path suffix - replace '_path_' with desired value"
-    "path\:+_path_+:Match by path substring - replace '_path_' with desired value"
-    "repo\:_repo_:Match by repository name - replace '_repo_' with desired value"
-    "repo\:_repo_+:Match by repository name prefix - replace '_repo_' with desired value"
-    "repo\:+_repo_:Match by repository name suffix - replace '_repo_' with desired value"
-    "repo\:+_repo_+:Match by repository name substring - replace '_repo_' with desired value"
-    "branch\:_branch_:Match by current branch name - replace '_branch_' with desired value"
-    "branch\:_branch_+:Match by current branch name prefix - replace '_branch_' with desired value"
-    "branch\:+_branch_:Match by current branch name suffix - replace '_branch_' with desired value"
-    "branch\:+_branch_+:Match by current branch name substring - replace '_branch_' with desired value"
   )
 
   statuses=(
@@ -78,8 +63,6 @@ _gitter() {
   )
 
   _arguments -C \
-    '--filter:pattern:->pattern' \
-    '-f:pattern:->pattern' \
     '--status:status:->status' \
     '-s:status:->status' \
     '1:command:->command' \
@@ -89,10 +72,6 @@ _gitter() {
   case $state in
     command)
       _describe 'gitter commands' commands
-      return
-      ;;
-    pattern)
-      _describe 'pattern prefix' pattern_prefixes
       return
       ;;
     status)

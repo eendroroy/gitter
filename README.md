@@ -49,12 +49,9 @@ export GITTER_PRIMARY_SYMBOL=" ━"      # Symbol to indicate primary informatio
 
 # Arg defaults
 export GITTER_MAX_DEPTH=2              # Maximum directory depth to search for git repositories (default: 2)
-export GITTER_FILTERS=()               # Default empty filters
-export GITTER_FILTER_EXCLUDE=false     # Do not exclude matched repositories by default
 export GITTER_NO_COLOR=false           # Enable colored output by default
 export GITTER_ASK_CONFIRMATION=false   # Proceed without asking for confirmation by default
 export GITTER_CONTINUE_ON_ERROR=false  # ASk to continue on error by default
-export GITTER_QUIET=false              # Quiet mode disabled by default, when enabled, only show stderr
 
 # Color configuration
 export GITTER_C____ERROR='\e[38;5;9m'   # Error
@@ -122,7 +119,8 @@ export GITTER_REPO_STATUS=" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]
 ## Filters
 
 Filters allow you to include or exclude repositories based on specific criteria such as path, repository name,
-or branch name. You can use multiple filters to narrow down the selection of repositories.
+or branch name. It supports bash expression evaluation format. 
+For example: *`"( filter1 && filter2) || ! filter3"`*
 
 #### Filter Format
 
@@ -130,25 +128,25 @@ or branch name. You can use multiple filters to narrow down the selection of rep
 
 #### Prefixes
 
-- `path`  : Match for path name
-- `repo`  : Match for repository name
-- `branch`: Match for current git branch
+- `path  ` : Match for path name
+- `repo  ` : Match for repository name
+- `branch` : Match for current git branch
 
 #### Patterns
 
-- `+pattern+`: Matches substring anywhere in the value
-- `pattern+` : Matches the beginning of the value
-- `+pattern` : Matches the end of the value
-- `pattern`  : Matches exactly the value
+- `+pattern+` : Matches substring anywhere in the value
+- ` pattern+` : Matches the beginning of the value
+- `+pattern ` : Matches the end of the value
+- ` pattern ` : Matches exactly the value
 
 #### Examples
 
-- `-f repo:+lib+`                : Includes repositories with "lib" anywhere in the repository name.
-- `-f path:src+`                 : Includes repositories with paths starting with "src".
-- `-f branch:feature/+`          : Includes repositories currently on branches starting with "feature/".
-- `-f branch:main`               : Includes repositories currently on the "main" branch.
-- `-e -f repo:+test+`            : Excludes repositories with "test" anywhere in the repository name.
-- `-f path:+utils+ -f branch:dev`: Includes repositories with "utils" in the path or currently on the "dev" branch.
+- `-f "repo:+lib+"                ` : Includes repositories with "lib" anywhere in the repository name.
+- `-f "path:src+"                 ` : Includes repositories with paths starting with "src".
+- `-f "branch:feature/+"          ` : Includes repositories currently on branches starting with "feature/".
+- `-f "branch:main"               ` : Includes repositories currently on the "main" branch.
+- `-f "! repo:+test+"             ` : Excludes repositories with "test" anywhere in the repository name.
+- `-f "path:+utils+ || branch:dev"` : Includes repositories with "utils" in the path or currently on the "dev" branch.
 
 ## .gitterignore
 
@@ -158,24 +156,24 @@ Lines starting with `#` are treated as comments and ignored.
 
 #### Patterns
 
-- `relative/path/to/directory`: Ignore directory at exact relative path `relative/path/to/directory`
-- `*/directory_name`          : Ignore directories under any parent directory named `directory_name`
-- `directory_name/*`          : Ignore directories directly under the top-level directory named `directory_name`
+- `relative/path/to/directory` : Ignore directory at exact relative path `relative/path/to/directory`
+- `*/directory_name          ` : Ignore directories under any parent directory named `directory_name`
+- `directory_name/*          ` : Ignore directories directly under the top-level directory named `directory_name`
 
 ## Argument expansion
 
 Within `exec` and `git` commands, you can use the following expanders in arguments:
 
-- `{_repo_}`      : Name of the current git repository
-- `{_path:r_}`    : Relative path of the current working directory from where gitter was invoked
-- `{_path:a_}`    : Absolute path of the current working directory
-- `{_branch_}`    : Current git branch name
-- `{_commit:f_}`  : Current git commit hash
-- `{_commit:<n>_}`: Current git commit hash abbreviated to `<n>` characters. i.e. `{_commit:8_}`
-- `{_time:r_}`    : Relative time of the current git commit (e.g., "2 days ago")
-- `{_time:d_}`    : Date and time of the current git commit (e.g., "2024-01-01 12:00:00")
-- `{_author:e_}`  : Current git commit author email
-- `{_author:n_}`  : Current git commit author name
+- `{_repo_}      ` : Name of the current git repository
+- `{_path:r_}    ` : Relative path of the current working directory from where gitter was invoked
+- `{_path:a_}    ` : Absolute path of the current working directory
+- `{_branch_}    ` : Current git branch name
+- `{_commit:f_}  ` : Current git commit hash
+- `{_commit:<n>_}` : Current git commit hash abbreviated to `<n>` characters. i.e. `{_commit:8_}`
+- `{_time:r_}    ` : Relative time of the current git commit (e.g., "2 days ago")
+- `{_time:d_}    ` : Date and time of the current git commit (e.g., "2024-01-01 12:00:00")
+- `{_author:e_}  ` : Current git commit author email
+- `{_author:n_}  ` : Current git commit author name
 
 ## License
 

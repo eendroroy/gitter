@@ -20,10 +20,7 @@ ____CURRENT_DIR=$(pwd)
 
 # Arg defaults
 [[ -z "${GITTER_MAX_DEPTH+x}"           ]] && GITTER_MAX_DEPTH=2
-[[ -z "${GITTER_FILTERS+x}"             ]] && GITTER_FILTERS=()
-[[ -z "${GITTER_FILTER_EXCLUDE+x}"      ]] && GITTER_FILTER_EXCLUDE=false
 [[ -z "${GITTER_NO_COLOR+x}"            ]] && GITTER_NO_COLOR=false
-[[ -z "${GITTER_QUIET+x}"               ]] && GITTER_QUIET=false
 [[ -z "${GITTER_ASK_CONFIRMATION+x}"    ]] && GITTER_ASK_CONFIRMATION=false
 [[ -z "${GITTER_CONTINUE_ON_ERROR+x}"   ]] && GITTER_CONTINUE_ON_ERROR=false
 [[ -z "${GITTER_REPO_STATUS+x}"         ]] && GITTER_REPO_STATUS="updated-by"
@@ -50,9 +47,11 @@ ____CURRENT_DIR=$(pwd)
 
 # Non configurable variables
 GITTER_C____RESET='\e[0m'
-GITTER_DRY_RUN=false
+DRY_RUN=false
+QUIET=false
 OPTION=()
 PATTERNS=()
+FILTERS=""
 # Predefined status patterns
 GITTER_STATUS_BRANCH=" on |[branch]"
 GITTER_STATUS_UPDATED=" on |[branch]| |[time:r]"
@@ -63,4 +62,4 @@ GITTER_STATUS_COMMIT_COUNT=" (|[commit:c]| commits)| on |[branch]"
 
 # Gitter project variables
 ____GITTER____LINK="https://github.com/eendroroy/gitter"
-____GITTER_VERSION="0.0.6"
+____GITTER_VERSION="0.1.0"
