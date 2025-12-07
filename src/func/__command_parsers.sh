@@ -90,7 +90,6 @@ ___expand_options() {
     -f ) echo "--filter"            ;;
     -a ) echo "--ask-confirmation"  ;;
     -c ) echo "--continue-on-error" ;;
-    -q ) echo "--quiet"             ;;
     -n ) echo "--dry-run"           ;;
      * ) echo "$1"                  ;;
   esac

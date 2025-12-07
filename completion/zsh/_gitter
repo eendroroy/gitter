@@ -37,8 +37,6 @@ _gitter() {
     "-a:Ask for confirmation before executing commands"
     "--continue-on-error:Continue executing commands even if some repositories result in errors"
     "-c:Continue executing commands even if some repositories result in errors"
-    "--quiet:Enable quiet mode, minimal output"
-    "-q:Enable quiet mode, minimal output"
     "--no-color:Disable colored output"
     "--dry-run:Show what would be done without actually executing commands"
     "-n:Show what would be done without actually executing commands"

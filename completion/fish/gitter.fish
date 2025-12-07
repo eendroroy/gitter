@@ -10,7 +10,6 @@ complete -c gitter -l filter            -s f -r -d 'Filter pattern (Run 'gitter 
 complete -c gitter -l status            -s s -r -d 'Show repository status (takes pattern)'  -a $gitter_status_fields
 complete -c gitter -l ask-confirmation  -s a    -d 'Ask for confirmation'
 complete -c gitter -l continue-on-error -s c    -d 'Continue on error'
-complete -c gitter -l quiet             -s q    -d 'Quiet mode'
 complete -c gitter -l no-color                  -d 'Disable color output'
 complete -c gitter -l dry-run           -s n    -d 'Dry run (no changes)'
 

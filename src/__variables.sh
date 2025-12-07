@@ -48,7 +48,6 @@ ____CURRENT_DIR=$(pwd)
 # Non configurable variables
 GITTER_C____RESET='\e[0m'
 DRY_RUN=false
-QUIET=false
 OPTION=()
 PATTERNS=()
 FILTERS=""

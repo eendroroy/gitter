@@ -41,7 +41,6 @@ while [[ $# -gt 0 ]]; do
     --filter            |-f) __track_options "${1}"; shift; FILTER="$1"                  ;;
     --ask-confirmation  |-a) __track_options "${1}";        GITTER_ASK_CONFIRMATION=true ;;
     --continue-on-error |-c) __track_options "${1}";        GITTER_CONTINUE_ON_ERROR=true;;
-    --quiet             |-q) __track_options "${1}";        QUIET=true                   ;;
     --no-color             ) __track_options "${1}";        GITTER_NO_COLOR=true         ;;
     --dry-run           |-n) __track_options "${1}";        DRY_RUN=true                 ;;
 

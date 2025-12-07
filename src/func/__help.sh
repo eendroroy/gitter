@@ -27,7 +27,6 @@ __help() {
   echo -e "  ${GITTER_C___OPTION}--filter            -f ${GITTER_C____RESET}<${GITTER_C____VALUE}pattern${GITTER_C____RESET}>${GITTER_C____RESET} Filter repositories matching the given pattern (can be specified multiple times)"
   echo -e "  ${GITTER_C___OPTION}--ask-confirmation  -a          ${GITTER_C____RESET} Ask for confirmation before executing commands in each repository"
   echo -e "  ${GITTER_C___OPTION}--continue-on-error -c          ${GITTER_C____RESET} Continue executing commands in other repositories even if an error occurs in one"
-  echo -e "  ${GITTER_C___OPTION}--quiet             -q          ${GITTER_C____RESET} Enable quiet mode (suppress output of successful commands)"
   echo -e "  ${GITTER_C___OPTION}--no-color                      ${GITTER_C____RESET} Disable colored output"
   echo -e "  ${GITTER_C___OPTION}--dry-run           -n          ${GITTER_C____RESET} Show what would be executed without actually running the commands"
   echo
