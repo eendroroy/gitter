@@ -15,13 +15,13 @@ declare -A __COMMAND_ARG_MAP
               __COMMAND_ARG_MAP["git"]="--status -s --max-depth -d --filter -f --processable -p --ask-confirmation -a --continue-on-error -c --no-color --dry-run -n"
              __COMMAND_ARG_MAP["exec"]="--status -s --max-depth -d --filter -f --processable -p --ask-confirmation -a --continue-on-error -c --no-color --dry-run -n"
              __COMMAND_ARG_MAP["eval"]="--status -s --max-depth -d --filter -f --processable -p --ask-confirmation -a --continue-on-error -c --no-color --dry-run -n"
-           __COMMAND_ARG_MAP["config"]="                                       --processable -p                                              --no-color             "
           __COMMAND_ARG_MAP["version"]="                                       --processable -p                                              --no-color             "
              __COMMAND_ARG_MAP["help"]="                                       --processable -p                                              --no-color             "
       __COMMAND_ARG_MAP["help-filter"]="                                       --processable -p                                              --no-color             "
 __COMMAND_ARG_MAP["help-gitterignore"]="                                       --processable -p                                              --no-color             "
     __COMMAND_ARG_MAP["help-expander"]="                                       --processable -p                                              --no-color             "
       __COMMAND_ARG_MAP["help-status"]="                                       --processable -p                                              --no-color             "
+           __COMMAND_ARG_MAP["config"]=""
 
 __print_command_error() {
   local option="$1"
