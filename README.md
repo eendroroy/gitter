@@ -107,14 +107,14 @@ export GITTER_REPO_STATUS=" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]
 
 #### Available placeholders for repository status patterns
 
-- `[branch]`    : Current git branch name
-- `[commit:a]`  : Abbreviated (8) current git commit hash
-- `[commit:f]`  : Full current git commit hash
-- `[commit:<n>]`: Current git commit hash abbreviated to `<n>` characters. e.g., `[commit:10]`
-- `[time:r]`    : Relative time of the current git commit (e.g., "2 days ago")
-- `[time:d]`    : Date and time of the current git commit (e.g., "2024-01-01 12:00:00")
-- `[author:e]`  : Current git commit author email
-- `[author:n]`  : Current git commit author name
+- `[branch]    ` : Current git branch name
+- `[commit:a]  ` : Abbreviated (8) current git commit hash
+- `[commit:f]  ` : Full current git commit hash
+- `[commit:<n>]` : Current git commit hash abbreviated to `<n>` characters. e.g., `[commit:10]`
+- `[time:r]    ` : Relative time of the current git commit (e.g., "2 days ago")
+- `[time:d]    ` : Date and time of the current git commit (e.g., "2024-01-01 12:00:00")
+- `[author:e]  ` : Current git commit author email
+- `[author:n]  ` : Current git commit author name
 
 ## Filters
 
