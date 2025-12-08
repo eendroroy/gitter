@@ -12,7 +12,7 @@
 __handle_stderr() {
   local prefix="$1"
   while IFS= read -r line || [ -n "$line" ]; do
-    if [[ $GREPABLE == true ]]; then
+    if [[ $PROCESSABLE == true ]]; then
       printf '%s::ERR::%s\n' "$prefix" "${line}" 1>&2
     else
       printf '%b\n' "${GITTER_C____ERROR}${GITTER___ERROR_SYMBOL}${GITTER_C____RESET}  ${line}" 1>&2
@@ -23,7 +23,7 @@ __handle_stderr() {
 __handle_stdout() {
   local prefix="$1"
   while IFS= read -r line || [ -n "$line" ]; do
-    if [[ $GREPABLE == true ]]; then
+    if [[ $PROCESSABLE == true ]]; then
       printf '%s::OUT::%s\n' "$prefix" "${line}" 1>&2
     else
       printf '%b\n' "${GITTER_C__SUCCESS}${GITTER_SUCCESS_SYMBOL}${GITTER_C____RESET}  ${line}"

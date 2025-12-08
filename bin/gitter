@@ -116,16 +116,18 @@ for repository in "${repositories[@]}"; do
   args_string="${parsed_args[*]}"
   [[ ${#args_string} -gt 60 ]] && args_string="${args_string:0:57}..."
 
-  [[ $GREPABLE == false ]] && echo -ne  "${GITTER_C__SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C____RESET}"
-  [[ $GREPABLE == false ]] && echo -ne  " ${GITTER_C______DIM}[${repo_index}/${total_repos}]${GITTER_C____RESET}"
-  [[ $GREPABLE == false ]] && echo -e   " $(__repo_status ".")"
+  [[ $PROCESSABLE == false ]] && {
+    echo -ne  "\n${GITTER_C__SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C____RESET}"
+    echo -ne  " ${GITTER_C______DIM}[${repo_index}/${total_repos}]${GITTER_C____RESET}"
+    echo -e   " $(__repo_status ".")"
+  }
 
   parsed_args=("${additional_args[@]}" "${parsed_args[@]}")
   if [[ "$DRY_RUN" == true ]]; then
     echo -e "   ${GITTER_C__COMMAND}${command}${GITTER_C____RESET} ${GITTER_C______ARG}${parsed_args[*]}${GITTER_C____RESET}"
   else
-    [[ $GREPABLE == false ]] && echo -ne "   ${GITTER_C______DIM}\$(${GITTER_C____RESET}${GITTER_C__COMMAND}${command}"
-    [[ $GREPABLE == false ]] && echo -e  " ${GITTER_C______ARG}${args_string}${GITTER_C____RESET}${GITTER_C______DIM})${GITTER_C____RESET}"
+    [[ $PROCESSABLE == false ]] && echo -ne "   ${GITTER_C______DIM}\$(${GITTER_C____RESET}${GITTER_C__COMMAND}${command}"
+    [[ $PROCESSABLE == false ]] && echo -e  " ${GITTER_C______ARG}${args_string}${GITTER_C____RESET}${GITTER_C______DIM})${GITTER_C____RESET}"
 
     if [[ "$GITTER_ASK_CONFIRMATION"  == true  && "$exit_code" -eq 0 ]]; then
       sleep 0.1
