@@ -71,10 +71,12 @@ __help_filter() {
   echo -ne "${GITTER_C______DIM}<${GITTER_C____RESET}${GITTER_C____VALUE}pattern${GITTER_C____RESET}${GITTER_C______DIM}>${GITTER_C____RESET}"
   echo -e  "${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C______DIM}]${GITTER_C____RESET}"
   echo
+  echo
   echo -e "${GITTER_C__HEADING}Prefixes:${GITTER_C____RESET}"
   echo -e "  ${GITTER_C____ERROR}path  ${GITTER_C____RESET}  Match for path name"
   echo -e "  ${GITTER_C____ERROR}repo  ${GITTER_C____RESET}  Match for repository name"
   echo -e "  ${GITTER_C____ERROR}branch${GITTER_C____RESET}  Match for current git branch"
+  echo -e "  ${GITTER_C____ERROR}type  ${GITTER_C____RESET}  Match for project type (supports exact match only - ${GITTER_C____ERROR}type${GITTER_C____RESET}${GITTER_C__HEADING}:${GITTER_C____RESET}${GITTER_C____VALUE}project_type${GITTER_C____RESET})"
   echo
   echo -e "${GITTER_C__HEADING}Patterns:${GITTER_C____RESET}"
   echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}          Matches anywhere in the value (default if no anchors specified)"
@@ -83,12 +85,27 @@ __help_filter() {
   echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C____VALUE}pattern${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}  Matches substring anywhere in the value"
   echo -e "   ${GITTER_C____VALUE}pattern${GITTER_C____RESET}   Matches exactly the value"
   echo
+  echo -e "${GITTER_C__HEADING}Project Types:${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}springboot${GITTER_C____RESET}        Spring Boot project"
+  echo -e "  ${GITTER_C____ERROR}maven${GITTER_C____RESET}             Maven project"
+  echo -e "  ${GITTER_C____ERROR}gradle${GITTER_C____RESET}            Gradle project"
+  echo -e "  ${GITTER_C____ERROR}nodejs${GITTER_C____RESET}            Node.js project"
+  echo -e "  ${GITTER_C____ERROR}python${GITTER_C____RESET}            Python project"
+  echo -e "  ${GITTER_C____ERROR}ruby${GITTER_C____RESET}              Ruby project"
+  echo -e "  ${GITTER_C____ERROR}go${GITTER_C____RESET}                Go project"
+  echo -e "  ${GITTER_C____ERROR}rust${GITTER_C____RESET}              Rust project"
+  echo -e "  ${GITTER_C____ERROR}php${GITTER_C____RESET}               PHP project"
+  echo -e "  ${GITTER_C____ERROR}dotnet${GITTER_C____RESET}            .NET project"
+
+  echo
   echo -e "${GITTER_C__HEADING}Examples:${GITTER_C____RESET}"
   echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}path:src/+${GITTER_C____RESET}\"         Filter repositories with path starting with 'src/'"
   echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}! repo:+-test${GITTER_C____RESET}\"      Filter repositories with name not ending with '-test'"
   echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}branch:master${GITTER_C____RESET}\"      Filter repositories on branch 'master'"
   echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}(path:+src/ || path:+test) & ! branch:hotfix/${GITTER_C____RESET}\""
   echo -e "                                       Filter repositories with path containing 'src/' or 'test' and not on any hotfix/ branch"
+  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}(type:nodejs || type:gradle)${GITTER_C____RESET}\""
+  echo -e "                                       Filter repositories which are either Node.js or Gradle projects"
   echo
 }
 

@@ -131,6 +131,7 @@ For example: *`"( filter1 && filter2) || ! filter3"`*
 - `path  ` : Match for path name
 - `repo  ` : Match for repository name
 - `branch` : Match for current git branch
+- `type`   :  Match for project type (supports exact match only - `type:<project_type>`)
 
 #### Patterns
 
@@ -138,6 +139,19 @@ For example: *`"( filter1 && filter2) || ! filter3"`*
 - ` pattern+` : Matches the beginning of the value
 - `+pattern ` : Matches the end of the value
 - ` pattern ` : Matches exactly the value
+
+#### Project Types:
+
+- `springboot`: Spring Boot project
+- `maven`     : Maven project
+- `gradle`    : Gradle project
+- `nodejs`    : Node.js project
+- `python`    : Python project
+- `ruby`      : Ruby project
+- `go`        : Go project
+- `rust`      : Rust project
+- `php`       : PHP project
+- `dotnet`    : .NET project
 
 #### Examples
 
