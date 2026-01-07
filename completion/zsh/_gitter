@@ -50,11 +50,11 @@ _gitter() {
   )
 
   statuses=(
-    "branch:\" on |[branch]\""
-    "updated:\" on |[branch]| |[time:r]\""
-    "updated-at:\" on |[branch]| |[commit:8]| at |[time:d]\""
-    "updated-by:\" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]\""
-    "updated-by-at:\" on |[branch]| |[commit:8]| by |[author:e]| at |[time:d]\""
+    "branch:\" |[type]| on |[branch]\""
+    "updated:\" |[type]| on |[branch]| |[time:r]\""
+    "updated-at:\" |[type]| on |[branch]| |[commit:8]| at |[time:d]\""
+    "updated-by:\" |[type]| on |[branch]| |[commit:8]| by |[author:e]| |[time:r]\""
+    "updated-by-at:\" |[type]| on |[branch]| |[commit:8]| by |[author:e]| at |[time:d]\""
     "commit-count:\" (|[commit:c]| commits)| on |[branch]\""
     ":provide custom format using placeholders (see 'gitter help status' for details)"
   )
