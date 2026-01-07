@@ -13,6 +13,7 @@ __expand_args() {
   local -n args_ref=$1
   local -n parsed_args_ref=$2
   for arg in "${args_ref[@]}"; do
+    [[ $arg == *"{_type_}"* ]] && arg="${arg//\{_type_\}/$(__detect_project "$PWD")}"
     [[ $arg == *"{_repo_}"* ]] && arg="${arg//\{_repo_\}/$(basename "$(pwd)")}"
     [[ $arg == *"{_path:r_}"* ]] && arg="${arg//\{_path:r_\}/${PWD/"${____CURRENT_DIR}"/.}}"
     [[ $arg == *"{_path:a_}"* ]] && arg="${arg//\{_path:a_\}/$(pwd)}"

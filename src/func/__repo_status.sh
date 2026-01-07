@@ -52,6 +52,7 @@ __repo_status() {
         echo -ne "${GITTER_C____VALUE}$(___commit_abbrev "${abbrev_length}")${GITTER_C____RESET}"
       else
         case "$pattern" in
+          "[type]"     ) echo -ne "${GITTER_C_____TYPE}$(__detect_project "${PWD}")${GITTER_C____RESET}"        ;;
           "[branch]"   ) echo -ne "${GITTER_C___BRANCH}$(___branch)${GITTER_C____RESET}"        ;;
           "[commit:a]" ) echo -ne "${GITTER_C___COMMIT}$(___commit_abbrev)${GITTER_C____RESET}" ;;
           "[commit:f]" ) echo -ne "${GITTER_C___COMMIT}$(___commit_full)${GITTER_C____RESET}"   ;;

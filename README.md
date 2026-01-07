@@ -90,11 +90,11 @@ gitter list --status " on |[branch]| #|[commit:7]|(commits: |[commit:c]|) by |[a
 - There are few predefined patterns are available as shortcuts:
 
 ```shell
-gitter list --status branch        # " on |[branch]"
-gitter list --status updated       # " on |[branch]| |[time:r]"
-gitter list --status updated-at    # " on |[branch]| |[commit:8]| at |[time:d]"
-gitter list --status updated-by    # " on |[branch]| |[commit:8]| by |[author:e]| |[time:r]"
-gitter list --status updated-by-at # " on |[branch]| |[commit:8]| by |[author:e]| at |[time:d]"
+gitter list --status branch        # " |[type]| on |[branch]"
+gitter list --status updated       # " |[type]| on |[branch]| |[time:r]"
+gitter list --status updated-at    # " |[type]| on |[branch]| |[commit:8]| at |[time:d]"
+gitter list --status updated-by    # " |[type]| on |[branch]| |[commit:8]| by |[author:e]| |[time:r]"
+gitter list --status updated-by-at # " |[type]| on |[branch]| |[commit:8]| by |[author:e]| at |[time:d]"
 gitter list --status commit-count  # " (|[commit:c]| commits)| on |[branch]"
 ```
 
@@ -107,6 +107,7 @@ export GITTER_REPO_STATUS=" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]
 
 #### Available placeholders for repository status patterns
 
+- `[type]      ` : Estimated project type (e.g., "maven", "nodejs", "python", etc.)
 - `[branch]    ` : Current git branch name
 - `[commit:a]  ` : Abbreviated (8) current git commit hash
 - `[commit:f]  ` : Full current git commit hash
@@ -142,16 +143,32 @@ For example: *`"( filter1 && filter2) || ! filter3"`*
 
 #### Project Types:
 
-- `springboot`: Spring Boot project
-- `maven`     : Maven project
-- `gradle`    : Gradle project
-- `nodejs`    : Node.js project
-- `python`    : Python project
-- `ruby`      : Ruby project
-- `go`        : Go project
-- `rust`      : Rust project
-- `php`       : PHP project
-- `dotnet`    : .NET project
+- `any`        : Any git repository (default)
+- `android`    : Android project
+- `angular`    : Angular project
+- `angularjs`  : AngularJS project
+- `bash`       : Bash script project
+- `c`          : C project
+- `cpp`        : C++ project
+- `docker`     : Docker project
+- `dotnet`     : .NET project
+- `flutter`    : Flutter project
+- `go`         : Go project
+- `gradle`     : Gradle project
+- `maven`      : Maven project
+- `nextjs`     : Next.js project
+- `nodejs`     : Node.js project
+- `php`        : PHP project
+- `python`     : Python project
+- `react`      : React project
+- `ruby`       : Ruby project
+- `rust`       : Rust project
+- `shell`      : Generic Shell scripts
+- `springboot` : Spring Boot project
+- `svelte`     : Svelte project
+- `terraform`  : Terraform project
+- `vue`        : Vue.js project
+- `zsh`        : Zsh script project
 
 #### Examples
 
@@ -178,6 +195,7 @@ Lines starting with `#` are treated as comments and ignored.
 
 Within `exec` and `git` commands, you can use the following expanders in arguments:
 
+- `{_type_}      ` : Estimated project type (e.g., "maven", "nodejs", "python", etc.)
 - `{_repo_}      ` : Name of the current git repository
 - `{_path:r_}    ` : Relative path of the current working directory from where gitter was invoked
 - `{_path:a_}    ` : Absolute path of the current working directory
