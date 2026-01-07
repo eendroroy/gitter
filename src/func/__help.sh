@@ -9,6 +9,7 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+# shellcheck disable=SC2154
 __help() {
   echo
   echo -e "${GITTER_C__HEADING}Gitter${GITTER_C____RESET}"
@@ -87,33 +88,17 @@ __help_filter() {
   echo -e "   ${GITTER_C____VALUE}pattern${GITTER_C____RESET}   Matches exactly the value"
   echo
   echo -e "${GITTER_C__HEADING}Project Types:${GITTER_C____RESET}"
-  echo -e "  ${GITTER_C____ERROR}any${GITTER_C____RESET}               Any git repository (${GITTER_C______ARG}default${GITTER_C____RESET})"
-  echo -e "  ${GITTER_C____ERROR}android${GITTER_C____RESET}           Android project"
-  echo -e "  ${GITTER_C____ERROR}angular${GITTER_C____RESET}           Angular project"
-  echo -e "  ${GITTER_C____ERROR}angularjs${GITTER_C____RESET}         AngularJS project"
-  echo -e "  ${GITTER_C____ERROR}bash${GITTER_C____RESET}              Bash script project"
-  echo -e "  ${GITTER_C____ERROR}c${GITTER_C____RESET}                 C project"
-  echo -e "  ${GITTER_C____ERROR}cpp${GITTER_C____RESET}               C++ project"
-  echo -e "  ${GITTER_C____ERROR}docker${GITTER_C____RESET}            Docker project"
-  echo -e "  ${GITTER_C____ERROR}dotnet${GITTER_C____RESET}            .NET project"
-  echo -e "  ${GITTER_C____ERROR}flutter${GITTER_C____RESET}           Flutter project"
-  echo -e "  ${GITTER_C____ERROR}go${GITTER_C____RESET}                Go project"
-  echo -e "  ${GITTER_C____ERROR}gradle${GITTER_C____RESET}            Gradle project"
-  echo -e "  ${GITTER_C____ERROR}maven${GITTER_C____RESET}             Maven project"
-  echo -e "  ${GITTER_C____ERROR}nextjs${GITTER_C____RESET}            Next.js project"
-  echo -e "  ${GITTER_C____ERROR}nodejs${GITTER_C____RESET}            Node.js project"
-  echo -e "  ${GITTER_C____ERROR}php${GITTER_C____RESET}               PHP project"
-  echo -e "  ${GITTER_C____ERROR}python${GITTER_C____RESET}            Python project"
-  echo -e "  ${GITTER_C____ERROR}react${GITTER_C____RESET}             React project"
-  echo -e "  ${GITTER_C____ERROR}ruby${GITTER_C____RESET}              Ruby project"
-  echo -e "  ${GITTER_C____ERROR}rust${GITTER_C____RESET}              Rust project"
-  echo -e "  ${GITTER_C____ERROR}shell${GITTER_C____RESET}             Generic Shell scripts"
-  echo -e "  ${GITTER_C____ERROR}springboot${GITTER_C____RESET}        Spring Boot project"
-  echo -e "  ${GITTER_C____ERROR}svelte${GITTER_C____RESET}            Svelte project"
-  echo -e "  ${GITTER_C____ERROR}terraform${GITTER_C____RESET}         Terraform project"
-  echo -e "  ${GITTER_C____ERROR}vue${GITTER_C____RESET}               Vue.js project"
-  echo -e "  ${GITTER_C____ERROR}zsh${GITTER_C____RESET}               Zsh script project"
-
+  echo -ne "  "
+  local _type_ct=0
+  for type in "${!_type_checks[@]}"; do
+    echo -ne "${GITTER_C____ERROR}${type}${GITTER_C____RESET} "
+    ((_type_ct++))
+    if (( _type_ct % 8 == 0 )); then
+      echo
+      echo -ne "  "
+    fi
+  done
+  echo
   echo
   echo -e "${GITTER_C__HEADING}Examples:${GITTER_C____RESET}"
   echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}path:src/+${GITTER_C____RESET}\"         Filter repositories with path starting with 'src/'"
@@ -150,7 +135,6 @@ __help_expander() {
   echo
   echo -e "${GITTER_C__HEADING}Expanders:${GITTER_C____RESET}"
   echo -e "  Within ${GITTER_C___OPTION}exec${GITTER_C____RESET} and ${GITTER_C___OPTION}git${GITTER_C____RESET} commands, the following expanders can be used in arguments:"
-  echo -e "    ${GITTER_C______ARG}{_type_}      ${GITTER_C____RESET} Estimated project type"
   echo -e "    ${GITTER_C______ARG}{_repo_}      ${GITTER_C____RESET} Name of the current git repository"
   echo -e "    ${GITTER_C______ARG}{_path:r_}    ${GITTER_C____RESET} Relative path of the current working directory from where gitter was invoked"
   echo -e "    ${GITTER_C______ARG}{_path:a_}    ${GITTER_C____RESET} Absolute path of the current working directory"
@@ -186,7 +170,6 @@ __help_status() {
   echo -e "    ${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C______ARG}text${GITTER_C____RESET}${GITTER_C______DIM}]${GITTER_C____RESET}${GITTER_C______ARG}|${GITTER_C____RESET}${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C______ARG}placeholder${GITTER_C____RESET}${GITTER_C______DIM}]...${GITTER_C____RESET}"
   echo
   echo -e "${GITTER_C__HEADING}Available placeholders:${GITTER_C____RESET}"
-  echo -e "    ${GITTER_C______ARG}[type]      ${GITTER_C____RESET} Estimated project type"
   echo -e "    ${GITTER_C______ARG}[branch]    ${GITTER_C____RESET} Current git branch name"
   echo -e "    ${GITTER_C______ARG}[commit:a]  ${GITTER_C____RESET} Abbreviated (8) current git commit hash"
   echo -e "    ${GITTER_C______ARG}[commit:<n>]${GITTER_C____RESET} Abbreviated (<n>) current git commit hash"
