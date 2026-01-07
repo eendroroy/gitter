@@ -35,6 +35,7 @@ __help() {
   echo -e "  ${GITTER_C___OPTION}git     g ${GITTER_C____RESET}        Run a git command (${GITTER_C______ARG}default${GITTER_C____RESET})"
   echo -e "  ${GITTER_C___OPTION}exec    x ${GITTER_C____RESET}        Run an arbitrary command"
   echo -e "  ${GITTER_C___OPTION}eval    e ${GITTER_C____RESET}        Evaluate a shell command - useful for complex commands involving pipes and redirections"
+  echo -e "  ${GITTER_C___OPTION}bash    b ${GITTER_C____RESET}        Execute a bash script file"
   echo -e "  ${GITTER_C___OPTION}list    ls${GITTER_C____RESET}        List repositories only"
   echo -e "  ${GITTER_C___OPTION}config  c ${GITTER_C____RESET}        Print current (effective) configuration"
   echo -e "  ${GITTER_C___OPTION}version v ${GITTER_C____RESET}        Show version"

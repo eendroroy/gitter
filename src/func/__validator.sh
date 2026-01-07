@@ -15,6 +15,7 @@ declare -A __COMMAND_ARG_MAP
               __COMMAND_ARG_MAP["git"]="--no-color --status -s --max-depth -d --filter -f --processable -p --ask-confirmation -a --continue-on-error -c --dry-run -n"
              __COMMAND_ARG_MAP["exec"]="--no-color --status -s --max-depth -d --filter -f --processable -p --ask-confirmation -a --continue-on-error -c --dry-run -n"
              __COMMAND_ARG_MAP["eval"]="--no-color --status -s --max-depth -d --filter -f --processable -p --ask-confirmation -a --continue-on-error -c --dry-run -n"
+             __COMMAND_ARG_MAP["bash"]="           --status -s --max-depth -d --filter -f --processable -p --ask-confirmation -a --continue-on-error -c --dry-run -n"
           __COMMAND_ARG_MAP["version"]="--no-color                                                                                                                  "
              __COMMAND_ARG_MAP["help"]="--no-color                                                                                                                  "
       __COMMAND_ARG_MAP["help-filter"]="--no-color                                                                                                                  "
@@ -32,6 +33,28 @@ __print_command_error() {
 # shellcheck disable=SC2154
 __validate_command() {
   local command="$1"
+  local -n arguments=${2}
+
+  case "$command" in
+    git|exec|eval)
+      if [[ "${#arguments[@]}" -lt 1 ]]; then
+        __invalid_args_for_command "$command" "at least 1" "${#arguments[@]}"
+      fi
+      ;;
+    bash)
+      if [[ "${#arguments[@]}" -ne 1 ]]; then
+        __invalid_args_for_command "$command" "exactly 1" "${#arguments[@]}"
+      fi
+      ;;
+    list|config|version)
+      if [[ "${#arguments[@]}" -ne 0 ]]; then
+        __invalid_args_for_command "$command" "no" "${#arguments[@]}"
+      fi
+      ;;
+    *)
+      ;;
+  esac
+
   local -a invalid_opts=()
 
   read -r -a allowed_options <<< "${__COMMAND_ARG_MAP["$command"]}"

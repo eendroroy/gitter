@@ -11,7 +11,8 @@
 
 __invalid_args_for_command() {
   echo
-  echo -e "${GITTER_C____ERROR}No arguments provided for command:${GITTER_C____RESET} ${GITTER_C__COMMAND}${1}${GITTER_C____RESET}" 1>&2
+  echo -ne "${GITTER_C____ERROR}Invalid number of arguments for:${GITTER_C____RESET} ${GITTER_C__COMMAND}${1}${GITTER_C____RESET}" 1>&2
+  echo -e "${GITTER_C____ERROR}. Expected ${GITTER_C__COMMAND}${3}${GITTER_C____RESET} ${GITTER_C____ERROR}argument/s but got ${GITTER_C____RESET}${GITTER_C__COMMAND}${3}${GITTER_C____RESET}${GITTER_C____ERROR}.${GITTER_C____RESET}" 1>&2
   echo
   echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
   echo
@@ -36,16 +37,6 @@ __all_repositories_filtered_out() {
 __unknown_arg() {
   echo
   echo -e "${GITTER_C____ERROR}Unknown argument:${GITTER_C____RESET} $1" 1>&2
-  echo
-  echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
-  echo
-  exit 1
-}
-
-__too_many_args() {
-  echo
-  echo -ne "${GITTER_C____ERROR}Too many arguments for:${GITTER_C____RESET} ${GITTER_C___OPTION}${1}${GITTER_C____RESET}" 1>&2
-  echo -e " ${GITTER_C____ERROR}(expected ${2} argument(s) but got ${3})${GITTER_C____RESET}" 1>&2
   echo
   echo -e "Run ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C______ARG}help${GITTER_C____RESET} for usage information." 1>&2
   echo

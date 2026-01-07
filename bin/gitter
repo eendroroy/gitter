@@ -30,6 +30,7 @@ while [[ $# -gt 0 ]]; do
     git     |g ) ___git              ;;
     exec    |x ) ___exec             ;;
     eval    |e ) ___eval             ;;
+    bash    |b ) ___bash             ;;
     list    |ls) ___list             ;;
     config  |c ) ___config           ;;
     help       ) ___help "$@"; break ;;
@@ -59,7 +60,7 @@ __expand_status
 
 [[ -z "$command" ]] && command="git"
 
-__validate_command "$command"
+__validate_command "$command" args
 
 [[ "$GITTER_NO_COLOR" == true ]] && __disable_color_output
 
@@ -70,8 +71,6 @@ __validate_command "$command"
 [[ "$command" == "help-status"       ]] && { __help_status;       exit 0; }
 [[ "$command" == "config"            ]] && { __print_config;      exit 0; }
 [[ "$command" == "version"           ]] && { __version;           exit 0; }
-
-[[ "$command" != "list" && ${#args[@]} -eq 0 ]] && __invalid_args_for_command "$command"
 
 # -- find all git repositories in the current directory
 readarray -d '' -t repositories < <(find . -name ".git" -maxdepth "$((GITTER_MAX_DEPTH+1))" -type d -print0)

@@ -129,6 +129,7 @@ __disable_color_output() {
 ___git()     { __parse_command "git"    ; }
 ___exec()    { __parse_command "exec"   ; }
 ___eval()    { __parse_command "eval"   ; }
+___bash()    { __parse_command "bash"   ; }
 ___list()    { __parse_command "list"   ; }
 ___config()  { __parse_command "config" ; }
 ___version() { __parse_command "version"; }
@@ -146,6 +147,6 @@ ___help()    {
       *           ) __unknown_arg "$1" ;;
     esac
   else
-  __too_many_args "help" "1" "$#"
+  __invalid_args_for_command "help" "1" "$#"
   fi
 }
