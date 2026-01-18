@@ -20,7 +20,7 @@ _gitter() {
 
   # tokens (left-hand side only)
   local commands=("git" "g" "exec" "x" "eval" "e" "bash" "b" "list" "ls" "help" "config")
-  local options=(--status -s --max-depth -d --filter -f --processable -p --ask-confirmation -a --continue-on-error -c --no-color --dry-run -n --)
+  local options=(--status -s --max-depth -d --filter -f --ask-confirmation -a --continue-on-error -c --no-color --dry-run -n --)
   local statuses=("branch" "updated" "updated-at" "updated-by" "updated-by-at" "commit-count")
   local helps=("filter" "gitterignore" "expander" "status")
 

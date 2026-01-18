@@ -37,8 +37,6 @@ _gitter() {
     "-e:Exclude matched repositories instead of including"
     "--filter:Filter repositories matching the given pattern (Run 'gitter help filter' for details)"
     "-f:Filter repositories matching the given pattern (Run 'gitter help filter' for details)"
-    "--processable:Processable output"
-    "-p:Processable output"
     "--ask-confirmation:Ask for confirmation before executing commands"
     "-a:Ask for confirmation before executing commands"
     "--continue-on-error:Continue executing commands even if some repositories result in errors"

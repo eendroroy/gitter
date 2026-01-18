@@ -60,7 +60,6 @@ __show_and_run gitter --no-color                      help gitterignore
 __show_and_run gitter                                 list
 __show_and_run gitter --status '" "'                  list
 __show_and_run gitter --no-color                      list
-__show_and_run gitter --processable                   list
 __show_and_run gitter --status branch                 list
 __show_and_run gitter --status commit-count           list
 __show_and_run gitter --status updated                list
@@ -78,5 +77,4 @@ __show_and_run gitter --dry-run                       git  -- branch
 __show_and_run gitter --dry-run                       exec -- git branch
 __show_and_run gitter                                 git  -- branch
 __show_and_run gitter                                 exec -- git branch
-__show_and_run gitter --processable                        -- branch
 __show_and_run gitter --continue-on-error             eval -- '"git branch | grep feature"'

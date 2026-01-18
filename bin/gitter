@@ -40,7 +40,6 @@ while [[ $# -gt 0 ]]; do
     --status            |-s) __track_options "${1}"; shift; __read_status "$1"           ;;
     --max-depth         |-d) __track_options "${1}"; shift; __read_max_depth "$1"        ;;
     --filter            |-f) __track_options "${1}"; shift; FILTER="$1"                  ;;
-    --processable       |-p) __track_options "${1}";        PROCESSABLE=true             ;;
     --ask-confirmation  |-a) __track_options "${1}";        GITTER_ASK_CONFIRMATION=true ;;
     --continue-on-error |-c) __track_options "${1}";        GITTER_CONTINUE_ON_ERROR=true;;
     --no-color             ) __track_options "${1}";        GITTER_NO_COLOR=true         ;;
@@ -115,18 +114,16 @@ for repository in "${repositories[@]}"; do
   args_string="${parsed_args[*]}"
   [[ ${#args_string} -gt 60 ]] && args_string="${args_string:0:57}..."
 
-  [[ $PROCESSABLE == false ]] && {
-    echo -ne  "\n${GITTER_C__SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C____RESET}"
-    echo -ne  " ${GITTER_C______DIM}[${repo_index}/${total_repos}]${GITTER_C____RESET}"
-    echo -e   " $(__repo_status ".")"
-  }
+  echo -ne  "\n${GITTER_C__SUCCESS}${GITTER_PRIMARY_SYMBOL}${GITTER_C____RESET}"
+  echo -ne  " ${GITTER_C______DIM}[${repo_index}/${total_repos}]${GITTER_C____RESET}"
+  echo -e   " $(__repo_status ".")"
 
   parsed_args=("${additional_args[@]}" "${parsed_args[@]}")
   if [[ "$DRY_RUN" == true ]]; then
     echo -e "   ${GITTER_C__COMMAND}${command}${GITTER_C____RESET} ${GITTER_C______ARG}${parsed_args[*]}${GITTER_C____RESET}"
   else
-    [[ $PROCESSABLE == false ]] && echo -ne "   ${GITTER_C______DIM}\$(${GITTER_C____RESET}${GITTER_C__COMMAND}${command}"
-    [[ $PROCESSABLE == false ]] && echo -e  " ${GITTER_C______ARG}${args_string}${GITTER_C____RESET}${GITTER_C______DIM})${GITTER_C____RESET}"
+    echo -ne "   ${GITTER_C______DIM}\$(${GITTER_C____RESET}${GITTER_C__COMMAND}${command}"
+    echo -e  " ${GITTER_C______ARG}${args_string}${GITTER_C____RESET}${GITTER_C______DIM})${GITTER_C____RESET}"
 
     if [[ "$GITTER_ASK_CONFIRMATION"  == true  && "$exit_code" -eq 0 ]]; then
       sleep 0.1
@@ -139,7 +136,7 @@ for repository in "${repositories[@]}"; do
       esac
     fi
 
-    command -- "$command" "${parsed_args[@]}" 1> >(__handle_stdout "$repo_dir") 2> >(__handle_stderr "$repo_dir")
+    command -- "$command" "${parsed_args[@]}" 1> >(__handle_stdout) 2> >(__handle_stderr)
     exit_code=$?
 
     if [[ "$GITTER_CONTINUE_ON_ERROR" == false && "$exit_code" -ne 0 ]]; then
