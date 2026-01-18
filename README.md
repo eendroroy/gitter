@@ -90,11 +90,11 @@ gitter list --status " on |[branch]| #|[commit:7]|(commits: |[commit:c]|) by |[a
 - There are few predefined patterns are available as shortcuts:
 
 ```shell
-gitter list --status branch        # " |[type]| on |[branch]"
-gitter list --status updated       # " |[type]| on |[branch]| |[time:r]"
-gitter list --status updated-at    # " |[type]| on |[branch]| |[commit:8]| at |[time:d]"
-gitter list --status updated-by    # " |[type]| on |[branch]| |[commit:8]| by |[author:e]| |[time:r]"
-gitter list --status updated-by-at # " |[type]| on |[branch]| |[commit:8]| by |[author:e]| at |[time:d]"
+gitter list --status branch        # " on |[branch]"
+gitter list --status updated       # " on |[branch]| |[time:r]"
+gitter list --status updated-at    # " on |[branch]| |[commit:8]| at |[time:d]"
+gitter list --status updated-by    # " on |[branch]| |[commit:8]| by |[author:e]| |[time:r]"
+gitter list --status updated-by-at # " on |[branch]| |[commit:8]| by |[author:e]| at |[time:d]"
 gitter list --status commit-count  # " (|[commit:c]| commits)| on |[branch]"
 ```
 
