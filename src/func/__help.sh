@@ -109,16 +109,15 @@ __help_filter() {
   done
   echo
   echo
-  echo  -e "${GITTER_C__HEADING}Examples:${GITTER_C____RESET}"
-  echo  -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}path:src/+${GITTER_C____RESET}\"         Filter repositories with path starting with 'src/'"
-  echo  -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}! repo:+-test${GITTER_C____RESET}\"      Filter repositories with name not ending with '-test'"
-  echo  -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}branch:master${GITTER_C____RESET}\"      Filter repositories on branch 'master'"
-  echo  -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}(path:+src/ || path:+test) & ! branch:hotfix/${GITTER_C____RESET}\""
-  echo  -e "                                       Filter repositories with path containing 'src/' or 'test' and not on any hotfix/ branch"
-  echo  -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}(type:nodejs || type:gradle)${GITTER_C____RESET}\""
-  echo  -e "                                       Filter repositories which are either Node.js or Gradle projects"
-  echo -ne "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}dirty && stale:7d${GITTER_C____RESET}\""
-  echo  -e "  Filter repositories which are dirty and not updated in last 7 days"
+  echo -e "${GITTER_C__HEADING}Examples:${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}path:src/+${GITTER_C____RESET}\"         Filter repositories with path starting with 'src/'"
+  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}! repo:+-test${GITTER_C____RESET}\"      Filter repositories with name not ending with '-test'"
+  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}branch:master${GITTER_C____RESET}\"      Filter repositories on branch 'master'"
+  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}(path:+src/ || path:+test) & ! branch:hotfix/${GITTER_C____RESET}\""
+  echo -e "                                       Filter repositories with path containing 'src/' or 'test' and not on any hotfix/ branch"
+  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}(type:nodejs || type:gradle)${GITTER_C____RESET}\""
+  echo -e "                                       Filter repositories which are either Node.js or Gradle projects"
+  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}dirty && stale:7d${GITTER_C____RESET}\"  Filter repositories which are dirty and not updated in last 7 days"
   echo
 }
 
