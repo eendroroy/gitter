@@ -125,16 +125,17 @@ For example: *`"( filter1 && filter2) || ! filter3"`*
 
 #### Filter Format
 
-`<prefix><:>[+]<pattern>[+]`
+`<prefix><:><value>`
 
 #### Prefixes
 
-- `path  ` : `[substr]` Match for path name
-- `repo  ` : `[substr]` Match for repository name
-- `branch` : `[substr]` Match for current git branch
-- `remote` : `[substr]` Match for remote name (e.g., origin)
-- `dirty ` : `[boolean]` Match for dirty state (default: `true`. Use value `false` to match clean repositories)
-- `type`   : `[full]` Match for project type (supports exact match only - `type:<project_type>`)
+- `path  ` : `[substr]`   Match for path name
+- `repo  ` : `[substr]`   Match for repository name
+- `branch` : `[substr]`   Match for current git branch
+- `remote` : `[substr]`   Match for remote name (e.g., origin)
+- `dirty ` : `[boolean]`  Match for dirty state (default: `true`. Use value `false` to match clean repositories)
+- `stale ` : `[temporal]` Match for stale repositories (supports duration format - e.g., `7d`, `12h`, `30m`)
+- `type`   : `[full]`     Match for project type (supports exact match only - `type:<project_type>`)
 
 #### `substr` Patterns
 
@@ -142,6 +143,10 @@ For example: *`"( filter1 && filter2) || ! filter3"`*
 - ` pattern+` : Matches the beginning of the value
 - `+pattern ` : Matches the end of the value
 - ` pattern ` : Matches exactly the value
+
+#### 'temporal' Format:
+
+`[<Years>y][<Months>mo][<Weeks>w][<Days>d][<Hours>h][<Minutes>m][<Seconds>s]`
 
 #### Project Types:
 

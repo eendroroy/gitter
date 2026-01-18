@@ -69,18 +69,16 @@ __help_filter() {
   echo -e  "${GITTER_C__HEADING}Syntax:${GITTER_C____RESET}"
   echo -ne "  ${GITTER_C______DIM}<${GITTER_C____RESET}${GITTER_C____ERROR}prefix${GITTER_C____RESET}${GITTER_C______DIM}>${GITTER_C____RESET}"
   echo -ne "${GITTER_C______DIM}<${GITTER_C____RESET}${GITTER_C__HEADING}:${GITTER_C____RESET}${GITTER_C______DIM}>${GITTER_C____RESET}"
-  echo -ne "${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C______DIM}]${GITTER_C____RESET}"
-  echo -ne "${GITTER_C______DIM}<${GITTER_C____RESET}${GITTER_C____VALUE}pattern${GITTER_C____RESET}${GITTER_C______DIM}>${GITTER_C____RESET}"
-  echo -e  "${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C______DIM}]${GITTER_C____RESET}"
-  echo
+  echo  -e "${GITTER_C______DIM}<${GITTER_C____RESET}${GITTER_C____VALUE}value${GITTER_C____RESET}${GITTER_C______DIM}>${GITTER_C____RESET}"
   echo
   echo -e "${GITTER_C__HEADING}Prefixes:${GITTER_C____RESET}"
-  echo -e "  ${GITTER_C____ERROR}path  ${GITTER_C____RESET}  [substr]  Match for path name"
-  echo -e "  ${GITTER_C____ERROR}repo  ${GITTER_C____RESET}  [substr]  Match for repository name"
-  echo -e "  ${GITTER_C____ERROR}branch${GITTER_C____RESET}  [substr]  Match for current git branch"
-  echo -e "  ${GITTER_C____ERROR}remote${GITTER_C____RESET}  [substr]  Match for remote name (e.g., origin)"
-  echo -e "  ${GITTER_C____ERROR}dirty ${GITTER_C____RESET}  [boolean] Match for dirty state (default: ${GITTER_C______ARG}true${GITTER_C____RESET}. Use value ${GITTER_C____VALUE}false${GITTER_C____RESET} to match clean repositories)"
-  echo -e "  ${GITTER_C____ERROR}type  ${GITTER_C____RESET}  [full]    Match for project type (supports exact match only - ${GITTER_C____ERROR}type${GITTER_C____RESET}${GITTER_C__HEADING}:${GITTER_C____RESET}${GITTER_C____VALUE}project_type${GITTER_C____RESET})"
+  echo -e "  ${GITTER_C____ERROR}path  ${GITTER_C____RESET}  [substr]   Match for path name"
+  echo -e "  ${GITTER_C____ERROR}repo  ${GITTER_C____RESET}  [substr]   Match for repository name"
+  echo -e "  ${GITTER_C____ERROR}branch${GITTER_C____RESET}  [substr]   Match for current git branch"
+  echo -e "  ${GITTER_C____ERROR}remote${GITTER_C____RESET}  [substr]   Match for remote name (e.g., origin)"
+  echo -e "  ${GITTER_C____ERROR}dirty ${GITTER_C____RESET}  [boolean]  Match for dirty state (default: ${GITTER_C______ARG}true${GITTER_C____RESET}. Use value ${GITTER_C____VALUE}false${GITTER_C____RESET} to match clean repositories)"
+  echo -e "  ${GITTER_C____ERROR}stale ${GITTER_C____RESET}  [temporal] Match for stale repositories (supports duration format - e.g., ${GITTER_C____VALUE}7d${GITTER_C____RESET}, ${GITTER_C____VALUE}12h${GITTER_C____RESET}, ${GITTER_C____VALUE}30m${GITTER_C____RESET})"
+  echo -e "  ${GITTER_C____ERROR}type  ${GITTER_C____RESET}  [full]     Match for project type (supports exact match only - ${GITTER_C____ERROR}type${GITTER_C____RESET}${GITTER_C__HEADING}:${GITTER_C____RESET}${GITTER_C____VALUE}project_type${GITTER_C____RESET})"
   echo
   echo -e "${GITTER_C__HEADING}'substr' Patterns:${GITTER_C____RESET}"
   echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}          Matches anywhere in the value (default if no anchors specified)"
@@ -88,6 +86,15 @@ __help_filter() {
   echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C____VALUE}pattern${GITTER_C____RESET}   Matches the end of the value"
   echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C____VALUE}pattern${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}  Matches substring anywhere in the value"
   echo -e "   ${GITTER_C____VALUE}pattern${GITTER_C____RESET}   Matches exactly the value"
+  echo
+  echo -e "${GITTER_C__HEADING}'temporal' Format:${GITTER_C____RESET}"
+  echo -ne "  [<${GITTER_C____VALUE}Years${GITTER_C____RESET}>${GITTER_C____ERROR}y${GITTER_C____RESET}]"
+  echo -ne "[<${GITTER_C____VALUE}Months${GITTER_C____RESET}>${GITTER_C____ERROR}mo${GITTER_C____RESET}]"
+  echo -ne "[<${GITTER_C____VALUE}Weeks${GITTER_C____RESET}>${GITTER_C____ERROR}w${GITTER_C____RESET}]"
+  echo -ne "[<${GITTER_C____VALUE}Days${GITTER_C____RESET}>${GITTER_C____ERROR}d${GITTER_C____RESET}]"
+  echo -ne "[<${GITTER_C____VALUE}Hours${GITTER_C____RESET}>${GITTER_C____ERROR}h${GITTER_C____RESET}]"
+  echo -ne "[<${GITTER_C____VALUE}Minutes${GITTER_C____RESET}>${GITTER_C____ERROR}m${GITTER_C____RESET}]"
+  echo  -e "[<${GITTER_C____VALUE}Seconds${GITTER_C____RESET}>${GITTER_C____ERROR}s${GITTER_C____RESET}]"
   echo
   echo -e "${GITTER_C__HEADING}Project Types:${GITTER_C____RESET}"
   echo -ne "  "
@@ -102,14 +109,16 @@ __help_filter() {
   done
   echo
   echo
-  echo -e "${GITTER_C__HEADING}Examples:${GITTER_C____RESET}"
-  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}path:src/+${GITTER_C____RESET}\"         Filter repositories with path starting with 'src/'"
-  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}! repo:+-test${GITTER_C____RESET}\"      Filter repositories with name not ending with '-test'"
-  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}branch:master${GITTER_C____RESET}\"      Filter repositories on branch 'master'"
-  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}(path:+src/ || path:+test) & ! branch:hotfix/${GITTER_C____RESET}\""
-  echo -e "                                       Filter repositories with path containing 'src/' or 'test' and not on any hotfix/ branch"
-  echo -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}(type:nodejs || type:gradle)${GITTER_C____RESET}\""
-  echo -e "                                       Filter repositories which are either Node.js or Gradle projects"
+  echo  -e "${GITTER_C__HEADING}Examples:${GITTER_C____RESET}"
+  echo  -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}path:src/+${GITTER_C____RESET}\"         Filter repositories with path starting with 'src/'"
+  echo  -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}! repo:+-test${GITTER_C____RESET}\"      Filter repositories with name not ending with '-test'"
+  echo  -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}branch:master${GITTER_C____RESET}\"      Filter repositories on branch 'master'"
+  echo  -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}(path:+src/ || path:+test) & ! branch:hotfix/${GITTER_C____RESET}\""
+  echo  -e "                                       Filter repositories with path containing 'src/' or 'test' and not on any hotfix/ branch"
+  echo  -e "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}(type:nodejs || type:gradle)${GITTER_C____RESET}\""
+  echo  -e "                                       Filter repositories which are either Node.js or Gradle projects"
+  echo -ne "  ${GITTER_C__COMMAND}gitter ${GITTER_C___OPTION}--filter${GITTER_C____RESET} \"${GITTER_C____VALUE}dirty && stale:7d${GITTER_C____RESET}\""
+  echo  -e "  Filter repositories which are dirty and not updated in last 7 days"
   echo
 }
 
