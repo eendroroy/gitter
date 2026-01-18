@@ -78,6 +78,7 @@ __help_filter() {
   echo -e "  ${GITTER_C____ERROR}path  ${GITTER_C____RESET}  Match for path name"
   echo -e "  ${GITTER_C____ERROR}repo  ${GITTER_C____RESET}  Match for repository name"
   echo -e "  ${GITTER_C____ERROR}branch${GITTER_C____RESET}  Match for current git branch"
+  echo -e "  ${GITTER_C____ERROR}remote${GITTER_C____RESET}  Match for remote name (e.g., origin)"
   echo -e "  ${GITTER_C____ERROR}type  ${GITTER_C____RESET}  Match for project type (supports exact match only - ${GITTER_C____ERROR}type${GITTER_C____RESET}${GITTER_C__HEADING}:${GITTER_C____RESET}${GITTER_C____VALUE}project_type${GITTER_C____RESET})"
   echo
   echo -e "${GITTER_C__HEADING}Patterns:${GITTER_C____RESET}"

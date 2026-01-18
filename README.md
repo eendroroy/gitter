@@ -132,7 +132,8 @@ For example: *`"( filter1 && filter2) || ! filter3"`*
 - `path  ` : Match for path name
 - `repo  ` : Match for repository name
 - `branch` : Match for current git branch
-- `type`   :  Match for project type (supports exact match only - `type:<project_type>`)
+- `remote` : Match for remote name (e.g., origin)
+- `type`   : Match for project type (supports exact match only - `type:<project_type>`)
 
 #### Patterns
 
