@@ -9,7 +9,7 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-__match_filter() {
+__match_filter_text() {
   local value="$1" pattern="$2"
 
   # Special-case: single '+' matches everything
@@ -59,11 +59,15 @@ __apply_filter() {
       ;;
   esac
 
-  if __match_filter "$value" "$filter_value"; then
-    echo 1
-  else
-    echo 0
-  fi
+  case "$filter_key" in
+    path|repo|branch|remote)
+      __match_filter_text "$value" "$filter_value" && echo 1 || echo 0
+      ;;
+    type)
+      # For 'type' filter, we want exact match
+      [[ "$value" == "$filter_value" ]] && echo 1 || echo 0
+      ;;
+  esac
 }
 
 __filter_repositories() {
