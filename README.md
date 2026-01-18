@@ -129,13 +129,14 @@ For example: *`"( filter1 && filter2) || ! filter3"`*
 
 #### Prefixes
 
-- `path  ` : Match for path name
-- `repo  ` : Match for repository name
-- `branch` : Match for current git branch
-- `remote` : Match for remote name (e.g., origin)
-- `type`   : Match for project type (supports exact match only - `type:<project_type>`)
+- `path  ` : `[substr]` Match for path name
+- `repo  ` : `[substr]` Match for repository name
+- `branch` : `[substr]` Match for current git branch
+- `remote` : `[substr]` Match for remote name (e.g., origin)
+- `dirty ` : `[boolean]` Match for dirty state (default: `true`. Use value `false` to match clean repositories)
+- `type`   : `[full]` Match for project type (supports exact match only - `type:<project_type>`)
 
-#### Patterns
+#### `substr` Patterns
 
 - `+pattern+` : Matches substring anywhere in the value
 - ` pattern+` : Matches the beginning of the value

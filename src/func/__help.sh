@@ -75,13 +75,14 @@ __help_filter() {
   echo
   echo
   echo -e "${GITTER_C__HEADING}Prefixes:${GITTER_C____RESET}"
-  echo -e "  ${GITTER_C____ERROR}path  ${GITTER_C____RESET}  Match for path name"
-  echo -e "  ${GITTER_C____ERROR}repo  ${GITTER_C____RESET}  Match for repository name"
-  echo -e "  ${GITTER_C____ERROR}branch${GITTER_C____RESET}  Match for current git branch"
-  echo -e "  ${GITTER_C____ERROR}remote${GITTER_C____RESET}  Match for remote name (e.g., origin)"
-  echo -e "  ${GITTER_C____ERROR}type  ${GITTER_C____RESET}  Match for project type (supports exact match only - ${GITTER_C____ERROR}type${GITTER_C____RESET}${GITTER_C__HEADING}:${GITTER_C____RESET}${GITTER_C____VALUE}project_type${GITTER_C____RESET})"
+  echo -e "  ${GITTER_C____ERROR}path  ${GITTER_C____RESET}  [substr]  Match for path name"
+  echo -e "  ${GITTER_C____ERROR}repo  ${GITTER_C____RESET}  [substr]  Match for repository name"
+  echo -e "  ${GITTER_C____ERROR}branch${GITTER_C____RESET}  [substr]  Match for current git branch"
+  echo -e "  ${GITTER_C____ERROR}remote${GITTER_C____RESET}  [substr]  Match for remote name (e.g., origin)"
+  echo -e "  ${GITTER_C____ERROR}dirty ${GITTER_C____RESET}  [boolean] Match for dirty state (default: ${GITTER_C______ARG}true${GITTER_C____RESET}. Use value ${GITTER_C____VALUE}false${GITTER_C____RESET} to match clean repositories)"
+  echo -e "  ${GITTER_C____ERROR}type  ${GITTER_C____RESET}  [full]    Match for project type (supports exact match only - ${GITTER_C____ERROR}type${GITTER_C____RESET}${GITTER_C__HEADING}:${GITTER_C____RESET}${GITTER_C____VALUE}project_type${GITTER_C____RESET})"
   echo
-  echo -e "${GITTER_C__HEADING}Patterns:${GITTER_C____RESET}"
+  echo -e "${GITTER_C__HEADING}'substr' Patterns:${GITTER_C____RESET}"
   echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}          Matches anywhere in the value (default if no anchors specified)"
   echo -e "   ${GITTER_C____VALUE}pattern${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}  Matches the beginning of the value"
   echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C____VALUE}pattern${GITTER_C____RESET}   Matches the end of the value"
