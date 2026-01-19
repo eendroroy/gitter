@@ -134,6 +134,7 @@ For example: *`"( filter1 && filter2 ) || ! filter3"`*
 - `remote` : `[substr]`   Match for remote name (e.g., origin)
 - `dirty ` : `[boolean]`  Match for dirty state (default: `true`. Use value `false` to match clean repositories)
 - `stale ` : `[temporal]` Match for stale repositories (supports duration format - e.g., `7d`, `12h`, `30m`)
+- `active` : `[temporal]` Match for repositories with activity in current branch (supports duration format - e.g., `7d`, `12h`, `30m`)
 - `type`   : `[full]`     Match for project type (supports exact match only - `type:<project_type>`)
 
 #### `substr` Format

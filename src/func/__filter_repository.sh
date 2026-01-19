@@ -85,13 +85,13 @@ __apply_filter() {
   repo_dir="$(dirname "$repo_git_dir")"
 
   case "$filter_key" in
-    path  ) value="$repo_dir" ;;
-    repo  ) value="$(basename "$repo_dir")"; [[ "$value" == "." ]] && value=$(basename "$(realpath .)") ;;
-    branch) value="$(git -C "$repo_dir" branch --show-current 2>/dev/null)" ;;
-    remote) value="$(git -C "$repo_dir" remote 2>/dev/null)" ;;
-    dirty ) value="$(git -C "$repo_dir" status --porcelain 2>/dev/null)" ;;
-    stale ) value="$(( $(date +%s) - $(git -C "$repo_dir" log -1 --format=%ct) ))" ;;
-    type  ) value=$(__project_type "$repo_dir" "$filter_value" && echo "$filter_value" || echo "OTHER") ;;
+    path         ) value="$repo_dir" ;;
+    repo         ) value="$(basename "$repo_dir")"; [[ "$value" == "." ]] && value=$(basename "$(realpath .)") ;;
+    branch       ) value="$(git -C "$repo_dir" branch --show-current 2>/dev/null)" ;;
+    remote       ) value="$(git -C "$repo_dir" remote 2>/dev/null)" ;;
+    dirty        ) value="$(git -C "$repo_dir" status --porcelain 2>/dev/null)" ;;
+    stale|active ) value="$(( $(date +%s) - $(git -C "$repo_dir" log -1 --format=%ct) ))" ;;
+    type         ) value=$(__project_type "$repo_dir" "$filter_value" && echo "$filter_value" || echo "OTHER") ;;
     *)
       echo -e "${GITTER_C____ERROR}${GITTER___ERROR_SYMBOL}  Unknown filter key: ${filter_key}${GITTER_C____RESET}" 1>&2
       exit 1
@@ -110,6 +110,9 @@ __apply_filter() {
       ;;
     stale)
       [[ "$value" -ge "$(___duration_to_seconds "$filter_value")" ]] && echo 1 || echo 0
+      ;;
+    active)
+      [[ "$value" -le "$(___duration_to_seconds "$filter_value")" ]] && echo 1 || echo 0
       ;;
   esac
 }
