@@ -107,7 +107,6 @@ export GITTER_REPO_STATUS=" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]
 
 #### Available placeholders for repository status patterns
 
-- `[type]      ` : Estimated project type (e.g., "maven", "nodejs", "python", etc.)
 - `[branch]    ` : Current git branch name
 - `[commit:a]  ` : Abbreviated (8) current git commit hash
 - `[commit:f]  ` : Full current git commit hash
@@ -121,7 +120,7 @@ export GITTER_REPO_STATUS=" on |[branch]| |[commit:8]| by |[author:e]| |[time:r]
 
 Filters allow you to include or exclude repositories based on specific criteria such as path, repository name,
 or branch name. It supports bash expression evaluation format. 
-For example: *`"( filter1 && filter2) || ! filter3"`*
+For example: *`"( filter1 && filter2 ) || ! filter3"`*
 
 #### Filter Format
 
@@ -137,7 +136,7 @@ For example: *`"( filter1 && filter2) || ! filter3"`*
 - `stale ` : `[temporal]` Match for stale repositories (supports duration format - e.g., `7d`, `12h`, `30m`)
 - `type`   : `[full]`     Match for project type (supports exact match only - `type:<project_type>`)
 
-#### `substr` Patterns
+#### `substr` Format
 
 - `+pattern+` : Matches substring anywhere in the value
 - ` pattern+` : Matches the beginning of the value
@@ -148,34 +147,21 @@ For example: *`"( filter1 && filter2) || ! filter3"`*
 
 `[<Years>y][<Months>mo][<Weeks>w][<Days>d][<Hours>h][<Minutes>m][<Seconds>s]`
 
+```
+Units |          y |        mo |      w |      d |     h |       m |         s
+------|------------|-----------|--------|--------|-------|---------|-----------
+    y |            |        12 |     52 |    365 | 8,760 | 525,600 | 31,536,000
+   mo |         12 |           |      4 |     30 |   720 |  43,200 |  25,92,000
+    w |         52 |         4 |        |      7 |   168 |  10,080 |    604,800
+    d |        365 |        30 |      7 |        |    24 |   1,440 |     86,400
+    h |      8,760 |       720 |    168 |     24 |       |      60 |      3,600
+    m |    525,600 |    43,200 |  10080 |  1,440 |    60 |         |         60
+    s | 31,536,000 | 2,592,000 | 604800 | 86,400 | 3,600 |      60 | 
+```
+
 #### Project Types:
 
-- `any`        : Any git repository (default)
-- `android`    : Android project
-- `angular`    : Angular project
-- `angularjs`  : AngularJS project
-- `bash`       : Bash script project
-- `c`          : C project
-- `cpp`        : C++ project
-- `docker`     : Docker project
-- `dotnet`     : .NET project
-- `flutter`    : Flutter project
-- `go`         : Go project
-- `gradle`     : Gradle project
-- `maven`      : Maven project
-- `nextjs`     : Next.js project
-- `nodejs`     : Node.js project
-- `php`        : PHP project
-- `python`     : Python project
-- `react`      : React project
-- `ruby`       : Ruby project
-- `rust`       : Rust project
-- `shell`      : Generic Shell scripts
-- `springboot` : Spring Boot project
-- `svelte`     : Svelte project
-- `terraform`  : Terraform project
-- `vue`        : Vue.js project
-- `zsh`        : Zsh script project
+`gitter help filter` command can be used to list all supported project types.
 
 #### Examples
 
@@ -185,6 +171,7 @@ For example: *`"( filter1 && filter2) || ! filter3"`*
 - `-f "branch:main"               ` : Includes repositories currently on the "main" branch.
 - `-f "! repo:+test+"             ` : Excludes repositories with "test" anywhere in the repository name.
 - `-f "path:+utils+ || branch:dev"` : Includes repositories with "utils" in the path or currently on the "dev" branch.
+- `-f "dirty && stale:7d"         ` : Filter repositories which are dirty and not updated in last 7 days
 
 ## .gitterignore
 
@@ -202,7 +189,6 @@ Lines starting with `#` are treated as comments and ignored.
 
 Within `exec` and `git` commands, you can use the following expanders in arguments:
 
-- `{_type_}      ` : Estimated project type (e.g., "maven", "nodejs", "python", etc.)
 - `{_repo_}      ` : Name of the current git repository
 - `{_path:r_}    ` : Relative path of the current working directory from where gitter was invoked
 - `{_path:a_}    ` : Absolute path of the current working directory

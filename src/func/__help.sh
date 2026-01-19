@@ -63,7 +63,7 @@ __help_filter() {
   echo
   echo -e  "${GITTER_C__HEADING}Filter:${GITTER_C____RESET}"
   echo -e  "  Supports bash expression evaluation format"
-  echo -e  "  For example: \"( ${GITTER_C____VALUE}filter1${GITTER_C____RESET} && ${GITTER_C____VALUE}filter2${GITTER_C____RESET}) || ! ${GITTER_C____VALUE}filter3${GITTER_C____RESET}\""
+  echo -e  "  For example: \"( ${GITTER_C____VALUE}filter1${GITTER_C____RESET} && ${GITTER_C____VALUE}filter2${GITTER_C____RESET} ) || ! ${GITTER_C____VALUE}filter3${GITTER_C____RESET}\""
   echo
   echo -e  "${GITTER_C__HEADING}Syntax:${GITTER_C____RESET}"
   echo -ne "  ${GITTER_C______DIM}<${GITTER_C____RESET}${GITTER_C____ERROR}prefix${GITTER_C____RESET}${GITTER_C______DIM}>${GITTER_C____RESET}"
@@ -79,7 +79,7 @@ __help_filter() {
   echo -e "  ${GITTER_C____ERROR}stale ${GITTER_C____RESET}  [temporal] Match for stale repositories (supports duration format - e.g., ${GITTER_C____VALUE}7d${GITTER_C____RESET}, ${GITTER_C____VALUE}12h${GITTER_C____RESET}, ${GITTER_C____VALUE}30m${GITTER_C____RESET})"
   echo -e "  ${GITTER_C____ERROR}type  ${GITTER_C____RESET}  [full]     Match for project type (supports exact match only - ${GITTER_C____ERROR}type${GITTER_C____RESET}${GITTER_C__HEADING}:${GITTER_C____RESET}${GITTER_C____VALUE}project_type${GITTER_C____RESET})"
   echo
-  echo -e "${GITTER_C__HEADING}'substr' Patterns:${GITTER_C____RESET}"
+  echo -e "${GITTER_C__HEADING}'substr' Formal:${GITTER_C____RESET}"
   echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}          Matches anywhere in the value (default if no anchors specified)"
   echo -e "   ${GITTER_C____VALUE}pattern${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}  Matches the beginning of the value"
   echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C____VALUE}pattern${GITTER_C____RESET}   Matches the end of the value"
@@ -94,6 +94,16 @@ __help_filter() {
   echo -ne "[<${GITTER_C____VALUE}Hours${GITTER_C____RESET}>${GITTER_C____ERROR}h${GITTER_C____RESET}]"
   echo -ne "[<${GITTER_C____VALUE}Minutes${GITTER_C____RESET}>${GITTER_C____ERROR}m${GITTER_C____RESET}]"
   echo  -e "[<${GITTER_C____VALUE}Seconds${GITTER_C____RESET}>${GITTER_C____ERROR}s${GITTER_C____RESET}]"
+  echo
+  echo -e "  ${GITTER_C____ERROR}Units${GITTER_C____RESET}| ${GITTER_C____ERROR}        y${GITTER_C____RESET}|${GITTER_C____ERROR}       mo${GITTER_C____RESET}|${GITTER_C____ERROR}     w${GITTER_C____RESET}| ${GITTER_C____ERROR}    d${GITTER_C____RESET}| ${GITTER_C____ERROR}   h${GITTER_C____RESET}| ${GITTER_C____ERROR}     m${GITTER_C____RESET}| ${GITTER_C____ERROR}        s${GITTER_C____RESET}"
+  echo -e "  -----|----------|---------|------|------|-----|-------|----------"
+  echo -e "  ${GITTER_C____ERROR}   y ${GITTER_C____RESET}|${GITTER_C____VALUE}          ${GITTER_C____RESET}|${GITTER_C____VALUE}       12${GITTER_C____RESET}|${GITTER_C____VALUE}    52${GITTER_C____RESET}|${GITTER_C____VALUE}   365${GITTER_C____RESET}|${GITTER_C____VALUE}8,760${GITTER_C____RESET}|${GITTER_C____VALUE}525,600${GITTER_C____RESET}|${GITTER_C____VALUE}31,536,000${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}  mo ${GITTER_C____RESET}|${GITTER_C____VALUE}        12${GITTER_C____RESET}|${GITTER_C____VALUE}         ${GITTER_C____RESET}|${GITTER_C____VALUE}     4${GITTER_C____RESET}|${GITTER_C____VALUE}    30${GITTER_C____RESET}|${GITTER_C____VALUE}  720${GITTER_C____RESET}|${GITTER_C____VALUE} 43,200${GITTER_C____RESET}|${GITTER_C____VALUE} 25,92,000${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}   w ${GITTER_C____RESET}|${GITTER_C____VALUE}        52${GITTER_C____RESET}|${GITTER_C____VALUE}        4${GITTER_C____RESET}|${GITTER_C____VALUE}      ${GITTER_C____RESET}|${GITTER_C____VALUE}     7${GITTER_C____RESET}|${GITTER_C____VALUE}  168${GITTER_C____RESET}|${GITTER_C____VALUE} 10,080${GITTER_C____RESET}|${GITTER_C____VALUE}   604,800${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}   d ${GITTER_C____RESET}|${GITTER_C____VALUE}       365${GITTER_C____RESET}|${GITTER_C____VALUE}       30${GITTER_C____RESET}|${GITTER_C____VALUE}     7${GITTER_C____RESET}|${GITTER_C____VALUE}      ${GITTER_C____RESET}|${GITTER_C____VALUE}   24${GITTER_C____RESET}|${GITTER_C____VALUE}  1,440${GITTER_C____RESET}|${GITTER_C____VALUE}    86,400${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}   h ${GITTER_C____RESET}|${GITTER_C____VALUE}     8,760${GITTER_C____RESET}|${GITTER_C____VALUE}      720${GITTER_C____RESET}|${GITTER_C____VALUE}   168${GITTER_C____RESET}|${GITTER_C____VALUE}    24${GITTER_C____RESET}|${GITTER_C____VALUE}     ${GITTER_C____RESET}|${GITTER_C____VALUE}     60${GITTER_C____RESET}|${GITTER_C____VALUE}     3,600${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}   m ${GITTER_C____RESET}|${GITTER_C____VALUE}   525,600${GITTER_C____RESET}|${GITTER_C____VALUE}   43,200${GITTER_C____RESET}|${GITTER_C____VALUE} 10080${GITTER_C____RESET}|${GITTER_C____VALUE} 1,440${GITTER_C____RESET}|${GITTER_C____VALUE}   60${GITTER_C____RESET}|${GITTER_C____VALUE}       ${GITTER_C____RESET}|${GITTER_C____VALUE}        60${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}   s ${GITTER_C____RESET}|${GITTER_C____VALUE}31,536,000${GITTER_C____RESET}|${GITTER_C____VALUE}2,592,000${GITTER_C____RESET}|${GITTER_C____VALUE}604800${GITTER_C____RESET}|${GITTER_C____VALUE}86,400${GITTER_C____RESET}|${GITTER_C____VALUE}3,600${GITTER_C____RESET}|${GITTER_C____VALUE}     60${GITTER_C____RESET}|${GITTER_C____VALUE}          ${GITTER_C____RESET}"
   echo
   echo -e "${GITTER_C__HEADING}Project Types:${GITTER_C____RESET}"
   echo -ne "  "
