@@ -35,9 +35,9 @@ ____CURRENT_DIR=$(pwd)
 [[ -z "${GITTER_C___OPTION+x}" ]] && GITTER_C___OPTION='\e[36m'
 [[ -z "${GITTER_C____VALUE+x}" ]] && GITTER_C____VALUE='\e[2;35;1;3m'
 # Status colors
-[[ -z "${GITTER_C_____PATH+x}" ]] && GITTER_C_____PATH='\e[2;38;5;4m'
+[[ -z "${GITTER_C_____PATH+x}" ]] && GITTER_C_____PATH='\e[1;2;38;5;4m'
 [[ -z "${GITTER_C_____REPO+x}" ]] && GITTER_C_____REPO='\e[1;38;5;12m'
-[[ -z "${GITTER_C___BRANCH+x}" ]] && GITTER_C___BRANCH='\e[32m'
+[[ -z "${GITTER_C___BRANCH+x}" ]] && GITTER_C___BRANCH='\e[38;5;2m'
 [[ -z "${GITTER_C___COMMIT+x}" ]] && GITTER_C___COMMIT='\e[2;35;1;3m'
 [[ -z "${GITTER_C__COMMITS+x}" ]] && GITTER_C__COMMITS='\e[2;35;1;3m'
 [[ -z "${GITTER_C_TIME_REL+x}" ]] && GITTER_C_TIME_REL='\e[1;2;38;5;3m'
