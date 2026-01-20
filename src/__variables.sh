@@ -28,8 +28,6 @@ ____CURRENT_DIR=$(pwd)
 # Color defaults
 [[ -z "${GITTER_C__SUCCESS+x}" ]] && GITTER_C__SUCCESS='\e[38;5;2m'
 [[ -z "${GITTER_C____ERROR+x}" ]] && GITTER_C____ERROR='\e[38;5;9m'
-[[ -z "${GITTER_C_____REPO+x}" ]] && GITTER_C_____REPO='\e[35m'
-[[ -z "${GITTER_C_____PATH+x}" ]] && GITTER_C_____PATH='\e[2;35m'
 [[ -z "${GITTER_C______DIM+x}" ]] && GITTER_C______DIM='\e[2;38;5;3m'
 [[ -z "${GITTER_C__HEADING+x}" ]] && GITTER_C__HEADING='\e[1;37m'
 [[ -z "${GITTER_C__COMMAND+x}" ]] && GITTER_C__COMMAND='\e[32m'
@@ -37,14 +35,15 @@ ____CURRENT_DIR=$(pwd)
 [[ -z "${GITTER_C___OPTION+x}" ]] && GITTER_C___OPTION='\e[36m'
 [[ -z "${GITTER_C____VALUE+x}" ]] && GITTER_C____VALUE='\e[2;35;1;3m'
 # Status colors
-[[ -z "${GITTER_C_____TYPE+x}" ]] && GITTER_C_____TYPE='\e[1;2;38;5;3m'
+[[ -z "${GITTER_C_____PATH+x}" ]] && GITTER_C_____PATH='\e[2;38;5;4m'
+[[ -z "${GITTER_C_____REPO+x}" ]] && GITTER_C_____REPO='\e[1;38;5;12m'
 [[ -z "${GITTER_C___BRANCH+x}" ]] && GITTER_C___BRANCH='\e[32m'
 [[ -z "${GITTER_C___COMMIT+x}" ]] && GITTER_C___COMMIT='\e[2;35;1;3m'
 [[ -z "${GITTER_C__COMMITS+x}" ]] && GITTER_C__COMMITS='\e[2;35;1;3m'
-[[ -z "${GITTER_C_TIME_REL+x}" ]] && GITTER_C_TIME_REL='\e[33m'
-[[ -z "${GITTER_C_TIME_ABS+x}" ]] && GITTER_C_TIME_ABS='\e[33m'
-[[ -z "${GITTER_C_AUTHOR_E+x}" ]] && GITTER_C_AUTHOR_E='\e[36m'
-[[ -z "${GITTER_C_AUTHOR_N+x}" ]] && GITTER_C_AUTHOR_N='\e[36m'
+[[ -z "${GITTER_C_TIME_REL+x}" ]] && GITTER_C_TIME_REL='\e[1;2;38;5;3m'
+[[ -z "${GITTER_C_TIME_ABS+x}" ]] && GITTER_C_TIME_ABS='\e[1;2;38;5;3m'
+[[ -z "${GITTER_C_AUTHOR_E+x}" ]] && GITTER_C_AUTHOR_E='\e[2;38;5;6m'
+[[ -z "${GITTER_C_AUTHOR_N+x}" ]] && GITTER_C_AUTHOR_N='\e[2;38;5;6m'
 
 # Non configurable variables
 GITTER_C____RESET='\e[0m'
