@@ -91,6 +91,8 @@ __apply_filter() {
     remote       ) value="$(git -C "$repo_dir" remote 2>/dev/null)" ;;
     dirty        ) value="$(git -C "$repo_dir" status --porcelain 2>/dev/null)" ;;
     stale|active ) value="$(( $(date +%s) - $(git -C "$repo_dir" log -1 --format=%ct) ))" ;;
+    author       ) value="$(git -C "$repo_dir" log -1 --format="%ae" 2>/dev/null)" ;;
+    author-name  ) value="$(git -C "$repo_dir" log -1 --format="%an" 2>/dev/null)" ;;
     type         ) value=$(__project_type "$repo_dir" "$filter_value" && echo "$filter_value" || echo "OTHER") ;;
     *)
       echo -e "${GITTER_C____ERROR}${GITTER___ERROR_SYMBOL}  Unknown filter key: ${filter_key}${GITTER_C____RESET}" 1>&2
@@ -99,7 +101,7 @@ __apply_filter() {
   esac
 
   case "$filter_key" in
-    path|repo|branch|remote)
+    path|repo|branch|remote|author|author-email|author-name)
       __match_filter_text "$value" "$filter_value" && echo 1 || echo 0
       ;;
     type)
