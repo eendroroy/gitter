@@ -25,7 +25,7 @@ __help() {
   echo -e "${GITTER_C__HEADING}Options:${GITTER_C____RESET}"
   echo -e "  ${GITTER_C___OPTION}--status            -s ${GITTER_C____RESET}<${GITTER_C____VALUE}status${GITTER_C____RESET}>${GITTER_C____RESET}  Set repository status format (overrides ${GITTER_C__COMMAND}GITTER_REPO_STATUS${GITTER_C____RESET} variable)"
   echo -e "  ${GITTER_C___OPTION}--max-depth         -d ${GITTER_C____RESET}<${GITTER_C____VALUE}depth${GITTER_C____RESET}>${GITTER_C____RESET}   Look for git repositories up to specified depth (default: ${GITTER_C______ARG}2${GITTER_C____RESET})"
-  echo -e "  ${GITTER_C___OPTION}--filter            -f ${GITTER_C____RESET}<${GITTER_C____VALUE}pattern${GITTER_C____RESET}>${GITTER_C____RESET} Filter repositories matching the given pattern (can be specified multiple times)"
+  echo -e "  ${GITTER_C___OPTION}--filter            -f ${GITTER_C____RESET}<${GITTER_C____VALUE}pattern${GITTER_C____RESET}>${GITTER_C____RESET} Filter repositories matching the given pattern"
   echo -e "  ${GITTER_C___OPTION}--ask-confirmation  -a          ${GITTER_C____RESET} Ask for confirmation before executing commands in each repository"
   echo -e "  ${GITTER_C___OPTION}--continue-on-error -c          ${GITTER_C____RESET} Continue executing commands in other repositories even if an error occurs in one"
   echo -e "  ${GITTER_C___OPTION}--no-color                      ${GITTER_C____RESET} Disable colored output"
