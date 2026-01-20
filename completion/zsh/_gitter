@@ -48,6 +48,7 @@ _gitter() {
   )
 
   statuses=(
+    "default:\" |[branch]| |[author:n]| |[time:r]\""
     "branch:\" on |[branch]\""
     "updated:\" on |[branch]| |[time:r]\""
     "updated-at:\" on |[branch]| |[commit:8]| at |[time:d]\""

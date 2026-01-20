@@ -59,6 +59,7 @@ __expand_status() {
   [[ -z "${status+x}" ]] && status="${GITTER_REPO_STATUS}"
 
   case "${status}" in
+    "default"       ) status="${GITTER_STATUS_DEFAULT}"        ;;
     "branch"        ) status="${GITTER_STATUS_BRANCH}"        ;;
     "updated"       ) status="${GITTER_STATUS_UPDATED}"       ;;
     "updated-at"    ) status="${GITTER_STATUS_UPDATED_AT}"    ;;

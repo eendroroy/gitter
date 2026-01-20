@@ -1,6 +1,6 @@
 # fish
 
-set -l gitter_status_fields 'branch updated updated-at updated-by updated-by-at commit-count'
+set -l gitter_status_fields 'default branch updated updated-at updated-by updated-by-at commit-count'
 set -l gitter_commands 'git g exec x eval e bash b list ls help config'
 
 

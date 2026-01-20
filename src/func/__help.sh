@@ -61,9 +61,8 @@ __help() {
 
 __help_filter() {
   echo
-  echo -e  "${GITTER_C__HEADING}Filter:${GITTER_C____RESET}"
-  echo -e  "  Supports bash expression evaluation format"
-  echo -e  "  For example: \"( ${GITTER_C____VALUE}filter1${GITTER_C____RESET} && ${GITTER_C____VALUE}filter2${GITTER_C____RESET} ) || ! ${GITTER_C____VALUE}filter3${GITTER_C____RESET}\""
+  echo -e  "Gitter supports filters using bash expression evaluation format"
+  echo -e  "For example: \"( ${GITTER_C____VALUE}filter1${GITTER_C____RESET} && ${GITTER_C____VALUE}filter2${GITTER_C____RESET} ) || ! ${GITTER_C____VALUE}filter3${GITTER_C____RESET}\""
   echo
   echo -e  "${GITTER_C__HEADING}Syntax:${GITTER_C____RESET}"
   echo -ne "  ${GITTER_C______DIM}<${GITTER_C____RESET}${GITTER_C____ERROR}prefix${GITTER_C____RESET}${GITTER_C______DIM}>${GITTER_C____RESET}"
@@ -80,7 +79,7 @@ __help_filter() {
   echo -e "  ${GITTER_C____ERROR}active${GITTER_C____RESET}  [temporal] Match for repositories with activity in current branch (supports duration format - e.g., ${GITTER_C____VALUE}7d${GITTER_C____RESET}, ${GITTER_C____VALUE}12h${GITTER_C____RESET}, ${GITTER_C____VALUE}30m${GITTER_C____RESET})"
   echo -e "  ${GITTER_C____ERROR}type  ${GITTER_C____RESET}  [full]     Match for project type (supports exact match only - ${GITTER_C____ERROR}type${GITTER_C____RESET}${GITTER_C__HEADING}:${GITTER_C____RESET}${GITTER_C____VALUE}project_type${GITTER_C____RESET})"
   echo
-  echo -e "${GITTER_C__HEADING}'substr' Formal:${GITTER_C____RESET}"
+  echo -e "${GITTER_C__HEADING}'substr' Format:${GITTER_C____RESET}"
   echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}          Matches anywhere in the value (default if no anchors specified)"
   echo -e "   ${GITTER_C____VALUE}pattern${GITTER_C____RESET}${GITTER_C____ERROR}+${GITTER_C____RESET}  Matches the beginning of the value"
   echo -e "  ${GITTER_C____ERROR}+${GITTER_C____RESET}${GITTER_C____VALUE}pattern${GITTER_C____RESET}   Matches the end of the value"
@@ -88,13 +87,24 @@ __help_filter() {
   echo -e "   ${GITTER_C____VALUE}pattern${GITTER_C____RESET}   Matches exactly the value"
   echo
   echo -e "${GITTER_C__HEADING}'temporal' Format:${GITTER_C____RESET}"
-  echo -ne "  [<${GITTER_C____VALUE}Years${GITTER_C____RESET}>${GITTER_C____ERROR}y${GITTER_C____RESET}]"
-  echo -ne "[<${GITTER_C____VALUE}Months${GITTER_C____RESET}>${GITTER_C____ERROR}mo${GITTER_C____RESET}]"
-  echo -ne "[<${GITTER_C____VALUE}Weeks${GITTER_C____RESET}>${GITTER_C____ERROR}w${GITTER_C____RESET}]"
-  echo -ne "[<${GITTER_C____VALUE}Days${GITTER_C____RESET}>${GITTER_C____ERROR}d${GITTER_C____RESET}]"
-  echo -ne "[<${GITTER_C____VALUE}Hours${GITTER_C____RESET}>${GITTER_C____ERROR}h${GITTER_C____RESET}]"
-  echo -ne "[<${GITTER_C____VALUE}Minutes${GITTER_C____RESET}>${GITTER_C____ERROR}m${GITTER_C____RESET}]"
-  echo  -e "[<${GITTER_C____VALUE}Seconds${GITTER_C____RESET}>${GITTER_C____ERROR}s${GITTER_C____RESET}]"
+  echo -ne "  < <${GITTER_C____VALUE}Years${GITTER_C____RESET}>${GITTER_C____ERROR}y${GITTER_C____RESET}"
+  echo -ne " | <${GITTER_C____VALUE}Months${GITTER_C____RESET}>${GITTER_C____ERROR}mo${GITTER_C____RESET}"
+  echo -ne " | <${GITTER_C____VALUE}Weeks${GITTER_C____RESET}>${GITTER_C____ERROR}w${GITTER_C____RESET}"
+  echo -ne " | <${GITTER_C____VALUE}Days${GITTER_C____RESET}>${GITTER_C____ERROR}d${GITTER_C____RESET}"
+  echo -ne " | <${GITTER_C____VALUE}Hours${GITTER_C____RESET}>${GITTER_C____ERROR}h${GITTER_C____RESET}"
+  echo -ne " | <${GITTER_C____VALUE}Minutes${GITTER_C____RESET}>${GITTER_C____ERROR}m${GITTER_C____RESET}"
+  echo  -e " | <${GITTER_C____VALUE}Seconds${GITTER_C____RESET}>${GITTER_C____ERROR}s${GITTER_C____RESET} ...>"
+  echo
+  echo -e  "  Example:"
+  echo -ne "    ${GITTER_C____VALUE}1${GITTER_C____RESET}${GITTER_C____ERROR}y${GITTER_C____RESET}"
+  echo -ne "${GITTER_C____VALUE}6${GITTER_C____RESET}${GITTER_C____ERROR}mo${GITTER_C____RESET}"
+  echo -e  "  1 year and 6 months"
+  echo -ne  "    ${GITTER_C____VALUE}2${GITTER_C____RESET}${GITTER_C____ERROR}w${GITTER_C____RESET}"
+  echo -ne "${GITTER_C____VALUE}3${GITTER_C____RESET}${GITTER_C____ERROR}d${GITTER_C____RESET}"
+  echo -e  "   2 weeks and 3 days"
+  echo -ne  "    ${GITTER_C____VALUE}1${GITTER_C____RESET}${GITTER_C____ERROR}d${GITTER_C____RESET}"
+  echo -ne "${GITTER_C____VALUE}12${GITTER_C____RESET}${GITTER_C____ERROR}h${GITTER_C____RESET}"
+  echo -e  "  1 day and 12 hours"
   echo
   echo -e "${GITTER_C__HEADING}'temporal' Unit Conversion Table:${GITTER_C____RESET}"
   echo
@@ -134,39 +144,33 @@ __help_filter() {
 
 __help_gitterignore() {
   echo
-  echo -e "${GITTER_C__HEADING}Gitter${GITTER_C____RESET}"
-  echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
+  echo -e "Gitter will look for a ${GITTER_C____VALUE}.gitterignore${GITTER_C____RESET} file ${GITTER_C______ARG}in the current directory.${GITTER_C____RESET}"
+  echo -e "If found, it will read patterns from the file to ignore matching repositories."
+  echo -e "Each line in the file should contain a pattern to match repository names or paths."
+  echo -e "Lines starting with ${GITTER_C____ERROR}#${GITTER_C____RESET} are treated as comments and ignored."
   echo
-  echo -e "${GITTER_C__HEADING}Ignore-file:${GITTER_C____RESET}"
-  echo -e "  Gitter will look for a ${GITTER_C_____REPO}.gitterignore${GITTER_C____RESET} file ${GITTER_C______ARG}in the current directory.${GITTER_C____RESET}"
-  echo -e "  If found, it will read patterns from the file to ignore matching repositories."
-  echo -e "  Each line in the file should contain a pattern to match repository names or paths."
-  echo -e "  Lines starting with ${GITTER_C____ERROR}#${GITTER_C____RESET} are treated as comments and ignored."
-  echo -e "  Patterns:"
-  echo -e "    ${GITTER_C____ERROR}relative/path/to/directory${GITTER_C____RESET} Ignore directory at exact relative path ${GITTER_C_____REPO}relative/path/to/directory${GITTER_C____RESET}"
-  echo -e "    ${GITTER_C____ERROR}*/directory_name${GITTER_C____RESET}           Ignore directories under any parent directory named ${GITTER_C_____REPO}directory_name${GITTER_C____RESET}"
-  echo -e "    ${GITTER_C____ERROR}directory_name/*${GITTER_C____RESET}           Ignore directories directly under the top-level directory named ${GITTER_C_____REPO}directory_name${GITTER_C____RESET}"
+  echo -e "${GITTER_C__HEADING}Patterns:${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}relative/path/to/directory${GITTER_C____RESET} Ignore directory at exact relative path ${GITTER_C_____REPO}relative/path/to/directory${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}*/directory_name${GITTER_C____RESET}           Ignore directories under any parent directory named ${GITTER_C_____REPO}directory_name${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}directory_name/*${GITTER_C____RESET}           Ignore directories directly under the top-level directory named ${GITTER_C_____REPO}directory_name${GITTER_C____RESET}"
   echo
 }
 
 __help_expander() {
   echo
-  echo -e "${GITTER_C__HEADING}Gitter${GITTER_C____RESET}"
-  echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
+  echo -e "Within ${GITTER_C___OPTION}exec${GITTER_C____RESET} and ${GITTER_C___OPTION}git${GITTER_C____RESET} commands, the following expanders can be used in arguments:"
   echo
-  echo -e "${GITTER_C__HEADING}Expanders:${GITTER_C____RESET}"
-  echo -e "  Within ${GITTER_C___OPTION}exec${GITTER_C____RESET} and ${GITTER_C___OPTION}git${GITTER_C____RESET} commands, the following expanders can be used in arguments:"
-  echo -e "    ${GITTER_C______ARG}{_repo_}      ${GITTER_C____RESET} Name of the current git repository"
-  echo -e "    ${GITTER_C______ARG}{_path:r_}    ${GITTER_C____RESET} Relative path of the current working directory from where gitter was invoked"
-  echo -e "    ${GITTER_C______ARG}{_path:a_}    ${GITTER_C____RESET} Absolute path of the current working directory"
-  echo -e "    ${GITTER_C______ARG}{_branch_}    ${GITTER_C____RESET} Current git branch name"
-  echo -e "    ${GITTER_C______ARG}{_commit:f_}  ${GITTER_C____RESET} Current git commit hash"
-  echo -e "    ${GITTER_C______ARG}{_commit:<n>_}${GITTER_C____RESET} Current git commit hash abbreviated to <n> characters. i.e. ${GITTER_C______ARG}{_commit:8_}${GITTER_C____RESET}"
-  echo -e "    ${GITTER_C______ARG}{_commit:c_}  ${GITTER_C____RESET} Current git commit count"
-  echo -e "    ${GITTER_C______ARG}{_author:e_}  ${GITTER_C____RESET} Current git commit author email"
-  echo -e "    ${GITTER_C______ARG}{_author:n_}  ${GITTER_C____RESET} Current git commit author name"
-  echo -e "    ${GITTER_C______ARG}{_time:r_}    ${GITTER_C____RESET} Relative time of the current git commit (e.g., \"2 days ago\")"
-  echo -e "    ${GITTER_C______ARG}{_time:d_}    ${GITTER_C____RESET} Date and time of the current git commit (e.g., \"2024-01-01 12:00:00\")"
+  echo -e "  ${GITTER_C______ARG}{_repo_}      ${GITTER_C____RESET} Name of the current git repository"
+  echo -e "  ${GITTER_C______ARG}{_path:r_}    ${GITTER_C____RESET} Relative path of the current working directory from where gitter was invoked"
+  echo -e "  ${GITTER_C______ARG}{_path:a_}    ${GITTER_C____RESET} Absolute path of the current working directory"
+  echo -e "  ${GITTER_C______ARG}{_branch_}    ${GITTER_C____RESET} Current git branch name"
+  echo -e "  ${GITTER_C______ARG}{_commit:f_}  ${GITTER_C____RESET} Current git commit hash"
+  echo -e "  ${GITTER_C______ARG}{_commit:<n>_}${GITTER_C____RESET} Current git commit hash abbreviated to <n> characters. i.e. ${GITTER_C______ARG}{_commit:8_}${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C______ARG}{_commit:c_}  ${GITTER_C____RESET} Current git commit count"
+  echo -e "  ${GITTER_C______ARG}{_author:e_}  ${GITTER_C____RESET} Current git commit author email"
+  echo -e "  ${GITTER_C______ARG}{_author:n_}  ${GITTER_C____RESET} Current git commit author name"
+  echo -e "  ${GITTER_C______ARG}{_time:r_}    ${GITTER_C____RESET} Relative time of the current git commit (e.g., \"2 days ago\")"
+  echo -e "  ${GITTER_C______ARG}{_time:d_}    ${GITTER_C____RESET} Date and time of the current git commit (e.g., \"2024-01-01 12:00:00\")"
   echo
   echo -e "${GITTER_C__HEADING}Example Usage:${GITTER_C____RESET}"
   echo -e "  ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C___OPTION}exec${GITTER_C____RESET} -- echo \
@@ -181,11 +185,7 @@ Date: ${GITTER_C______ARG}{_time:d_}${GITTER_C____RESET}\""
 __help_status() {
   local separator="${GITTER_C______DIM}|${GITTER_C____RESET}"
   echo
-  echo -e "${GITTER_C__HEADING}Gitter${GITTER_C____RESET}"
-  echo -e "  Run git or arbitrary command in multiple git repositories with filters in current directory"
-  echo
-  echo -e "${GITTER_C__HEADING}Usage:${GITTER_C____RESET}"
-  echo -e "  Set ${GITTER_C__COMMAND}GITTER_REPO_STATUS${GITTER_C____RESET} variable or use ${GITTER_C___OPTION}--status${GITTER_C____RESET} option to define custom or predefined repository status format."
+  echo -e "Set ${GITTER_C__COMMAND}GITTER_REPO_STATUS${GITTER_C____RESET} variable or use ${GITTER_C___OPTION}--status${GITTER_C____RESET} option to define custom or predefined repository status format."
   echo
   echo -e "${GITTER_C__HEADING}Syntax:${GITTER_C____RESET}"
   echo -e "    ${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C______ARG}text${GITTER_C____RESET}${GITTER_C______DIM}]${GITTER_C____RESET}${GITTER_C______ARG}|${GITTER_C____RESET}${GITTER_C______DIM}[${GITTER_C____RESET}${GITTER_C______ARG}placeholder${GITTER_C____RESET}${GITTER_C______DIM}]...${GITTER_C____RESET}"
@@ -201,17 +201,18 @@ __help_status() {
   echo -e "    ${GITTER_C______ARG}[author:e]  ${GITTER_C____RESET} Current git commit author email"
   echo -e "    ${GITTER_C______ARG}[author:n]  ${GITTER_C____RESET} Current git commit author name"
   echo
-  echo -e "${GITTER_C__HEADING}Example Configuration for status:${GITTER_C____RESET}"
+  echo -e "${GITTER_C__HEADING}Example:${GITTER_C____RESET}"
   echo -e "    ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C___OPTION}list --status${GITTER_C____RESET} ${GITTER_C____VALUE}updated-by${GITTER_C____RESET}"
-  echo -e "    ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C___OPTION}list --status${GITTER_C____RESET} ${GITTER_C____VALUE}\" on |[branch]\"${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C__COMMAND}gitter${GITTER_C____RESET} ${GITTER_C___OPTION}list --status${GITTER_C____RESET} \"${GITTER_C____VALUE} on |[branch]${GITTER_C____RESET}\""
   echo
   echo -e "${GITTER_C__HEADING}Predefined patterns:${GITTER_C____RESET}"
-  echo -e "    ${GITTER_C______ARG}branch${GITTER_C____RESET}           ${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}"
-  echo -e "    ${GITTER_C______ARG}updated${GITTER_C____RESET}          ${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[time:r]${GITTER_C____RESET}"
-  echo -e "    ${GITTER_C______ARG}updated-at${GITTER_C____RESET}       ${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[commit:8]${GITTER_C____RESET}${separator}${GITTER_C______DIM} at ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[time:d]${GITTER_C____RESET}"
-  echo -e "    ${GITTER_C______ARG}updated-by${GITTER_C____RESET}       ${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[commit:8]${GITTER_C____RESET}${separator}${GITTER_C______DIM} by ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[author:e]${GITTER_C____RESET}${separator} ${GITTER_C______ARG}[time:r]${GITTER_C____RESET}"
-  echo -e "    ${GITTER_C______ARG}updated-by-at${GITTER_C____RESET}    ${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[commit:8]${GITTER_C____RESET}${separator}${GITTER_C______DIM} by ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[author:e]${GITTER_C____RESET}${separator} ${GITTER_C______DIM}at${GITTER_C____RESET} ${separator}${GITTER_C______ARG}[time:d]${GITTER_C____RESET}"
-  echo -e "    ${GITTER_C______ARG}commit-count${GITTER_C____RESET}     ${GITTER_C______DIM} (${GITTER_C____RESET}${separator}${GITTER_C______ARG}[commit:c]${GITTER_C____RESET}${separator} ${GITTER_C______DIM}commits) on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}"
+  echo -e "    ${GITTER_C______ARG}default${GITTER_C____RESET}          \" ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[author:n]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[time:r]${GITTER_C____RESET}\""
+  echo -e "    ${GITTER_C______ARG}branch${GITTER_C____RESET}           \"${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}\""
+  echo -e "    ${GITTER_C______ARG}updated${GITTER_C____RESET}          \"${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[time:r]${GITTER_C____RESET}\""
+  echo -e "    ${GITTER_C______ARG}updated-at${GITTER_C____RESET}       \"${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[commit:8]${GITTER_C____RESET}${separator}${GITTER_C______DIM} at ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[time:d]${GITTER_C____RESET}\""
+  echo -e "    ${GITTER_C______ARG}updated-by${GITTER_C____RESET}       \"${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[commit:8]${GITTER_C____RESET}${separator}${GITTER_C______DIM} by ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[author:e]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[time:r]${GITTER_C____RESET}\""
+  echo -e "    ${GITTER_C______ARG}updated-by-at${GITTER_C____RESET}    \"${GITTER_C______DIM} on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}${separator} ${separator}${GITTER_C______ARG}[commit:8]${GITTER_C____RESET}${separator}${GITTER_C______DIM} by ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[author:e]${GITTER_C____RESET}${separator} ${GITTER_C______DIM}at${GITTER_C____RESET} ${separator}${GITTER_C______ARG}[time:d]${GITTER_C____RESET}\""
+  echo -e "    ${GITTER_C______ARG}commit-count${GITTER_C____RESET}     \"${GITTER_C______DIM} (${GITTER_C____RESET}${separator}${GITTER_C______ARG}[commit:c]${GITTER_C____RESET}${separator} ${GITTER_C______DIM}commits) on ${GITTER_C____RESET}${separator}${GITTER_C______ARG}[branch]${GITTER_C____RESET}\""
   echo
 }
 
