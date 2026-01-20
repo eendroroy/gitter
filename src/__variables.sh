@@ -62,4 +62,4 @@ GITTER_STATUS_COMMIT_COUNT=" (|[commit:c]| commits)| on |[branch]"
 
 # Gitter project variables
 ____GITTER____LINK="https://github.com/eendroroy/gitter"
-____GITTER_VERSION="0.1.6"
+____GITTER_VERSION="0.1.7"
