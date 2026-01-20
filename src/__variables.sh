@@ -23,7 +23,7 @@ ____CURRENT_DIR=$(pwd)
 [[ -z "${GITTER_NO_COLOR+x}"            ]] && GITTER_NO_COLOR=false
 [[ -z "${GITTER_ASK_CONFIRMATION+x}"    ]] && GITTER_ASK_CONFIRMATION=false
 [[ -z "${GITTER_CONTINUE_ON_ERROR+x}"   ]] && GITTER_CONTINUE_ON_ERROR=false
-[[ -z "${GITTER_REPO_STATUS+x}"         ]] && GITTER_REPO_STATUS="updated-by"
+[[ -z "${GITTER_REPO_STATUS+x}"         ]] && GITTER_REPO_STATUS="default"
 
 # Color defaults
 [[ -z "${GITTER_C__SUCCESS+x}" ]] && GITTER_C__SUCCESS='\e[38;5;2m'
@@ -52,6 +52,7 @@ OPTION=()
 PATTERNS=()
 FILTERS=""
 # Predefined status patterns
+GITTER_STATUS_DEFAULT=" |[branch]| |[author:e]| |[time:r]"
 GITTER_STATUS_BRANCH=" on |[branch]"
 GITTER_STATUS_UPDATED=" on |[branch]| |[time:r]"
 GITTER_STATUS_UPDATED_AT=" on |[branch]| |[commit:8]| at |[time:d]"
