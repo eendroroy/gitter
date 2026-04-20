@@ -19,14 +19,26 @@ _gitter() {
   }
 
   # tokens (left-hand side only)
-  local commands=("git" "g" "exec" "x" "eval" "e" "bash" "b" "list" "ls" "help" "config")
+  local commands=("git" "g" "exec" "x" "eval" "e" "bash" "b" "list" "ls" "help" "config" "version" "v")
   local options=(--status -s --max-depth -d --filter -f --ask-confirmation -a --continue-on-error -c --no-color --dry-run -n --)
   local statuses=("default" "branch" "updated" "updated-at" "updated-by" "updated-by-at" "commit-count")
   local helps=("filter" "gitterignore" "expander" "status")
+  local filter_hints=("repo:+name+" "branch:main" "path:src+" "dirty" "stale:7d" "active:1d" "type:node")
 
-  # If previous token expects a pattern (after --status or -s)
+  # After --status / -s → complete predefined status names
   if [[ "${prev}" == "--status" || "${prev}" == "-s" ]]; then
     COMPREPLY=( $(compgen -W "${statuses[*]}" -- "${cur}") )
+    return 0
+  fi
+
+  # After --max-depth / -d → nothing useful (numeric)
+  if [[ "${prev}" == "--max-depth" || "${prev}" == "-d" ]]; then
+    return 0
+  fi
+
+  # After --filter / -f → offer example filter hints
+  if [[ "${prev}" == "--filter" || "${prev}" == "-f" ]]; then
+    COMPREPLY=( $(compgen -W "${filter_hints[*]}" -- "${cur}") )
     return 0
   fi
 

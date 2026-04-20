@@ -26,9 +26,13 @@ Add below line to your shell configuration file:
 ```shell
 export PATH="$HOME/.gitter/bin:$PATH"
 
-export fpath=("${fpath[@]}" "${HOME}/.gitter/completion/zsh") # ZSH Completion
-source ~/.gitter/completion/bash/gitter.bash # Bash Completion
-source ~/.gitter/completion/fish/gitter.fish # Fish Completion
+export fpath=("${fpath[@]}" "${HOME}/.gitter/completion/zsh")   # Zsh  – fpath entry
+source ~/.gitter/completion/bash/gitter.bash                    # Bash – source in ~/.bashrc
+source ~/.gitter/completion/fish/gitter.fish                    # Fish – source in config.fish
+. ~/.gitter/completion/pwsh/gitter.ps1                          # PowerShell – dot-source in $PROFILE
+source ~/.gitter/completion/elvish/gitter.elv                   # Elvish – source in rc.elv
+source ~/.gitter/completion/nushell/gitter.nu                   # Nushell – source in config.nu
+source ~/.gitter/completion/tcsh/gitter.tcsh                    # tcsh – source in ~/.tcshrc
 ```
 
 ## Usage
