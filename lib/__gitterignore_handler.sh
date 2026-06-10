@@ -15,8 +15,8 @@ __process_gitterignore() {
 
   if [[ ${#ignore_patterns[@]} -gt 0 ]]; then
     kept_repo_git_dirs=()
-    ignore=false
     for repo_git_dir in "${repo_git_dirs[@]}"; do
+      ignore=false
       git_repo_dir_name="$(dirname "${repo_git_dir#./}")"
       for pattern in "${ignore_patterns[@]}"; do
         if [[ "$pattern" == '*/'* ]]; then
