@@ -14,9 +14,9 @@
 
 _____SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-source "$_____SCRIPT_DIR"/../src/__variables.sh
+source "$_____SCRIPT_DIR"/../lib/__variables.sh
 # shellcheck source=/dev/null
-for script in "$_____SCRIPT_DIR"/../src/func/*.sh; do source "$script"; done
+for script in "$_____SCRIPT_DIR"/../lib/*.sh; do source "$script"; done
 
 [[ $# -eq 0 ]] && { __help; exit 1; }
 
