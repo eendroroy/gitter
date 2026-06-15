@@ -150,9 +150,8 @@ __help_gitterignore() {
   echo -e "Lines starting with ${GITTER_C____ERROR}#${GITTER_C____RESET} are treated as comments and ignored."
   echo
   echo -e "${GITTER_C__HEADING}Patterns:${GITTER_C____RESET}"
-  echo -e "  ${GITTER_C____ERROR}relative/path/to/directory${GITTER_C____RESET} Ignore directory at exact relative path ${GITTER_C_____REPO}relative/path/to/directory${GITTER_C____RESET}"
-  echo -e "  ${GITTER_C____ERROR}*/directory_name${GITTER_C____RESET}           Ignore directories under any parent directory named ${GITTER_C_____REPO}directory_name${GITTER_C____RESET}"
-  echo -e "  ${GITTER_C____ERROR}directory_name/*${GITTER_C____RESET}           Ignore directories directly under the top-level directory named ${GITTER_C_____REPO}directory_name${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}relative/path/to/repository${GITTER_C____RESET}  Ignore directory at exact relative path ${GITTER_C_____REPO}relative/path/to/repository${GITTER_C____RESET}"
+  echo -e "  ${GITTER_C____ERROR}relative/path/to/directory/*${GITTER_C____RESET} Ignore repositories under the top-level relative path ${GITTER_C_____REPO}relative/path/to/directory${GITTER_C____RESET}"
   echo
 }
 

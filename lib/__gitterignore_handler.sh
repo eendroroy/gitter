@@ -11,45 +11,35 @@
 
 __process_gitterignore() {
   local -n repo_git_dirs="$1"
-  mapfile -t ignore_patterns < <(sed -e 's/#.*//' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' -e '/^$/d' .gitterignore)
+  [[ ! -f .gitterignore ]] && return
 
-  if [[ ${#ignore_patterns[@]} -gt 0 ]]; then
-    kept_repo_git_dirs=()
-    for repo_git_dir in "${repo_git_dirs[@]}"; do
-      ignore=false
-      git_repo_dir_name="$(dirname "${repo_git_dir#./}")"
-      for pattern in "${ignore_patterns[@]}"; do
-        if [[ "$pattern" == '*/'* ]]; then
-          IFS='/' read -r -a path_parts <<< "$git_repo_dir_name"
-          for part in "${path_parts[@]}"; do
-            if [[ "$part" == "${pattern#*/}" ]]; then
-              ignore=true
-              break
-            fi
-          done
-          [[ "$ignore" == true ]] && break
-        elif [[ "$pattern" == *'/*' ]]; then
-          parent_dir="${git_repo_dir_name%%/*}"
-          if [[ "$parent_dir" == "${pattern%/*}" ]]; then
-            ignore=true
-            break
-          fi
-        else
-          repo_name="$(basename "$(dirname "$repo_git_dir")")"
-          if [[ "$repo_name" == "$pattern" ]]; then
-            ignore=true
-            break
-          fi
-          if [[ "$git_repo_dir_name" == "$pattern" ]]; then
-            ignore=true
-            break
-          fi
-        fi
-      done
+  # Read and clean patterns
+  mapfile -t patterns < <(sed -E 's/#.*//; s/^[[:space:]]+//; s/[[:space:]]+$//; /^$/d' .gitterignore)
 
-      [[ "$ignore" == false ]] && kept_repo_git_dirs+=("$repo_git_dir")
+  local kept_dirs=()
+  for dir in "${repo_git_dirs[@]}"; do
+    local ignore=false
+    local path="${dir#./}"
+    local repo_rel_path="$(dirname "$path")"
+
+    for pat in "${patterns[@]}"; do
+
+      echo -n "Path: $path Parent: ${repo_rel_path}, pat: $pat  "
+
+      # Match pattern against:
+      # 1. Exact match (path)
+      # 2. Starts with pattern (handles foo/*)
+      if [[ "$pat" == *"/*" ]]; then
+        base_pat="${pat%/*}"
+        [[ "$repo_rel_path" == "$base_pat/"* ]] && ignore=true
+      else
+        [[ "$repo_rel_path" == "$pat" ]] && ignore=true
+      fi
+      [[ "$ignore" == true ]] && echo match && break || echo not
     done
 
-    repo_git_dirs=("${kept_repo_git_dirs[@]}")
-  fi
+    [[ "$ignore" == false ]] && kept_dirs+=("$dir")
+  done
+
+  repo_git_dirs=("${kept_dirs[@]}")
 }
