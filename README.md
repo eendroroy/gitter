@@ -13,6 +13,8 @@
 
 Run git or arbitrary command in multiple git repositories with filters in current directory
 
+_Note:_ Newer and faster rust based implementation available at: [gitter-rs](https://github.com/eendroroy/giter-rs)
+
 ## Installation
 
 Clone the repository:
